@@ -108,4 +108,3 @@ class CategoryController extends Controller
             ->with('success', "Category '{$categoryName}' deleted successfully.");
     }
 }
-

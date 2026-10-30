@@ -114,4 +114,3 @@ class AdminAuthTest extends TestCase
         $response->assertRedirect(route('admin.dashboard'));
     }
 }
-

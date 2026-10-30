@@ -80,13 +80,15 @@ export interface SiteMeta {
     title: string;
     description: string;
     canonical?: string;
+    robots?: string;
     og_title?: string;
     og_description?: string;
     og_image?: string;
     og_url?: string;
     og_type?: string;
     twitter_card?: string;
-    schema?: Record<string, unknown>;
+    breadcrumbs?: Array<{ name: string; url: string }>;
+    schema?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
 export type PageProps<

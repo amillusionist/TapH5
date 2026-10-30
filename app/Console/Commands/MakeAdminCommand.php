@@ -96,4 +96,3 @@ class MakeAdminCommand extends Command
         return self::SUCCESS;
     }
 }
-

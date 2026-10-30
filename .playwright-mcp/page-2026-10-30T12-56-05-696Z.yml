@@ -1,0 +1,159 @@
+- generic [ref=f3e663]:
+  - complementary [ref=f3e664]:
+    - link "TAPH5 GAMES Free Web Gaming Admin" [ref=f3e666] [cursor=pointer]:
+      - /url: http://127.0.0.1:8000/admin
+      - link "TAPH5 GAMES Free Web Gaming" [ref=f3e667]:
+        - /url: /
+        - generic [ref=f3e673]:
+          - generic [ref=f3e674]:
+            - generic [ref=f3e675]: TAPH5
+            - generic [ref=f3e676]: GAMES
+          - generic [ref=f3e677]: Free Web Gaming
+      - generic [ref=f3e678]: Admin
+    - generic [ref=f3e679]:
+      - generic [ref=f3e680]:
+        - generic [ref=f3e681]: Platform Operations
+        - navigation [ref=f3e682]:
+          - link "Dashboard" [ref=f3e683] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin
+          - link "Games Manager" [ref=f3e690] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/games
+      - generic [ref=f3e694]:
+        - generic [ref=f3e695]: Content & Taxonomies
+        - navigation [ref=f3e696]:
+          - link "Categories" [ref=f3e697] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/categories
+          - link "Tags" [ref=f3e701] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/tags
+    - generic [ref=f3e706]:
+      - link "View Live Portal" [ref=f3e707] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f3e716]:
+        - generic [ref=f3e717]:
+          - paragraph [ref=f3e718]: TapH5 Admin
+          - paragraph [ref=f3e719]: admin@taph5gaming.com
+        - button "Sign Out of Admin" [ref=f3e720] [cursor=pointer]
+  - generic [ref=f3e724]:
+    - banner [ref=f3e725]:
+      - generic [ref=f3e727]:
+        - generic [ref=f3e728]: Control Panel
+        - generic [ref=f3e729]: /
+        - generic [ref=f3e730]: "Edit Game: Classic Snake - TapH5"
+      - generic [ref=f3e731]: Single-Domain Online
+    - main [ref=f3e734]:
+      - generic [ref=f3e735]:
+        - generic [ref=f3e736]:
+          - navigation [ref=f3e737]:
+            - link "Admin" [ref=f3e738] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin
+            - link "Games" [ref=f3e741] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin/games
+            - link "Classic Snake - TapH5" [ref=f3e744] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin/games/9
+            - generic [ref=f3e747]: Edit
+          - generic [ref=f3e748]:
+            - generic [ref=f3e749]:
+              - 'heading "Edit: Classic Snake - TapH5" [level=1] [ref=f3e750]'
+              - paragraph [ref=f3e752]: "Editing metadata and curation properties for ID #9"
+            - generic [ref=f3e753]:
+              - link "Cancel" [ref=f3e754] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/admin/games/9
+              - button "Save Changes" [ref=f3e755] [cursor=pointer]
+        - generic [ref=f3e756]:
+          - generic [ref=f3e757]:
+            - generic [ref=f3e758]:
+              - heading "Basic Information" [level=3] [ref=f3e759]
+              - paragraph [ref=f3e760]: Primary identifiers and descriptions surfaced on game cards and details pages.
+            - generic [ref=f3e761]:
+              - generic [ref=f3e762]:
+                - generic [ref=f3e763]: Game Title *
+                - textbox [ref=f3e764]: Classic Snake - TapH5
+              - generic [ref=f3e765]:
+                - generic [ref=f3e766]: URL Slug *
+                - textbox [ref=f3e767]: classic-snake-taph5
+                - paragraph [ref=f3e768]: "Route: /games/classic-snake-taph5"
+            - generic [ref=f3e769]:
+              - generic [ref=f3e770]: Primary Category
+              - combobox [ref=f3e771]:
+                - option "None / Unassigned"
+                - option "Action"
+                - option "Arcade" [selected]
+                - option "Puzzle"
+                - option "Racing"
+                - option "Adventure"
+                - option "Sports"
+            - generic [ref=f3e772]:
+              - generic [ref=f3e773]: Description
+              - textbox "Enter game summary for player overview and social previews..." [ref=f3e774]: Play Classic Snake - TapH5 online for free on TapH5 Games. Fast, responsive HTML5 gameplay in your browser.
+            - generic [ref=f3e775]:
+              - generic [ref=f3e776]: Gameplay Instructions
+              - textbox "Keyboard controls, tap gestures, objective..." [ref=f3e777]: Use keyboard arrows or touch controls to play.
+          - generic [ref=f3e778]:
+            - generic [ref=f3e779]:
+              - heading "Thumbnail & Presentation" [level=3] [ref=f3e780]
+              - paragraph [ref=f3e781]: Thumbnail image asset used across category listings and search grids.
+            - generic [ref=f3e782]:
+              - generic [ref=f3e783]:
+                - generic [ref=f3e784]: Thumbnail Path / URL
+                - textbox "/images/thumbnails/my-game.svg" [ref=f3e785]: /images/thumbnails/classic-snake-taph5.svg
+                - paragraph [ref=f3e786]:
+                  - text: Enter relative path (e.g.
+                  - code [ref=f3e787]: /images/thumbnails/...
+                  - text: ) or fully qualified URL.
+              - generic [ref=f3e788]:
+                - generic [ref=f3e789]: Live Preview
+                - img "Classic Snake - TapH5" [ref=f3e791]
+          - generic [ref=f3e792]:
+            - generic [ref=f3e793]:
+              - heading "Curation & Promotion Flags" [level=3] [ref=f3e794]
+              - paragraph [ref=f3e795]: Promote this game on the homepage carousel, trending lists, or popular showcases.
+            - generic [ref=f3e796]:
+              - generic [ref=f3e797] [cursor=pointer]:
+                - checkbox "Featured Game Showcase on top hero section" [ref=f3e798]
+                - generic [ref=f3e799]:
+                  - generic [ref=f3e800]: Featured Game
+                  - generic [ref=f3e801]: Showcase on top hero section
+              - generic [ref=f3e802] [cursor=pointer]:
+                - checkbox "Trending Now High player engagement badge" [ref=f3e803]
+                - generic [ref=f3e804]:
+                  - generic [ref=f3e805]: Trending Now
+                  - generic [ref=f3e806]: High player engagement badge
+              - generic [ref=f3e807] [cursor=pointer]:
+                - checkbox "Popular Catalog Include in popular filters" [ref=f3e808]
+                - generic [ref=f3e809]:
+                  - generic [ref=f3e810]: Popular Catalog
+                  - generic [ref=f3e811]: Include in popular filters
+          - generic [ref=f3e812]:
+            - generic [ref=f3e813]:
+              - heading "Tags & Taxonomy" [level=3] [ref=f3e814]
+              - paragraph [ref=f3e815]: Assign searchable keywords and descriptive tags to this game.
+            - generic [ref=f3e816]:
+              - button "#Casual" [ref=f3e817] [cursor=pointer]
+              - button "#Fast Paced" [ref=f3e819] [cursor=pointer]
+              - button "#HTML5" [ref=f3e821] [cursor=pointer]
+              - button "#Keyboard Controls" [ref=f3e823] [cursor=pointer]
+              - button "#Mobile Friendly" [ref=f3e825] [cursor=pointer]
+              - button "#Retro" [ref=f3e827] [cursor=pointer]
+              - button "#Sci-Fi" [ref=f3e829] [cursor=pointer]
+              - button "#Single Player" [ref=f3e831] [cursor=pointer]
+              - button "#Touch Screen" [ref=f3e833] [cursor=pointer]
+          - generic [ref=f3e835]:
+            - generic [ref=f3e836]:
+              - heading "Search Engine Optimization (SEO)" [level=3] [ref=f3e837]
+              - paragraph [ref=f3e838]: Configure how this game is indexed and appears in Google search engine result pages.
+            - generic [ref=f3e839]:
+              - generic [ref=f3e840]:
+                - generic [ref=f3e841]: SEO Title Override
+                - textbox "Leave blank to use default portal title" [ref=f3e842]: Classic Snake - TapH5 — Play Free Online HTML5 Game | TapH5
+              - generic [ref=f3e843]:
+                - generic [ref=f3e844]: SEO Meta Description
+                - textbox "Leave blank to use game description" [ref=f3e845]: Play Classic Snake - TapH5 online for free on TapH5 Games. Fast, responsive HTML5 gameplay in your browser.
+              - generic [ref=f3e846]:
+                - generic [ref=f3e847]: Google Search Snippet Preview
+                - paragraph [ref=f3e848]: https://taph5gaming.com/games/classic-snake-taph5
+                - paragraph [ref=f3e849] [cursor=pointer]: Classic Snake - TapH5 — Play Free Online HTML5 Game | TapH5
+                - paragraph [ref=f3e850]: Play Classic Snake - TapH5 online for free on TapH5 Games. Fast, responsive HTML5 gameplay in your browser.
+          - generic [ref=f3e851]:
+            - link "Cancel" [ref=f3e852] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin/games/9
+            - button "Save Changes" [ref=f3e853] [cursor=pointer]

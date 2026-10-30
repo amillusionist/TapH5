@@ -1,0 +1,293 @@
+- generic [active] [ref=f7e1]:
+  - generic [ref=f7e2]: This XML file does not appear to have any style information associated with it. The document tree is shown below.
+  - generic [ref=f7e4]:
+    - generic [ref=f7e5]:
+      - generic [ref=f7e6] [cursor=pointer]
+      - generic [ref=f7e7]:
+        - text: <urlset
+        - generic [ref=f7e8]: xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        - text: ">"
+    - generic [ref=f7e9]:
+      - generic [ref=f7e10]:
+        - generic [ref=f7e11]:
+          - generic [ref=f7e12] [cursor=pointer]
+          - generic [ref=f7e13]: <url>
+        - generic [ref=f7e15]:
+          - generic [ref=f7e16]: <loc>
+          - text: http://localhost:8000
+          - generic [ref=f7e17]: </loc>
+        - generic [ref=f7e18]: </url>
+      - generic [ref=f7e20]:
+        - generic [ref=f7e21]:
+          - generic [ref=f7e22] [cursor=pointer]
+          - generic [ref=f7e23]: <url>
+        - generic [ref=f7e25]:
+          - generic [ref=f7e26]: <loc>
+          - text: http://localhost:8000/games
+          - generic [ref=f7e27]: </loc>
+        - generic [ref=f7e28]: </url>
+      - generic [ref=f7e30]:
+        - generic [ref=f7e31]:
+          - generic [ref=f7e32] [cursor=pointer]
+          - generic [ref=f7e33]: <url>
+        - generic [ref=f7e35]:
+          - generic [ref=f7e36]: <loc>
+          - text: http://localhost:8000/about
+          - generic [ref=f7e37]: </loc>
+        - generic [ref=f7e38]: </url>
+      - generic [ref=f7e40]:
+        - generic [ref=f7e41]:
+          - generic [ref=f7e42] [cursor=pointer]
+          - generic [ref=f7e43]: <url>
+        - generic [ref=f7e45]:
+          - generic [ref=f7e46]: <loc>
+          - text: http://localhost:8000/contact
+          - generic [ref=f7e47]: </loc>
+        - generic [ref=f7e48]: </url>
+      - generic [ref=f7e50]:
+        - generic [ref=f7e51]:
+          - generic [ref=f7e52] [cursor=pointer]
+          - generic [ref=f7e53]: <url>
+        - generic [ref=f7e55]:
+          - generic [ref=f7e56]: <loc>
+          - text: http://localhost:8000/privacy
+          - generic [ref=f7e57]: </loc>
+        - generic [ref=f7e58]: </url>
+      - generic [ref=f7e60]:
+        - generic [ref=f7e61]:
+          - generic [ref=f7e62] [cursor=pointer]
+          - generic [ref=f7e63]: <url>
+        - generic [ref=f7e65]:
+          - generic [ref=f7e66]: <loc>
+          - text: http://localhost:8000/terms
+          - generic [ref=f7e67]: </loc>
+        - generic [ref=f7e68]: </url>
+      - generic [ref=f7e70]:
+        - generic [ref=f7e71]:
+          - generic [ref=f7e72] [cursor=pointer]
+          - generic [ref=f7e73]: <url>
+        - generic [ref=f7e75]:
+          - generic [ref=f7e76]: <loc>
+          - text: http://localhost:8000/cookie-policy
+          - generic [ref=f7e77]: </loc>
+        - generic [ref=f7e78]: </url>
+      - generic [ref=f7e80]:
+        - generic [ref=f7e81]:
+          - generic [ref=f7e82] [cursor=pointer]
+          - generic [ref=f7e83]: <url>
+        - generic [ref=f7e85]:
+          - generic [ref=f7e86]: <loc>
+          - text: http://localhost:8000/data-policy
+          - generic [ref=f7e87]: </loc>
+        - generic [ref=f7e88]: </url>
+      - generic [ref=f7e90]:
+        - generic [ref=f7e91]:
+          - generic [ref=f7e92] [cursor=pointer]
+          - generic [ref=f7e93]: <url>
+        - generic [ref=f7e94]:
+          - generic [ref=f7e95]:
+            - generic [ref=f7e96]: <loc>
+            - text: http://localhost:8000/category/action
+            - generic [ref=f7e97]: </loc>
+          - generic [ref=f7e98]:
+            - generic [ref=f7e99]: <lastmod>
+            - text: 2026-10-30T04:32:19+00:00
+            - generic [ref=f7e100]: </lastmod>
+        - generic [ref=f7e101]: </url>
+      - generic [ref=f7e103]:
+        - generic [ref=f7e104]:
+          - generic [ref=f7e105] [cursor=pointer]
+          - generic [ref=f7e106]: <url>
+        - generic [ref=f7e107]:
+          - generic [ref=f7e108]:
+            - generic [ref=f7e109]: <loc>
+            - text: http://localhost:8000/category/arcade
+            - generic [ref=f7e110]: </loc>
+          - generic [ref=f7e111]:
+            - generic [ref=f7e112]: <lastmod>
+            - text: 2026-10-30T04:32:19+00:00
+            - generic [ref=f7e113]: </lastmod>
+        - generic [ref=f7e114]: </url>
+      - generic [ref=f7e116]:
+        - generic [ref=f7e117]:
+          - generic [ref=f7e118] [cursor=pointer]
+          - generic [ref=f7e119]: <url>
+        - generic [ref=f7e120]:
+          - generic [ref=f7e121]:
+            - generic [ref=f7e122]: <loc>
+            - text: http://localhost:8000/category/puzzle
+            - generic [ref=f7e123]: </loc>
+          - generic [ref=f7e124]:
+            - generic [ref=f7e125]: <lastmod>
+            - text: 2026-10-30T04:32:19+00:00
+            - generic [ref=f7e126]: </lastmod>
+        - generic [ref=f7e127]: </url>
+      - generic [ref=f7e129]:
+        - generic [ref=f7e130]:
+          - generic [ref=f7e131] [cursor=pointer]
+          - generic [ref=f7e132]: <url>
+        - generic [ref=f7e133]:
+          - generic [ref=f7e134]:
+            - generic [ref=f7e135]: <loc>
+            - text: http://localhost:8000/category/racing
+            - generic [ref=f7e136]: </loc>
+          - generic [ref=f7e137]:
+            - generic [ref=f7e138]: <lastmod>
+            - text: 2026-10-30T04:32:19+00:00
+            - generic [ref=f7e139]: </lastmod>
+        - generic [ref=f7e140]: </url>
+      - generic [ref=f7e142]:
+        - generic [ref=f7e143]:
+          - generic [ref=f7e144] [cursor=pointer]
+          - generic [ref=f7e145]: <url>
+        - generic [ref=f7e146]:
+          - generic [ref=f7e147]:
+            - generic [ref=f7e148]: <loc>
+            - text: http://localhost:8000/category/adventure
+            - generic [ref=f7e149]: </loc>
+          - generic [ref=f7e150]:
+            - generic [ref=f7e151]: <lastmod>
+            - text: 2026-10-30T04:32:19+00:00
+            - generic [ref=f7e152]: </lastmod>
+        - generic [ref=f7e153]: </url>
+      - generic [ref=f7e155]:
+        - generic [ref=f7e156]:
+          - generic [ref=f7e157] [cursor=pointer]
+          - generic [ref=f7e158]: <url>
+        - generic [ref=f7e159]:
+          - generic [ref=f7e160]:
+            - generic [ref=f7e161]: <loc>
+            - text: http://localhost:8000/category/sports
+            - generic [ref=f7e162]: </loc>
+          - generic [ref=f7e163]:
+            - generic [ref=f7e164]: <lastmod>
+            - text: 2026-10-30T04:32:19+00:00
+            - generic [ref=f7e165]: </lastmod>
+        - generic [ref=f7e166]: </url>
+      - generic [ref=f7e168]:
+        - generic [ref=f7e169]:
+          - generic [ref=f7e170] [cursor=pointer]
+          - generic [ref=f7e171]: <url>
+        - generic [ref=f7e172]:
+          - generic [ref=f7e173]:
+            - generic [ref=f7e174]: <loc>
+            - text: http://localhost:8000/games/classic-snake-taph5
+            - generic [ref=f7e175]: </loc>
+          - generic [ref=f7e176]:
+            - generic [ref=f7e177]: <lastmod>
+            - text: 2026-10-30T07:12:59+00:00
+            - generic [ref=f7e178]: </lastmod>
+        - generic [ref=f7e179]: </url>
+      - generic [ref=f7e181]:
+        - generic [ref=f7e182]:
+          - generic [ref=f7e183] [cursor=pointer]
+          - generic [ref=f7e184]: <url>
+        - generic [ref=f7e185]:
+          - generic [ref=f7e186]:
+            - generic [ref=f7e187]: <loc>
+            - text: http://localhost:8000/games/mind-mesh
+            - generic [ref=f7e188]: </loc>
+          - generic [ref=f7e189]:
+            - generic [ref=f7e190]: <lastmod>
+            - text: 2026-10-30T04:32:19+00:00
+            - generic [ref=f7e191]: </lastmod>
+        - generic [ref=f7e192]: </url>
+      - generic [ref=f7e194]:
+        - generic [ref=f7e195]:
+          - generic [ref=f7e196] [cursor=pointer]
+          - generic [ref=f7e197]: <url>
+        - generic [ref=f7e198]:
+          - generic [ref=f7e199]:
+            - generic [ref=f7e200]: <loc>
+            - text: http://localhost:8000/games/pixel-quest
+            - generic [ref=f7e201]: </loc>
+          - generic [ref=f7e202]:
+            - generic [ref=f7e203]: <lastmod>
+            - text: 2026-10-30T04:32:19+00:00
+            - generic [ref=f7e204]: </lastmod>
+        - generic [ref=f7e205]: </url>
+      - generic [ref=f7e207]:
+        - generic [ref=f7e208]:
+          - generic [ref=f7e209] [cursor=pointer]
+          - generic [ref=f7e210]: <url>
+        - generic [ref=f7e211]:
+          - generic [ref=f7e212]:
+            - generic [ref=f7e213]: <loc>
+            - text: http://localhost:8000/games/astro-blaster
+            - generic [ref=f7e214]: </loc>
+          - generic [ref=f7e215]:
+            - generic [ref=f7e216]: <lastmod>
+            - text: 2026-10-30T04:32:19+00:00
+            - generic [ref=f7e217]: </lastmod>
+        - generic [ref=f7e218]: </url>
+      - generic [ref=f7e220]:
+        - generic [ref=f7e221]:
+          - generic [ref=f7e222] [cursor=pointer]
+          - generic [ref=f7e223]: <url>
+        - generic [ref=f7e224]:
+          - generic [ref=f7e225]:
+            - generic [ref=f7e226]: <loc>
+            - text: http://localhost:8000/games/hyper-hoops
+            - generic [ref=f7e227]: </loc>
+          - generic [ref=f7e228]:
+            - generic [ref=f7e229]: <lastmod>
+            - text: 2026-10-30T04:32:19+00:00
+            - generic [ref=f7e230]: </lastmod>
+        - generic [ref=f7e231]: </url>
+      - generic [ref=f7e233]:
+        - generic [ref=f7e234]:
+          - generic [ref=f7e235] [cursor=pointer]
+          - generic [ref=f7e236]: <url>
+        - generic [ref=f7e237]:
+          - generic [ref=f7e238]:
+            - generic [ref=f7e239]: <loc>
+            - text: http://localhost:8000/games/neon-pulse
+            - generic [ref=f7e240]: </loc>
+          - generic [ref=f7e241]:
+            - generic [ref=f7e242]: <lastmod>
+            - text: 2026-10-30T04:32:19+00:00
+            - generic [ref=f7e243]: </lastmod>
+        - generic [ref=f7e244]: </url>
+      - generic [ref=f7e246]:
+        - generic [ref=f7e247]:
+          - generic [ref=f7e248] [cursor=pointer]
+          - generic [ref=f7e249]: <url>
+        - generic [ref=f7e250]:
+          - generic [ref=f7e251]:
+            - generic [ref=f7e252]: <loc>
+            - text: http://localhost:8000/games/cyber-runner
+            - generic [ref=f7e253]: </loc>
+          - generic [ref=f7e254]:
+            - generic [ref=f7e255]: <lastmod>
+            - text: 2026-10-30T04:32:19+00:00
+            - generic [ref=f7e256]: </lastmod>
+        - generic [ref=f7e257]: </url>
+      - generic [ref=f7e259]:
+        - generic [ref=f7e260]:
+          - generic [ref=f7e261] [cursor=pointer]
+          - generic [ref=f7e262]: <url>
+        - generic [ref=f7e263]:
+          - generic [ref=f7e264]:
+            - generic [ref=f7e265]: <loc>
+            - text: http://localhost:8000/games/galaxy-drift
+            - generic [ref=f7e266]: </loc>
+          - generic [ref=f7e267]:
+            - generic [ref=f7e268]: <lastmod>
+            - text: 2026-10-30T04:32:19+00:00
+            - generic [ref=f7e269]: </lastmod>
+        - generic [ref=f7e270]: </url>
+      - generic [ref=f7e272]:
+        - generic [ref=f7e273]:
+          - generic [ref=f7e274] [cursor=pointer]
+          - generic [ref=f7e275]: <url>
+        - generic [ref=f7e276]:
+          - generic [ref=f7e277]:
+            - generic [ref=f7e278]: <loc>
+            - text: http://localhost:8000/games/shadow-blade
+            - generic [ref=f7e279]: </loc>
+          - generic [ref=f7e280]:
+            - generic [ref=f7e281]: <lastmod>
+            - text: 2026-10-30T04:32:19+00:00
+            - generic [ref=f7e282]: </lastmod>
+        - generic [ref=f7e283]: </url>
+    - generic [ref=f7e285]: </urlset>

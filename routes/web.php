@@ -9,6 +9,7 @@ use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RobotsController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,8 +29,9 @@ Route::get('/terms', [PageController::class, 'terms'])->name('pages.terms');
 Route::get('/cookie-policy', [PageController::class, 'cookiePolicy'])->name('pages.cookie-policy');
 Route::get('/data-policy', [PageController::class, 'dataPolicy'])->name('pages.data-policy');
 
-// XML Sitemap
+// XML Sitemap & Robots
 Route::get('/sitemap.xml', SitemapController::class)->name('sitemap');
+Route::get('/robots.txt', RobotsController::class)->name('robots');
 
 // Authenticated User Dashboard (Redirects Admins to Admin Panel)
 Route::get('/dashboard', function () {

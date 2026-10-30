@@ -8,7 +8,8 @@
             $meta = $page['props']['meta'] ?? null;
             $title = $meta['title'] ?? config('app.name', 'TapH5 Games') . ' — Free Online HTML5 Games';
             $description = $meta['description'] ?? 'Play free HTML5 games instantly on TapH5 Games with no downloads.';
-            $canonical = $meta['canonical'] ?? url()->current();
+            $canonical = $meta['canonical'] ?? rtrim(config('app.seo_url', config('app.url', 'http://127.0.0.1:8000')), '/') . parse_url(url()->current(), PHP_URL_PATH);
+            $robots = $meta['robots'] ?? 'index, follow';
             $ogType = $meta['og_type'] ?? 'website';
             $ogTitle = $meta['og_title'] ?? $title;
             $ogDescription = $meta['og_description'] ?? $description;
@@ -19,6 +20,7 @@
 
         <title inertia>{{ $title }}</title>
         <meta name="description" content="{{ $description }}">
+        <meta name="robots" content="{{ $robots }}">
         <link rel="canonical" href="{{ $canonical }}">
 
         <!-- Open Graph / Facebook -->

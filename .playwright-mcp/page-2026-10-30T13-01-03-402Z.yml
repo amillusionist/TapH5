@@ -1,0 +1,171 @@
+- generic [ref=f6e3]:
+  - complementary [ref=f6e4]:
+    - link "TAPH5 GAMES Free Web Gaming Admin" [ref=f6e6] [cursor=pointer]:
+      - /url: http://127.0.0.1:8000/admin
+      - link "TAPH5 GAMES Free Web Gaming" [ref=f6e7]:
+        - /url: /
+        - generic [ref=f6e13]:
+          - generic [ref=f6e14]:
+            - generic [ref=f6e15]: TAPH5
+            - generic [ref=f6e16]: GAMES
+          - generic [ref=f6e17]: Free Web Gaming
+      - generic [ref=f6e18]: Admin
+    - generic [ref=f6e19]:
+      - generic [ref=f6e20]:
+        - generic [ref=f6e21]: Platform Operations
+        - navigation [ref=f6e22]:
+          - link "Dashboard" [ref=f6e23] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin
+          - link "Games Manager" [ref=f6e30] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/games
+      - generic [ref=f6e34]:
+        - generic [ref=f6e35]: Content & Taxonomies
+        - navigation [ref=f6e36]:
+          - link "Categories" [ref=f6e37] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/categories
+          - link "Tags" [ref=f6e41] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/tags
+    - generic [ref=f6e46]:
+      - link "View Live Portal" [ref=f6e47] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f6e56]:
+        - generic [ref=f6e57]:
+          - paragraph [ref=f6e58]: TapH5 Admin
+          - paragraph [ref=f6e59]: admin@taph5gaming.com
+        - button "Sign Out of Admin" [ref=f6e60] [cursor=pointer]
+  - generic [ref=f6e64]:
+    - banner [ref=f6e65]:
+      - generic [ref=f6e67]:
+        - generic [ref=f6e68]: Control Panel
+        - generic [ref=f6e69]: /
+        - generic [ref=f6e70]: Tags Management
+      - generic [ref=f6e71]: Single-Domain Online
+    - main [ref=f6e74]:
+      - generic [ref=f6e75]:
+        - generic [ref=f6e76]:
+          - navigation [ref=f6e77]:
+            - link "Admin" [ref=f6e78] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin
+            - generic [ref=f6e81]: Tags
+          - generic [ref=f6e82]:
+            - generic [ref=f6e83]:
+              - heading "Tags Manager" [level=1] [ref=f6e84]
+              - paragraph [ref=f6e86]: Manage searchable keywords, gameplay labels, and taxonomies.
+            - link "+ New Tag" [ref=f6e88] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin/tags/create
+        - table [ref=f6e91]:
+          - rowgroup [ref=f6e92]:
+            - row [ref=f6e93]:
+              - columnheader "Tag Label" [ref=f6e94]
+              - columnheader "Slug Identifier" [ref=f6e95]
+              - columnheader "Associated Games" [ref=f6e96]
+              - columnheader "Actions" [ref=f6e97]
+          - rowgroup [ref=f6e98]:
+            - row [ref=f6e99]:
+              - cell "# Casual" [ref=f6e100]:
+                - generic [ref=f6e101]:
+                  - generic [ref=f6e102]: "#"
+                  - generic [ref=f6e103]: Casual
+              - cell "casual" [ref=f6e104]
+              - cell "2 assigned games" [ref=f6e105]
+              - cell [ref=f6e106]:
+                - generic [ref=f6e107]:
+                  - link "Edit" [ref=f6e108] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/tags/6/edit
+                  - button "Delete" [ref=f6e109] [cursor=pointer]
+            - row [ref=f6e110]:
+              - cell "# Fast Paced" [ref=f6e111]:
+                - generic [ref=f6e112]:
+                  - generic [ref=f6e113]: "#"
+                  - generic [ref=f6e114]: Fast Paced
+              - cell "fast-paced" [ref=f6e115]
+              - cell "3 assigned games" [ref=f6e116]
+              - cell [ref=f6e117]:
+                - generic [ref=f6e118]:
+                  - link "Edit" [ref=f6e119] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/tags/9/edit
+                  - button "Delete" [ref=f6e120] [cursor=pointer]
+            - row [ref=f6e121]:
+              - cell "# HTML5" [ref=f6e122]:
+                - generic [ref=f6e123]:
+                  - generic [ref=f6e124]: "#"
+                  - generic [ref=f6e125]: HTML5
+              - cell "html5" [ref=f6e126]
+              - cell "8 assigned games" [ref=f6e127]
+              - cell [ref=f6e128]:
+                - generic [ref=f6e129]:
+                  - link "Edit" [ref=f6e130] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/tags/2/edit
+                  - button "Delete" [ref=f6e131] [cursor=pointer]
+            - row [ref=f6e132]:
+              - cell "# Keyboard Controls" [ref=f6e133]:
+                - generic [ref=f6e134]:
+                  - generic [ref=f6e135]: "#"
+                  - generic [ref=f6e136]: Keyboard Controls
+              - cell "keyboard-controls" [ref=f6e137]
+              - cell "0 assigned games" [ref=f6e138]
+              - cell [ref=f6e139]:
+                - generic [ref=f6e140]:
+                  - link "Edit" [ref=f6e141] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/tags/5/edit
+                  - button "Delete" [ref=f6e142] [cursor=pointer]
+            - row [ref=f6e143]:
+              - cell "# Mobile Friendly" [ref=f6e144]:
+                - generic [ref=f6e145]:
+                  - generic [ref=f6e146]: "#"
+                  - generic [ref=f6e147]: Mobile Friendly
+              - cell "mobile-friendly" [ref=f6e148]
+              - cell "0 assigned games" [ref=f6e149]
+              - cell [ref=f6e150]:
+                - generic [ref=f6e151]:
+                  - link "Edit" [ref=f6e152] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/tags/3/edit
+                  - button "Delete" [ref=f6e153] [cursor=pointer]
+            - row [ref=f6e154]:
+              - cell "# Retro" [ref=f6e155]:
+                - generic [ref=f6e156]:
+                  - generic [ref=f6e157]: "#"
+                  - generic [ref=f6e158]: Retro
+              - cell "retro" [ref=f6e159]
+              - cell "1 assigned games" [ref=f6e160]
+              - cell [ref=f6e161]:
+                - generic [ref=f6e162]:
+                  - link "Edit" [ref=f6e163] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/tags/8/edit
+                  - button "Delete" [ref=f6e164] [cursor=pointer]
+            - row [ref=f6e165]:
+              - cell "# Sci-Fi" [ref=f6e166]:
+                - generic [ref=f6e167]:
+                  - generic [ref=f6e168]: "#"
+                  - generic [ref=f6e169]: Sci-Fi
+              - cell "sci-fi" [ref=f6e170]
+              - cell "3 assigned games" [ref=f6e171]
+              - cell [ref=f6e172]:
+                - generic [ref=f6e173]:
+                  - link "Edit" [ref=f6e174] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/tags/7/edit
+                  - button "Delete" [ref=f6e175] [cursor=pointer]
+            - row [ref=f6e176]:
+              - cell "# Single Player" [ref=f6e177]:
+                - generic [ref=f6e178]:
+                  - generic [ref=f6e179]: "#"
+                  - generic [ref=f6e180]: Single Player
+              - cell "single-player" [ref=f6e181]
+              - cell "4 assigned games" [ref=f6e182]
+              - cell [ref=f6e183]:
+                - generic [ref=f6e184]:
+                  - link "Edit" [ref=f6e185] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/tags/1/edit
+                  - button "Delete" [ref=f6e186] [cursor=pointer]
+            - row [ref=f6e187]:
+              - cell "# Touch Screen" [ref=f6e188]:
+                - generic [ref=f6e189]:
+                  - generic [ref=f6e190]: "#"
+                  - generic [ref=f6e191]: Touch Screen
+              - cell "touch-screen" [ref=f6e192]
+              - cell "3 assigned games" [ref=f6e193]
+              - cell [ref=f6e194]:
+                - generic [ref=f6e195]:
+                  - link "Edit" [ref=f6e196] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/tags/4/edit
+                  - button "Delete" [ref=f6e197] [cursor=pointer]

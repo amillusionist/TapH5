@@ -2,6 +2,9 @@
 import { ref } from 'vue';
 import { Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
+import AdminPageHeader from '@/Components/Admin/AdminPageHeader.vue';
+import StatusBadge from '@/Components/Admin/StatusBadge.vue';
+import ConfirmModal from '@/Components/Admin/ConfirmModal.vue';
 import type { Game } from '@/types';
 
 const props = defineProps<{
@@ -10,75 +13,82 @@ const props = defineProps<{
 
 const isPublishing = ref(false);
 const isArchiving = ref(false);
+const isPublishModalOpen = ref(false);
+const isArchiveModalOpen = ref(false);
+const showRawJson = ref(false);
+const copiedFingerprint = ref(false);
 
-const publishGame = () => {
-    if (!confirm(`Are you sure you want to approve and publish "${props.game.title}" to the live portal?`)) {
-        return;
-    }
+const openPublishModal = () => {
+    isPublishModalOpen.value = true;
+};
+
+const confirmPublish = () => {
     isPublishing.value = true;
     router.post(route('admin.games.publish', props.game.id), {}, {
         onFinish: () => {
             isPublishing.value = false;
+            isPublishModalOpen.value = false;
         },
     });
 };
 
-const archiveGame = () => {
-    if (!confirm(`Are you sure you want to archive "${props.game.title}"? The game will be hidden from the public portal, but files will NOT be deleted.`)) {
-        return;
-    }
+const openArchiveModal = () => {
+    isArchiveModalOpen.value = true;
+};
+
+const confirmArchive = () => {
     isArchiving.value = true;
     router.post(route('admin.games.archive', props.game.id), {}, {
         onFinish: () => {
             isArchiving.value = false;
+            isArchiveModalOpen.value = false;
         },
     });
+};
+
+const copyFingerprint = async () => {
+    if (!props.game.fingerprint) return;
+    try {
+        await navigator.clipboard.writeText(props.game.fingerprint);
+        copiedFingerprint.value = true;
+        setTimeout(() => {
+            copiedFingerprint.value = false;
+        }, 2000);
+    } catch {
+        // fallback ignored
+    }
 };
 </script>
 
 <template>
     <AdminLayout :title="`Game Review: ${game.title}`">
-        <div class="space-y-6 max-w-5xl">
-            <!-- Top Action Header -->
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800/80">
-                <div class="flex items-center gap-3">
-                    <Link
-                        :href="route('admin.games.index')"
-                        class="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-colors"
-                        title="Back to Games List"
-                    >
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 12H5M12 19l-7-7 7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </Link>
-                    <div>
-                        <h2 class="text-xl font-extrabold text-white flex items-center gap-2">
-                            <span>{{ game.title }}</span>
-                            <span
-                                class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase tracking-wide border"
-                                :class="{
-                                    'bg-emerald-500/10 text-emerald-400 border-emerald-500/30': game.status === 'published',
-                                    'bg-amber-500/10 text-amber-400 border-amber-500/30': game.status === 'draft',
-                                    'bg-slate-700/20 text-slate-400 border-slate-700/50': game.status === 'archived',
-                                }"
-                            >
-                                {{ game.status }}
-                            </span>
-                        </h2>
-                        <p class="text-xs text-slate-400 font-mono mt-0.5">ID: #{{ game.id }} • Slug: {{ game.slug }}</p>
-                    </div>
-                </div>
+        <div class="space-y-6 max-w-6xl mx-auto">
+            <!-- Header with Breadcrumbs & Actions -->
+            <AdminPageHeader
+                :title="game.title"
+                :description="`ID: #${game.id} • Slug: ${game.slug}`"
+                :breadcrumbs="[
+                    { label: 'Admin', href: route('admin.dashboard') },
+                    { label: 'Games', href: route('admin.games.index') },
+                    { label: game.title },
+                ]"
+            >
+                <template #badge>
+                    <StatusBadge :status="game.status" size="md" />
+                </template>
 
-                <!-- Action Controls -->
-                <div class="flex flex-wrap items-center gap-2.5">
+                <template #actions>
                     <!-- Publish Button (For Drafts) -->
                     <button
                         v-if="game.status === 'draft'"
-                        @click="publishGame"
+                        @click="openPublishModal"
                         :disabled="isPublishing"
-                        class="px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-emerald-500/20 transition-all disabled:opacity-50"
+                        class="px-5 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black text-xs uppercase tracking-wider rounded-xl shadow-lg shadow-emerald-500/20 transition-all disabled:opacity-50 flex items-center gap-2"
                     >
-                        {{ isPublishing ? 'Publishing...' : 'Approve & Publish' }}
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Approve & Publish</span>
                     </button>
 
                     <!-- Public URL Shortcut (For Published) -->
@@ -96,124 +106,178 @@ const archiveGame = () => {
                         <span>View Live</span>
                     </a>
 
-                    <!-- Archive Button -->
+                    <!-- Archive Button (For Published) -->
                     <button
                         v-if="game.status === 'published'"
-                        @click="archiveGame"
+                        @click="openArchiveModal"
                         :disabled="isArchiving"
                         class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl text-xs font-bold transition-colors disabled:opacity-50"
                     >
-                        {{ isArchiving ? 'Archiving...' : 'Archive Game' }}
+                        Archive
                     </button>
 
                     <!-- Edit Button -->
                     <Link
                         :href="route('admin.games.edit', game.id)"
-                        class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold transition-colors"
+                        class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-200 border border-slate-800 rounded-xl text-xs font-semibold transition-colors flex items-center gap-1.5"
                     >
-                        Edit Metadata
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <span>Edit Metadata</span>
                     </Link>
-                </div>
-            </div>
+                </template>
+            </AdminPageHeader>
 
             <!-- Two-Column Review Layout -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Left 2 Cols: Specifications, Instructions, Scan Metadata -->
-                <div class="md:col-span-2 space-y-6">
-                    <!-- General Information Card -->
-                    <div class="p-6 rounded-2xl bg-[#0a0f1d] border border-slate-800/80 space-y-4">
-                        <h3 class="text-sm font-bold text-white uppercase tracking-wider">Game Overview</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Left 2 Cols: Content Overview & Diagnostic Architecture -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- General Content Card -->
+                    <div class="p-6 rounded-2xl bg-[#0a0f1d] border border-slate-800/80 space-y-5">
+                        <div class="border-b border-slate-800/60 pb-3">
+                            <h3 class="text-sm font-bold text-white uppercase tracking-wider">
+                                Game Overview & Instructions
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-0.5">
+                                Content surfaced to players on the game detail page.
+                            </p>
+                        </div>
 
-                        <div class="space-y-3 text-xs">
+                        <div class="space-y-4 text-xs">
                             <div>
-                                <span class="text-slate-400 block mb-1">Description</span>
-                                <p class="text-slate-200 leading-relaxed bg-slate-900/60 p-3 rounded-xl border border-slate-800/60">
+                                <span class="text-slate-400 font-semibold block mb-1.5 uppercase text-[10px] tracking-wider">Description</span>
+                                <div class="text-slate-200 leading-relaxed bg-slate-900/60 p-4 rounded-xl border border-slate-800/60">
                                     {{ game.description || 'No description provided.' }}
-                                </p>
+                                </div>
                             </div>
 
                             <div>
-                                <span class="text-slate-400 block mb-1">Gameplay Instructions</span>
-                                <p class="text-slate-200 leading-relaxed bg-slate-900/60 p-3 rounded-xl border border-slate-800/60">
+                                <span class="text-slate-400 font-semibold block mb-1.5 uppercase text-[10px] tracking-wider">Gameplay Instructions</span>
+                                <div class="text-slate-200 leading-relaxed bg-slate-900/60 p-4 rounded-xl border border-slate-800/60">
                                     {{ game.instructions || 'No instructions provided.' }}
-                                </p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Scan & Filesystem Details -->
-                    <div class="p-6 rounded-2xl bg-[#0a0f1d] border border-slate-800/80 space-y-4">
-                        <h3 class="text-sm font-bold text-white uppercase tracking-wider">Filesystem & Scanner Diagnostics</h3>
+                    <!-- Filesystem & Scanner Diagnostics Card -->
+                    <div class="p-6 rounded-2xl bg-[#0a0f1d] border border-slate-800/80 space-y-5">
+                        <div class="border-b border-slate-800/60 pb-3">
+                            <h3 class="text-sm font-bold text-white uppercase tracking-wider">
+                                Filesystem & Discovery Engine Diagnostics
+                            </h3>
+                            <p class="text-xs text-slate-400 mt-0.5">
+                                Single-domain paths, entry file validation, and cryptographic identity.
+                            </p>
+                        </div>
 
+                        <!-- 4 Metric Cards -->
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                            <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800/60">
-                                <span class="text-slate-400 block text-[11px]">Storage Path</span>
-                                <span class="font-mono text-slate-200 break-all">{{ game.storage_path || 'Unassigned' }}</span>
+                            <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800/60 space-y-1">
+                                <span class="text-slate-400 text-[10px] font-bold uppercase tracking-wider block">Storage Directory</span>
+                                <span class="font-mono text-slate-200 text-xs break-all">{{ game.storage_path || 'Unassigned' }}</span>
                             </div>
-                            <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800/60">
-                                <span class="text-slate-400 block text-[11px]">Entry File</span>
-                                <span class="font-mono text-emerald-400">{{ game.entry_file }}</span>
+
+                            <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800/60 space-y-1">
+                                <span class="text-slate-400 text-[10px] font-bold uppercase tracking-wider block">Entry File</span>
+                                <span class="font-mono text-emerald-400 text-xs font-semibold">{{ game.entry_file }}</span>
                             </div>
-                            <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800/60">
-                                <span class="text-slate-400 block text-[11px]">Game Type</span>
-                                <span class="font-mono text-slate-200">{{ game.game_type }}</span>
+
+                            <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800/60 space-y-1">
+                                <span class="text-slate-400 text-[10px] font-bold uppercase tracking-wider block">Game Architecture</span>
+                                <span class="font-mono text-slate-200 text-xs">{{ game.game_type }}</span>
                             </div>
-                            <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800/60">
-                                <span class="text-slate-400 block text-[11px]">Recorded Plays</span>
-                                <span class="font-bold text-slate-200">{{ game.plays_count.toLocaleString() }}</span>
+
+                            <div class="p-3.5 rounded-xl bg-slate-900/60 border border-slate-800/60 space-y-1">
+                                <span class="text-slate-400 text-[10px] font-bold uppercase tracking-wider block">Recorded Plays</span>
+                                <span class="font-bold text-slate-100 text-xs">{{ game.plays_count.toLocaleString() }} sessions</span>
                             </div>
                         </div>
 
-                        <!-- Scan Metadata (JSON) Details if present -->
-                        <div v-if="game.scan_metadata" class="space-y-2 pt-2">
-                            <span class="text-xs font-bold text-slate-400 block">Scan Metadata Payload:</span>
-                            <div class="p-4 rounded-xl bg-slate-950 font-mono text-[11px] text-slate-300 overflow-x-auto border border-slate-800/60 max-h-60">
+                        <!-- Cryptographic Fingerprint Box -->
+                        <div v-if="game.fingerprint" class="p-4 rounded-xl bg-slate-950/70 border border-slate-800/80 flex items-center justify-between gap-3">
+                            <div class="min-w-0 flex-1">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Cryptographic Fingerprint</span>
+                                <code class="text-xs font-mono text-slate-300 break-all select-all">{{ game.fingerprint }}</code>
+                            </div>
+                            <button
+                                @click="copyFingerprint"
+                                class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 text-xs font-semibold shrink-0 transition-colors border border-slate-800"
+                            >
+                                {{ copiedFingerprint ? 'Copied!' : 'Copy' }}
+                            </button>
+                        </div>
+
+                        <!-- Scan Metadata Payload (Collapsible) -->
+                        <div v-if="game.scan_metadata" class="space-y-2 pt-1">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold text-slate-300">Scan Metadata Payload</span>
+                                <button
+                                    @click="showRawJson = !showRawJson"
+                                    class="text-xs text-emerald-400 hover:text-emerald-300 font-semibold flex items-center gap-1 transition-colors"
+                                >
+                                    <span>{{ showRawJson ? 'Hide Raw JSON' : 'Inspect Raw JSON' }}</span>
+                                    <svg
+                                        class="w-3.5 h-3.5 transition-transform"
+                                        :class="showRawJson ? 'rotate-180' : ''"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            <div v-if="showRawJson" class="p-4 rounded-xl bg-slate-950 font-mono text-[11px] text-slate-300 overflow-x-auto border border-slate-800/80 max-h-72">
                                 <pre>{{ JSON.stringify(game.scan_metadata, null, 2) }}</pre>
                             </div>
                         </div>
-
-                        <!-- Fingerprint -->
-                        <div v-if="game.fingerprint" class="p-3 rounded-xl bg-slate-900/60 border border-slate-800/60 text-xs font-mono">
-                            <span class="text-slate-400 block text-[11px]">Cryptographic Fingerprint</span>
-                            <span class="text-slate-300 break-all">{{ game.fingerprint }}</span>
-                        </div>
                     </div>
                 </div>
 
-                <!-- Right 1 Col: Media, Taxonomies & Flags -->
+                <!-- Right 1 Col: Media, Taxonomies & Curation -->
                 <div class="space-y-6">
-                    <!-- Thumbnail Preview -->
+                    <!-- Thumbnail Preview Card -->
                     <div class="p-5 rounded-2xl bg-[#0a0f1d] border border-slate-800/80 space-y-3">
-                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Thumbnail Preview</h4>
-                        <div class="aspect-[4/3] rounded-xl overflow-hidden bg-slate-900 border border-slate-800 flex items-center justify-center">
+                        <div class="flex items-center justify-between">
+                            <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Thumbnail Asset</h4>
+                            <span class="text-[10px] font-mono text-slate-400">4:3 Aspect</span>
+                        </div>
+
+                        <div class="aspect-[4/3] rounded-xl overflow-hidden bg-slate-900 border border-slate-800 flex items-center justify-center relative group">
                             <img
                                 :src="game.thumbnail || '/images/thumbnails/default-game.svg'"
                                 :alt="game.title"
-                                class="w-full h-full object-cover"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                             />
                         </div>
-                        <p class="text-[11px] text-slate-400 font-mono break-all">{{ game.thumbnail }}</p>
+                        <p class="text-[11px] text-slate-400 font-mono break-all bg-slate-900/60 p-2.5 rounded-lg border border-slate-800/60">
+                            {{ game.thumbnail || 'Default placeholder' }}
+                        </p>
                     </div>
 
-                    <!-- Category & Tags -->
-                    <div class="p-5 rounded-2xl bg-[#0a0f1d] border border-slate-800/80 space-y-3 text-xs">
-                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Taxonomies</h4>
+                    <!-- Taxonomies Card -->
+                    <div class="p-5 rounded-2xl bg-[#0a0f1d] border border-slate-800/80 space-y-4 text-xs">
+                        <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider">Taxonomies</h4>
 
-                        <div class="pb-2 border-b border-slate-800/60">
-                            <span class="text-slate-400 block mb-1">Category</span>
-                            <span v-if="game.category" class="font-semibold text-slate-200">
+                        <div class="pb-3 border-b border-slate-800/60">
+                            <span class="text-slate-400 text-[11px] block mb-1">Primary Category</span>
+                            <span v-if="game.category" class="inline-flex items-center px-2.5 py-1 rounded-lg bg-slate-800 text-slate-200 font-medium">
                                 {{ game.category.name }}
                             </span>
                             <span v-else class="text-slate-500 italic">None assigned</span>
                         </div>
 
                         <div>
-                            <span class="text-slate-400 block mb-2">Assigned Tags</span>
+                            <span class="text-slate-400 text-[11px] block mb-2">Assigned Tags</span>
                             <div v-if="game.tags && game.tags.length > 0" class="flex flex-wrap gap-1.5">
                                 <span
                                     v-for="tag in game.tags"
                                     :key="tag.id"
-                                    class="px-2.5 py-1 text-[11px] font-semibold bg-slate-800 text-slate-300 rounded-lg border border-slate-700/60"
+                                    class="px-2.5 py-1 text-[11px] font-semibold bg-slate-800/80 text-slate-300 rounded-lg border border-slate-700/60"
                                 >
                                     #{{ tag.name }}
                                 </span>
@@ -222,32 +286,66 @@ const archiveGame = () => {
                         </div>
                     </div>
 
-                    <!-- Curation Flags -->
-                    <div class="p-5 rounded-2xl bg-[#0a0f1d] border border-slate-800/80 space-y-2 text-xs">
-                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3">Curation Status</h4>
+                    <!-- Curation & Promotion Flags -->
+                    <div class="p-5 rounded-2xl bg-[#0a0f1d] border border-slate-800/80 space-y-3 text-xs">
+                        <h4 class="text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Curation Flags</h4>
 
-                        <div class="flex items-center justify-between pb-1.5 border-b border-slate-800/60">
-                            <span class="text-slate-400">Featured</span>
-                            <span :class="game.is_featured ? 'text-emerald-400 font-bold' : 'text-slate-500'">
-                                {{ game.is_featured ? 'Yes' : 'No' }}
+                        <div class="flex items-center justify-between pb-2 border-b border-slate-800/60">
+                            <span class="text-slate-400">Featured Game</span>
+                            <span
+                                class="px-2 py-0.5 rounded-full text-[10px] font-bold"
+                                :class="game.is_featured ? 'bg-purple-500/10 text-purple-400 border border-purple-500/30' : 'text-slate-500'"
+                            >
+                                {{ game.is_featured ? 'Active' : 'Off' }}
                             </span>
                         </div>
-                        <div class="flex items-center justify-between pb-1.5 border-b border-slate-800/60">
-                            <span class="text-slate-400">Trending</span>
-                            <span :class="game.is_trending ? 'text-amber-400 font-bold' : 'text-slate-500'">
-                                {{ game.is_trending ? 'Yes' : 'No' }}
+
+                        <div class="flex items-center justify-between pb-2 border-b border-slate-800/60">
+                            <span class="text-slate-400">Trending Now</span>
+                            <span
+                                class="px-2 py-0.5 rounded-full text-[10px] font-bold"
+                                :class="game.is_trending ? 'bg-amber-500/10 text-amber-400 border border-amber-500/30' : 'text-slate-500'"
+                            >
+                                {{ game.is_trending ? 'Active' : 'Off' }}
                             </span>
                         </div>
+
                         <div class="flex items-center justify-between">
-                            <span class="text-slate-400">Popular</span>
-                            <span :class="game.is_popular ? 'text-cyan-400 font-bold' : 'text-slate-500'">
-                                {{ game.is_popular ? 'Yes' : 'No' }}
+                            <span class="text-slate-400">Popular Catalog</span>
+                            <span
+                                class="px-2 py-0.5 rounded-full text-[10px] font-bold"
+                                :class="game.is_popular ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30' : 'text-slate-500'"
+                            >
+                                {{ game.is_popular ? 'Active' : 'Off' }}
                             </span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Confirm Approve & Publish Modal -->
+        <ConfirmModal
+            :show="isPublishModalOpen"
+            title="Approve & Publish Game"
+            :message="`Are you sure you want to approve and publish '${game.title}' to the public live portal? Visitors will immediately be able to play and discover this game.`"
+            confirm-text="Approve & Publish"
+            variant="primary"
+            :loading="isPublishing"
+            @confirm="confirmPublish"
+            @close="isPublishModalOpen = false"
+        />
+
+        <!-- Confirm Archive Modal -->
+        <ConfirmModal
+            :show="isArchiveModalOpen"
+            title="Archive Game"
+            :message="`Are you sure you want to archive '${game.title}'? The game will be immediately hidden from public navigation and searches, but its files will NOT be deleted from disk.`"
+            confirm-text="Archive Game"
+            variant="warning"
+            :loading="isArchiving"
+            @confirm="confirmArchive"
+            @close="isArchiveModalOpen = false"
+        />
     </AdminLayout>
 </template>
-

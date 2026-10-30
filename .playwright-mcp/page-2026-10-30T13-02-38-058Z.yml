@@ -1,0 +1,231 @@
+- generic [ref=f7e240]:
+  - complementary [ref=f7e241]:
+    - generic [ref=f7e242]:
+      - link "TAPH5 GAMES Free Web Gaming Admin" [ref=f7e243] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin
+        - link "TAPH5 GAMES Free Web Gaming" [ref=f7e244]:
+          - /url: /
+          - generic [ref=f7e250]:
+            - generic [ref=f7e251]:
+              - generic [ref=f7e252]: TAPH5
+              - generic [ref=f7e253]: GAMES
+            - generic [ref=f7e254]: Free Web Gaming
+        - generic [ref=f7e255]: Admin
+      - button "Close Sidebar" [ref=f7e256] [cursor=pointer]
+    - generic [ref=f7e259]:
+      - generic [ref=f7e260]:
+        - generic [ref=f7e261]: Platform Operations
+        - navigation [ref=f7e262]:
+          - link "Dashboard" [ref=f7e263] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin
+          - link "Games Manager" [ref=f7e270] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/games
+      - generic [ref=f7e274]:
+        - generic [ref=f7e275]: Content & Taxonomies
+        - navigation [ref=f7e276]:
+          - link "Categories" [ref=f7e277] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/categories
+          - link "Tags" [ref=f7e281] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/tags
+    - generic [ref=f7e286]:
+      - link "View Live Portal" [ref=f7e287] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f7e296]:
+        - generic [ref=f7e297]:
+          - paragraph [ref=f7e298]: TapH5 Admin
+          - paragraph [ref=f7e299]: admin@taph5gaming.com
+        - button "Sign Out of Admin" [ref=f7e300] [cursor=pointer]
+  - generic [ref=f7e304]:
+    - banner [ref=f7e305]:
+      - generic [ref=f7e306]:
+        - button "Open Mobile Menu" [ref=f7e307] [cursor=pointer]
+        - generic [ref=f7e309]:
+          - generic [ref=f7e310]: Control Panel
+          - generic [ref=f7e311]: /
+          - generic [ref=f7e312]: Games Management
+    - main [ref=f7e313]:
+      - generic [ref=f7e314]:
+        - generic [ref=f7e315]:
+          - navigation [ref=f7e316]:
+            - link "Admin" [ref=f7e317] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin
+            - generic [ref=f7e320]: Games
+          - generic [ref=f7e322]:
+            - heading "Games Catalog Manager" [level=1] [ref=f7e323]
+            - paragraph [ref=f7e325]: Review, inspect, edit, publish, and manage all HTML5 games on the platform.
+        - generic [ref=f7e326]:
+          - button "All Games 9" [ref=f7e327] [cursor=pointer]:
+            - generic [ref=f7e328]: All Games
+            - generic [ref=f7e329]: "9"
+          - button "Draft Queue 0" [ref=f7e330] [cursor=pointer]:
+            - generic [ref=f7e331]: Draft Queue
+            - generic [ref=f7e332]: "0"
+          - button "Published 9" [ref=f7e333] [cursor=pointer]:
+            - generic [ref=f7e334]: Published
+            - generic [ref=f7e335]: "9"
+          - button "Archived 0" [ref=f7e336] [cursor=pointer]:
+            - generic [ref=f7e337]: Archived
+            - generic [ref=f7e338]: "0"
+        - generic [ref=f7e339]:
+          - textbox "Search by title, slug, or keywords..." [ref=f7e344]
+          - generic [ref=f7e345]:
+            - combobox [ref=f7e346]:
+              - option "All Categories" [selected]
+              - option "Action"
+              - option "Arcade"
+              - option "Puzzle"
+              - option "Racing"
+              - option "Adventure"
+              - option "Sports"
+            - combobox [ref=f7e347]:
+              - 'option "Sort: Newest" [selected]'
+              - 'option "Sort: Oldest"'
+              - 'option "Sort: Title A-Z"'
+              - 'option "Sort: Title Z-A"'
+              - 'option "Sort: Most Played"'
+            - button "Filter" [ref=f7e348] [cursor=pointer]
+        - generic [ref=f7e349]:
+          - generic [ref=f7e350]:
+            - generic [ref=f7e351]:
+              - img "Classic Snake - TapH5" [ref=f7e352]
+              - generic [ref=f7e353]:
+                - generic [ref=f7e354]:
+                  - heading "Classic Snake - TapH5" [level=4] [ref=f7e355]
+                  - generic [ref=f7e356]: Published
+                - paragraph [ref=f7e359]: /games/classic-snake-taph5
+                - paragraph [ref=f7e360]: Arcade • 20 plays
+            - generic [ref=f7e361]:
+              - generic [ref=f7e362]: single_file
+              - generic [ref=f7e363]:
+                - link "Inspect" [ref=f7e364] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/9
+                - link "Edit" [ref=f7e365] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/9/edit
+          - generic [ref=f7e366]:
+            - generic [ref=f7e367]:
+              - img "Neon Pulse" [ref=f7e368]
+              - generic [ref=f7e369]:
+                - generic [ref=f7e370]:
+                  - heading "Neon Pulse" [level=4] [ref=f7e371]
+                  - generic [ref=f7e372]: Published
+                - paragraph [ref=f7e375]: /games/neon-pulse
+                - paragraph [ref=f7e376]: Arcade • 4 plays
+            - generic [ref=f7e377]:
+              - generic [ref=f7e378]: single_file
+              - generic [ref=f7e379]:
+                - link "Inspect" [ref=f7e380] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/1
+                - link "Edit" [ref=f7e381] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/1/edit
+          - generic [ref=f7e382]:
+            - generic [ref=f7e383]:
+              - img "Cyber Runner" [ref=f7e384]
+              - generic [ref=f7e385]:
+                - generic [ref=f7e386]:
+                  - heading "Cyber Runner" [level=4] [ref=f7e387]
+                  - generic [ref=f7e388]: Published
+                - paragraph [ref=f7e391]: /games/cyber-runner
+                - paragraph [ref=f7e392]: Action • 3 plays
+            - generic [ref=f7e393]:
+              - generic [ref=f7e394]: multi_file
+              - generic [ref=f7e395]:
+                - link "Inspect" [ref=f7e396] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/2
+                - link "Edit" [ref=f7e397] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/2/edit
+          - generic [ref=f7e398]:
+            - generic [ref=f7e399]:
+              - img "Galaxy Drift" [ref=f7e400]
+              - generic [ref=f7e401]:
+                - generic [ref=f7e402]:
+                  - heading "Galaxy Drift" [level=4] [ref=f7e403]
+                  - generic [ref=f7e404]: Published
+                - paragraph [ref=f7e407]: /games/galaxy-drift
+                - paragraph [ref=f7e408]: Racing • 0 plays
+            - generic [ref=f7e409]:
+              - generic [ref=f7e410]: multi_file
+              - generic [ref=f7e411]:
+                - link "Inspect" [ref=f7e412] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/3
+                - link "Edit" [ref=f7e413] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/3/edit
+          - generic [ref=f7e414]:
+            - generic [ref=f7e415]:
+              - img "Mind Mesh" [ref=f7e416]
+              - generic [ref=f7e417]:
+                - generic [ref=f7e418]:
+                  - heading "Mind Mesh" [level=4] [ref=f7e419]
+                  - generic [ref=f7e420]: Published
+                - paragraph [ref=f7e423]: /games/mind-mesh
+                - paragraph [ref=f7e424]: Puzzle • 1 plays
+            - generic [ref=f7e425]:
+              - generic [ref=f7e426]: single_file
+              - generic [ref=f7e427]:
+                - link "Inspect" [ref=f7e428] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/4
+                - link "Edit" [ref=f7e429] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/4/edit
+          - generic [ref=f7e430]:
+            - generic [ref=f7e431]:
+              - img "Pixel Quest" [ref=f7e432]
+              - generic [ref=f7e433]:
+                - generic [ref=f7e434]:
+                  - heading "Pixel Quest" [level=4] [ref=f7e435]
+                  - generic [ref=f7e436]: Published
+                - paragraph [ref=f7e439]: /games/pixel-quest
+                - paragraph [ref=f7e440]: Adventure • 0 plays
+            - generic [ref=f7e441]:
+              - generic [ref=f7e442]: multi_file
+              - generic [ref=f7e443]:
+                - link "Inspect" [ref=f7e444] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/5
+                - link "Edit" [ref=f7e445] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/5/edit
+          - generic [ref=f7e446]:
+            - generic [ref=f7e447]:
+              - img "Shadow Blade" [ref=f7e448]
+              - generic [ref=f7e449]:
+                - generic [ref=f7e450]:
+                  - heading "Shadow Blade" [level=4] [ref=f7e451]
+                  - generic [ref=f7e452]: Published
+                - paragraph [ref=f7e455]: /games/shadow-blade
+                - paragraph [ref=f7e456]: Action • 1 plays
+            - generic [ref=f7e457]:
+              - generic [ref=f7e458]: single_file
+              - generic [ref=f7e459]:
+                - link "Inspect" [ref=f7e460] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/6
+                - link "Edit" [ref=f7e461] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/6/edit
+          - generic [ref=f7e462]:
+            - generic [ref=f7e463]:
+              - img "Astro Blaster" [ref=f7e464]
+              - generic [ref=f7e465]:
+                - generic [ref=f7e466]:
+                  - heading "Astro Blaster" [level=4] [ref=f7e467]
+                  - generic [ref=f7e468]: Published
+                - paragraph [ref=f7e471]: /games/astro-blaster
+                - paragraph [ref=f7e472]: Arcade • 0 plays
+            - generic [ref=f7e473]:
+              - generic [ref=f7e474]: single_file
+              - generic [ref=f7e475]:
+                - link "Inspect" [ref=f7e476] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/7
+                - link "Edit" [ref=f7e477] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/7/edit
+          - generic [ref=f7e478]:
+            - generic [ref=f7e479]:
+              - img "Hyper Hoops" [ref=f7e480]
+              - generic [ref=f7e481]:
+                - generic [ref=f7e482]:
+                  - heading "Hyper Hoops" [level=4] [ref=f7e483]
+                  - generic [ref=f7e484]: Published
+                - paragraph [ref=f7e487]: /games/hyper-hoops
+                - paragraph [ref=f7e488]: Sports • 2 plays
+            - generic [ref=f7e489]:
+              - generic [ref=f7e490]: single_file
+              - generic [ref=f7e491]:
+                - link "Inspect" [ref=f7e492] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/8
+                - link "Edit" [ref=f7e493] [cursor=pointer]:
+                  - /url: http://127.0.0.1:8000/admin/games/8/edit

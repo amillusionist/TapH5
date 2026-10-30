@@ -1,0 +1,100 @@
+- generic [ref=f3e3]:
+  - complementary [ref=f3e4]:
+    - link "TAPH5 GAMES Free Web Gaming Admin" [ref=f3e6] [cursor=pointer]:
+      - /url: http://127.0.0.1:8000/admin
+      - link "TAPH5 GAMES Free Web Gaming" [ref=f3e7]:
+        - /url: /
+        - generic [ref=f3e13]:
+          - generic [ref=f3e14]:
+            - generic [ref=f3e15]: TAPH5
+            - generic [ref=f3e16]: GAMES
+          - generic [ref=f3e17]: Free Web Gaming
+      - generic [ref=f3e18]: Admin
+    - generic [ref=f3e19]:
+      - generic [ref=f3e20]:
+        - generic [ref=f3e21]: Platform Operations
+        - navigation [ref=f3e22]:
+          - link "Dashboard" [ref=f3e23] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin
+          - link "Games Manager" [ref=f3e30] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/games
+      - generic [ref=f3e34]:
+        - generic [ref=f3e35]: Content & Taxonomies
+        - navigation [ref=f3e36]:
+          - link "Categories" [ref=f3e37] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/categories
+          - link "Tags" [ref=f3e41] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/tags
+    - generic [ref=f3e46]:
+      - link "View Live Portal" [ref=f3e47] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f3e56]:
+        - generic [ref=f3e57]:
+          - paragraph [ref=f3e58]: TapH5 Admin
+          - paragraph [ref=f3e59]: admin@taph5gaming.com
+        - button "Sign Out of Admin" [ref=f3e60] [cursor=pointer]
+  - generic [ref=f3e64]:
+    - banner [ref=f3e65]:
+      - generic [ref=f3e67]:
+        - generic [ref=f3e68]: Control Panel
+        - generic [ref=f3e69]: /
+        - generic [ref=f3e70]: Games Management
+      - generic [ref=f3e71]: Single-Domain Online
+    - main [ref=f3e74]:
+      - generic [ref=f3e75]:
+        - generic [ref=f3e76]:
+          - navigation [ref=f3e77]:
+            - link "Admin" [ref=f3e78] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin
+            - generic [ref=f3e81]: Games
+          - generic [ref=f3e83]:
+            - heading "Games Catalog Manager" [level=1] [ref=f3e84]
+            - paragraph [ref=f3e86]: Review, inspect, edit, publish, and manage all HTML5 games on the platform.
+        - generic [ref=f3e87]:
+          - button "All Games 9" [ref=f3e88] [cursor=pointer]:
+            - generic [ref=f3e89]: All Games
+            - generic [ref=f3e90]: "9"
+          - button "Draft Queue 0" [active] [ref=f3e91] [cursor=pointer]:
+            - generic [ref=f3e92]: Draft Queue
+            - generic [ref=f3e93]: "0"
+          - button "Published 9" [ref=f3e94] [cursor=pointer]:
+            - generic [ref=f3e95]: Published
+            - generic [ref=f3e96]: "9"
+          - button "Archived 0" [ref=f3e97] [cursor=pointer]:
+            - generic [ref=f3e98]: Archived
+            - generic [ref=f3e99]: "0"
+        - generic [ref=f3e100]:
+          - textbox "Search by title, slug, or keywords..." [ref=f3e105]
+          - generic [ref=f3e106]:
+            - combobox [ref=f3e107]:
+              - option "All Categories" [selected]
+              - option "Action"
+              - option "Arcade"
+              - option "Puzzle"
+              - option "Racing"
+              - option "Adventure"
+              - option "Sports"
+            - combobox [ref=f3e108]:
+              - 'option "Sort: Newest" [selected]'
+              - 'option "Sort: Oldest"'
+              - 'option "Sort: Title A-Z"'
+              - 'option "Sort: Title Z-A"'
+              - 'option "Sort: Most Played"'
+            - button "Filter" [ref=f3e109] [cursor=pointer]
+            - button "Clear" [ref=f3e295] [cursor=pointer]
+        - table [ref=f3e111]:
+          - rowgroup [ref=f3e112]:
+            - row [ref=f3e113]:
+              - columnheader "Game" [ref=f3e114]
+              - columnheader "Category" [ref=f3e115]
+              - columnheader "Type" [ref=f3e116]
+              - columnheader "Status" [ref=f3e117]
+              - columnheader "Plays" [ref=f3e118]
+              - columnheader "Actions" [ref=f3e119]
+          - rowgroup [ref=f3e120]:
+            - row [ref=f3e296]:
+              - cell [ref=f3e297]:
+                - generic [ref=f3e298]:
+                  - paragraph [ref=f3e302]: No games found
+                  - paragraph [ref=f3e303]: Try adjusting your filters or search keywords.
+                  - button "Clear Filters" [ref=f3e304] [cursor=pointer]

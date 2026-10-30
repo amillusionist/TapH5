@@ -191,4 +191,3 @@ class GameController extends Controller
         return back()->with('success', "Game '{$game->title}' has been archived.");
     }
 }
-

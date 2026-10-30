@@ -5,6 +5,14 @@
 
     RewriteEngine On
 
+    # Prevent standalone iframe game bundle HTML files from being indexed directly
+    <IfModule mod_headers.c>
+        <IfModule mod_setenvif.c>
+            SetEnvIf Request_URI "^/games/.*\.(html|htm)$" IS_GAME_HTML
+            Header set X-Robots-Tag "noindex, nofollow" env=IS_GAME_HTML
+        </IfModule>
+    </IfModule>
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -19,6 +27,7 @@
     RewriteRule ^ %1 [L,R=301]
 
     # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_URI} ^/games/?$ [OR]
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]

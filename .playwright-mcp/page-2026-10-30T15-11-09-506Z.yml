@@ -1,0 +1,138 @@
+- generic [ref=f5e3]:
+  - banner [ref=f5e4]:
+    - generic [ref=f5e5]:
+      - link "TAPH5 GAMES Free Web Gaming" [ref=f5e6] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f5e12]:
+          - generic [ref=f5e13]:
+            - generic [ref=f5e14]: TAPH5
+            - generic [ref=f5e15]: GAMES
+          - generic [ref=f5e16]: Free Web Gaming
+      - navigation [ref=f5e17]:
+        - link "Home" [ref=f5e18] [cursor=pointer]:
+          - /url: /
+        - link "All Games" [ref=f5e19] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games
+        - button "Categories" [ref=f5e21] [cursor=pointer]
+      - generic [ref=f5e26]:
+        - textbox "Search games..." [ref=f5e27]
+        - button [ref=f5e28] [cursor=pointer]
+  - main [ref=f5e32]:
+    - generic [ref=f5e33]:
+      - navigation [ref=f5e34]:
+        - link "Home" [ref=f5e35] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f5e36]: /
+        - generic [ref=f5e37]: All Games
+      - generic [ref=f5e38]:
+        - generic [ref=f5e39]:
+          - heading "All HTML5 Games" [level=1] [ref=f5e40]
+          - paragraph [ref=f5e41]: Showing free games ready for instant in-browser play.
+        - generic [ref=f5e42]:
+          - generic [ref=f5e43]: "Sort by:"
+          - combobox [ref=f5e44]:
+            - option "Newest First" [selected]
+            - option "Most Popular"
+            - option "Featured First"
+            - option "Alphabetical (A-Z)"
+            - option "Oldest First"
+    - generic [ref=f5e45]:
+      - generic [ref=f5e46]:
+        - textbox "Search games by title or keywords..." [ref=f5e47]: snake
+        - button [ref=f5e52] [cursor=pointer]
+      - generic [ref=f5e56]:
+        - button "All Genres" [ref=f5e57] [cursor=pointer]
+        - button "Action" [ref=f5e58] [cursor=pointer]
+        - button "Arcade" [ref=f5e59] [cursor=pointer]
+        - button "Puzzle" [ref=f5e60] [cursor=pointer]
+        - button "Racing" [ref=f5e61] [cursor=pointer]
+        - button "Adventure" [ref=f5e62] [cursor=pointer]
+        - button "Sports" [ref=f5e63] [cursor=pointer]
+    - link "Classic Snake - TapH5 Arcade Classic Snake - TapH5 Play Classic Snake - TapH5 online for free on TapH5 Games. Fast, responsive HTML5 gameplay in your browser. Free Play Instant H5" [ref=f5e65] [cursor=pointer]:
+      - /url: http://127.0.0.1:8000/games/classic-snake-taph5
+      - generic [ref=f5e66]:
+        - img "Classic Snake - TapH5" [ref=f5e67]
+        - generic [ref=f5e69]: Arcade
+      - generic [ref=f5e75]:
+        - heading "Classic Snake - TapH5" [level=3] [ref=f5e76]
+        - paragraph [ref=f5e77]: Play Classic Snake - TapH5 online for free on TapH5 Games. Fast, responsive HTML5 gameplay in your browser.
+        - generic [ref=f5e78]:
+          - generic [ref=f5e79]: Free Play
+          - generic [ref=f5e83]: Instant H5
+  - contentinfo [ref=f5e84]:
+    - generic [ref=f5e85]:
+      - generic [ref=f5e86]:
+        - generic [ref=f5e87]:
+          - link "TAPH5 GAMES Free Web Gaming" [ref=f5e88] [cursor=pointer]:
+            - /url: /
+            - generic [ref=f5e94]:
+              - generic [ref=f5e95]:
+                - generic [ref=f5e96]: TAPH5
+                - generic [ref=f5e97]: GAMES
+              - generic [ref=f5e98]: Free Web Gaming
+          - paragraph [ref=f5e99]: TapH5 Games is a dedicated web gaming portal delivering high-performance, responsive HTML5 games playable across mobile, tablet, and desktop without downloads.
+          - generic [ref=f5e100]: Shared-Hosting & Sandbox Origin Ready
+        - generic [ref=f5e103]:
+          - heading "Categories" [level=4] [ref=f5e104]
+          - list [ref=f5e105]:
+            - listitem [ref=f5e106]:
+              - link "Action Games" [ref=f5e107] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/action
+            - listitem [ref=f5e108]:
+              - link "Arcade Games" [ref=f5e109] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/arcade
+            - listitem [ref=f5e110]:
+              - link "Puzzle Games" [ref=f5e111] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/puzzle
+            - listitem [ref=f5e112]:
+              - link "Racing Games" [ref=f5e113] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/racing
+            - listitem [ref=f5e114]:
+              - link "Adventure Games" [ref=f5e115] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/adventure
+            - listitem [ref=f5e116]:
+              - link "Sports Games" [ref=f5e117] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/sports
+        - generic [ref=f5e118]:
+          - heading "Discover" [level=4] [ref=f5e119]
+          - list [ref=f5e120]:
+            - listitem [ref=f5e121]:
+              - link "Home Portal" [ref=f5e122] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=f5e123]:
+              - link "All Games" [ref=f5e124] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/games
+            - listitem [ref=f5e125]:
+              - link "Featured Games" [ref=f5e126] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/games?sort=featured
+            - listitem [ref=f5e127]:
+              - link "Popular Titles" [ref=f5e128] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/games?sort=popular
+        - generic [ref=f5e129]:
+          - heading "Legal & About" [level=4] [ref=f5e130]
+          - list [ref=f5e131]:
+            - listitem [ref=f5e132]:
+              - link "About Us" [ref=f5e133] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/about
+            - listitem [ref=f5e134]:
+              - link "Contact Us" [ref=f5e135] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/contact
+            - listitem [ref=f5e136]:
+              - link "Privacy Policy" [ref=f5e137] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/privacy
+            - listitem [ref=f5e138]:
+              - link "Terms of Service" [ref=f5e139] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/terms
+            - listitem [ref=f5e140]:
+              - link "Cookie Policy" [ref=f5e141] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/cookie-policy
+            - listitem [ref=f5e142]:
+              - link "Data Policy" [ref=f5e143] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/data-policy
+      - generic [ref=f5e144]:
+        - paragraph [ref=f5e145]: © 2026 TapH5 Games. All rights reserved.
+        - generic [ref=f5e146]:
+          - link "XML Sitemap" [ref=f5e147] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/sitemap.xml
+          - generic [ref=f5e148]: •
+          - generic [ref=f5e149]: Designed for Global HTML5 Gaming

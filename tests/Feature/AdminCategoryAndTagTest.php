@@ -130,4 +130,3 @@ class AdminCategoryAndTagTest extends TestCase
         $response->assertStatus(200);
     }
 }
-

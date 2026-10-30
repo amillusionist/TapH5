@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { useForm, Link } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
+import AdminPageHeader from '@/Components/Admin/AdminPageHeader.vue';
+import FormSection from '@/Components/Admin/FormSection.vue';
 import type { Category, Game, Tag } from '@/types';
 
 const props = defineProps<{
@@ -34,6 +37,14 @@ const toggleTag = (tagId: number) => {
     }
 };
 
+const effectiveSeoTitle = computed(() => {
+    return form.seo_title.trim() || `${form.title} — Play Free Online on TapH5 Games`;
+});
+
+const effectiveSeoDescription = computed(() => {
+    return form.seo_description.trim() || form.description.trim() || `Play ${form.title} for free in your browser on TapH5 Games. No downloads required.`;
+});
+
 const submit = () => {
     form.put(route('admin.games.update', props.game.id));
 };
@@ -41,35 +52,47 @@ const submit = () => {
 
 <template>
     <AdminLayout :title="`Edit Game: ${game.title}`">
-        <div class="max-w-4xl space-y-6">
+        <div class="max-w-4xl mx-auto space-y-6">
             <!-- Header -->
-            <div class="flex items-center justify-between pb-4 border-b border-slate-800/80">
-                <div class="flex items-center gap-3">
+            <AdminPageHeader
+                :title="`Edit: ${game.title}`"
+                :description="`Editing metadata and curation properties for ID #${game.id}`"
+                :breadcrumbs="[
+                    { label: 'Admin', href: route('admin.dashboard') },
+                    { label: 'Games', href: route('admin.games.index') },
+                    { label: game.title, href: route('admin.games.show', game.id) },
+                    { label: 'Edit' },
+                ]"
+            >
+                <template #actions>
                     <Link
                         :href="route('admin.games.show', game.id)"
-                        class="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-white transition-colors"
+                        class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 text-xs font-semibold transition-colors"
                     >
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path d="M19 12H5M12 19l-7-7 7-7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
+                        Cancel
                     </Link>
-                    <div>
-                        <h2 class="text-xl font-extrabold text-white">Edit Game Metadata</h2>
-                        <p class="text-xs text-slate-400 mt-0.5">Editing #{{ game.id }} ({{ game.title }})</p>
-                    </div>
-                </div>
-            </div>
+                    <button
+                        type="button"
+                        @click="submit"
+                        :disabled="form.processing"
+                        class="px-5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-wider shadow-lg shadow-emerald-500/20 transition-all disabled:opacity-50"
+                    >
+                        {{ form.processing ? 'Saving...' : 'Save Changes' }}
+                    </button>
+                </template>
+            </AdminPageHeader>
 
             <!-- Form -->
             <form @submit.prevent="submit" class="space-y-6">
-                <!-- Basic Metadata Card -->
-                <div class="p-6 rounded-2xl bg-[#0a0f1d] border border-slate-800/80 space-y-4">
-                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">Basic Metadata</h3>
-
+                <!-- Section 1: Basic Information -->
+                <FormSection
+                    title="Basic Information"
+                    description="Primary identifiers and descriptions surfaced on game cards and details pages."
+                >
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <!-- Title -->
                         <div>
-                            <label class="block text-xs font-semibold text-slate-300 mb-1">Title *</label>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Game Title *</label>
                             <input
                                 v-model="form.title"
                                 type="text"
@@ -81,20 +104,21 @@ const submit = () => {
 
                         <!-- Slug -->
                         <div>
-                            <label class="block text-xs font-semibold text-slate-300 mb-1">Slug *</label>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">URL Slug *</label>
                             <input
                                 v-model="form.slug"
                                 type="text"
                                 required
-                                class="w-full px-3.5 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
+                                class="w-full px-3.5 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs font-mono text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
                             />
+                            <p class="mt-1 text-[11px] text-slate-400 font-mono">Route: /games/{{ form.slug || '...' }}</p>
                             <p v-if="form.errors.slug" class="mt-1 text-xs text-rose-400">{{ form.errors.slug }}</p>
                         </div>
                     </div>
 
-                    <!-- Category -->
+                    <!-- Category Selector -->
                     <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Category</label>
+                        <label class="block text-xs font-semibold text-slate-300 mb-1">Primary Category</label>
                         <select
                             v-model="form.category_id"
                             class="w-full px-3.5 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500"
@@ -111,7 +135,8 @@ const submit = () => {
                         <textarea
                             v-model="form.description"
                             rows="3"
-                            class="w-full px-3.5 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
+                            placeholder="Enter game summary for player overview and social previews..."
+                            class="w-full px-3.5 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 leading-relaxed"
                         ></textarea>
                         <p v-if="form.errors.description" class="mt-1 text-xs text-rose-400">{{ form.errors.description }}</p>
                     </div>
@@ -122,105 +147,182 @@ const submit = () => {
                         <textarea
                             v-model="form.instructions"
                             rows="3"
-                            class="w-full px-3.5 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
+                            placeholder="Keyboard controls, tap gestures, objective..."
+                            class="w-full px-3.5 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 leading-relaxed"
                         ></textarea>
                         <p v-if="form.errors.instructions" class="mt-1 text-xs text-rose-400">{{ form.errors.instructions }}</p>
                     </div>
+                </FormSection>
 
-                    <!-- Thumbnail Path -->
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">Thumbnail Path / URL</label>
-                        <input
-                            v-model="form.thumbnail"
-                            type="text"
-                            placeholder="/images/thumbnails/my-game.svg"
-                            class="w-full px-3.5 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
-                        />
-                        <p v-if="form.errors.thumbnail" class="mt-1 text-xs text-rose-400">{{ form.errors.thumbnail }}</p>
+                <!-- Section 2: Media & Thumbnail -->
+                <FormSection
+                    title="Thumbnail & Presentation"
+                    description="Thumbnail image asset used across category listings and search grids."
+                >
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 items-start">
+                        <div class="sm:col-span-2 space-y-2">
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Thumbnail Path / URL</label>
+                            <input
+                                v-model="form.thumbnail"
+                                type="text"
+                                placeholder="/images/thumbnails/my-game.svg"
+                                class="w-full px-3.5 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white font-mono focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
+                            />
+                            <p class="text-[11px] text-slate-400">
+                                Enter relative path (e.g. <code class="text-emerald-400">/images/thumbnails/...</code>) or fully qualified URL.
+                            </p>
+                            <p v-if="form.errors.thumbnail" class="mt-1 text-xs text-rose-400">{{ form.errors.thumbnail }}</p>
+                        </div>
+
+                        <!-- Live Thumbnail Preview -->
+                        <div class="p-3 bg-slate-950/60 rounded-xl border border-slate-800/80 space-y-1.5">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Live Preview</span>
+                            <div class="aspect-[4/3] rounded-lg overflow-hidden bg-slate-900 border border-slate-800 flex items-center justify-center">
+                                <img
+                                    :src="form.thumbnail || '/images/thumbnails/default-game.svg'"
+                                    :alt="form.title"
+                                    class="w-full h-full object-cover"
+                                />
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </FormSection>
 
-                <!-- Curation & Flags Card -->
-                <div class="p-6 rounded-2xl bg-[#0a0f1d] border border-slate-800/80 space-y-4">
-                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">Curation Flags</h3>
-
-                    <div class="flex flex-wrap gap-6 text-xs">
-                        <label class="flex items-center gap-2 cursor-pointer">
+                <!-- Section 3: Curation Flags -->
+                <FormSection
+                    title="Curation & Promotion Flags"
+                    description="Promote this game on the homepage carousel, trending lists, or popular showcases."
+                >
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <!-- Featured -->
+                        <label
+                            class="p-4 rounded-xl border cursor-pointer transition-all flex items-start gap-3 select-none"
+                            :class="form.is_featured
+                                ? 'bg-purple-500/10 border-purple-500/40 text-purple-200'
+                                : 'bg-slate-900/40 border-slate-800 text-slate-400 hover:border-slate-700'"
+                        >
                             <input
                                 v-model="form.is_featured"
                                 type="checkbox"
-                                class="rounded bg-slate-900 border-slate-700 text-emerald-500 focus:ring-emerald-400"
+                                class="mt-0.5 rounded bg-slate-900 border-slate-700 text-purple-500 focus:ring-purple-400"
                             />
-                            <span class="font-semibold text-slate-200">Featured Game</span>
+                            <div>
+                                <span class="font-bold text-xs text-white block">Featured Game</span>
+                                <span class="text-[11px] text-slate-400 block mt-0.5">Showcase on top hero section</span>
+                            </div>
                         </label>
 
-                        <label class="flex items-center gap-2 cursor-pointer">
+                        <!-- Trending -->
+                        <label
+                            class="p-4 rounded-xl border cursor-pointer transition-all flex items-start gap-3 select-none"
+                            :class="form.is_trending
+                                ? 'bg-amber-500/10 border-amber-500/40 text-amber-200'
+                                : 'bg-slate-900/40 border-slate-800 text-slate-400 hover:border-slate-700'"
+                        >
                             <input
                                 v-model="form.is_trending"
                                 type="checkbox"
-                                class="rounded bg-slate-900 border-slate-700 text-amber-500 focus:ring-amber-400"
+                                class="mt-0.5 rounded bg-slate-900 border-slate-700 text-amber-500 focus:ring-amber-400"
                             />
-                            <span class="font-semibold text-slate-200">Trending</span>
+                            <div>
+                                <span class="font-bold text-xs text-white block">Trending Now</span>
+                                <span class="text-[11px] text-slate-400 block mt-0.5">High player engagement badge</span>
+                            </div>
                         </label>
 
-                        <label class="flex items-center gap-2 cursor-pointer">
+                        <!-- Popular -->
+                        <label
+                            class="p-4 rounded-xl border cursor-pointer transition-all flex items-start gap-3 select-none"
+                            :class="form.is_popular
+                                ? 'bg-cyan-500/10 border-cyan-500/40 text-cyan-200'
+                                : 'bg-slate-900/40 border-slate-800 text-slate-400 hover:border-slate-700'"
+                        >
                             <input
                                 v-model="form.is_popular"
                                 type="checkbox"
-                                class="rounded bg-slate-900 border-slate-700 text-cyan-500 focus:ring-cyan-400"
+                                class="mt-0.5 rounded bg-slate-900 border-slate-700 text-cyan-500 focus:ring-cyan-400"
                             />
-                            <span class="font-semibold text-slate-200">Popular</span>
+                            <div>
+                                <span class="font-bold text-xs text-white block">Popular Catalog</span>
+                                <span class="text-[11px] text-slate-400 block mt-0.5">Include in popular filters</span>
+                            </div>
                         </label>
                     </div>
-                </div>
+                </FormSection>
 
-                <!-- Tags Assignment Card -->
-                <div class="p-6 rounded-2xl bg-[#0a0f1d] border border-slate-800/80 space-y-4">
-                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">Tags Assignment</h3>
-
-                    <div class="flex flex-wrap gap-2">
+                <!-- Section 4: Tags Assignment -->
+                <FormSection
+                    title="Tags & Taxonomy"
+                    description="Assign searchable keywords and descriptive tags to this game."
+                >
+                    <div v-if="tags.length === 0" class="text-xs text-slate-400 italic">
+                        No tags created yet.
+                    </div>
+                    <div v-else class="flex flex-wrap gap-2">
                         <button
                             v-for="tag in tags"
                             :key="tag.id"
                             type="button"
                             @click="toggleTag(tag.id)"
-                            class="px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all"
-                            :class="form.tags.includes(tag.id) ? 'bg-emerald-500 text-slate-950 border-emerald-400' : 'bg-slate-900 text-slate-400 border-slate-800 hover:text-white'"
+                            class="px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all flex items-center gap-1.5"
+                            :class="form.tags.includes(tag.id)
+                                ? 'bg-emerald-500 text-slate-950 border-emerald-400 shadow-sm shadow-emerald-500/20'
+                                : 'bg-slate-900 text-slate-400 border-slate-800 hover:text-white hover:border-slate-700'"
                         >
-                            #{{ tag.name }}
+                            <span>#{{ tag.name }}</span>
+                            <span v-if="form.tags.includes(tag.id)" class="text-slate-950 font-black">✓</span>
                         </button>
                     </div>
-                </div>
+                </FormSection>
 
-                <!-- SEO Metadata Card -->
-                <div class="p-6 rounded-2xl bg-[#0a0f1d] border border-slate-800/80 space-y-4">
-                    <h3 class="text-sm font-bold text-white uppercase tracking-wider">SEO Customization</h3>
+                <!-- Section 5: SEO Customization & Live SERP Preview -->
+                <FormSection
+                    title="Search Engine Optimization (SEO)"
+                    description="Configure how this game is indexed and appears in Google search engine result pages."
+                >
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">SEO Title Override</label>
+                            <input
+                                v-model="form.seo_title"
+                                type="text"
+                                placeholder="Leave blank to use default portal title"
+                                class="w-full px-3.5 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500"
+                            />
+                            <p v-if="form.errors.seo_title" class="mt-1 text-xs text-rose-400">{{ form.errors.seo_title }}</p>
+                        </div>
 
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">SEO Title Override</label>
-                        <input
-                            v-model="form.seo_title"
-                            type="text"
-                            placeholder="Defaults to auto-generated portal title"
-                            class="w-full px-3.5 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500"
-                        />
-                        <p v-if="form.errors.seo_title" class="mt-1 text-xs text-rose-400">{{ form.errors.seo_title }}</p>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">SEO Meta Description</label>
+                            <textarea
+                                v-model="form.seo_description"
+                                rows="2"
+                                placeholder="Leave blank to use game description"
+                                class="w-full px-3.5 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500"
+                            ></textarea>
+                            <p v-if="form.errors.seo_description" class="mt-1 text-xs text-rose-400">{{ form.errors.seo_description }}</p>
+                        </div>
+
+                        <!-- Google SERP Snippet Preview -->
+                        <div class="p-4 rounded-xl bg-slate-950/80 border border-slate-800 space-y-1">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5">
+                                Google Search Snippet Preview
+                            </span>
+                            <p class="text-xs text-slate-400 font-mono truncate">
+                                https://taph5gaming.com/games/{{ form.slug || 'game-slug' }}
+                            </p>
+                            <p class="text-sm font-semibold text-blue-400 hover:underline cursor-pointer truncate">
+                                {{ effectiveSeoTitle }}
+                            </p>
+                            <p class="text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                                {{ effectiveSeoDescription }}
+                            </p>
+                        </div>
                     </div>
-
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-300 mb-1">SEO Description Override</label>
-                        <textarea
-                            v-model="form.seo_description"
-                            rows="2"
-                            placeholder="Defaults to auto-generated portal description"
-                            class="w-full px-3.5 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500"
-                        ></textarea>
-                        <p v-if="form.errors.seo_description" class="mt-1 text-xs text-rose-400">{{ form.errors.seo_description }}</p>
-                    </div>
-                </div>
+                </FormSection>
 
                 <!-- Action Footer -->
-                <div class="flex items-center justify-end gap-3 pt-2">
+                <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-800/80">
                     <Link
                         :href="route('admin.games.show', game.id)"
                         class="px-5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-bold text-slate-300 transition-colors"
@@ -239,4 +341,3 @@ const submit = () => {
         </div>
     </AdminLayout>
 </template>
-

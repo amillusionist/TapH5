@@ -56,6 +56,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Canonical SEO Base URL
+    |--------------------------------------------------------------------------
+    |
+    | Used to generate canonical URLs, Open Graph URLs, sitemaps, and structured
+    | data. In production, this can be set to https://taph5gaming.com while
+    | falling back to APP_URL locally.
+    |
+    */
+
+    'seo_url' => env('APP_SEO_URL', env('APP_URL', 'http://127.0.0.1:8000')),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Timezone
     |--------------------------------------------------------------------------
     |

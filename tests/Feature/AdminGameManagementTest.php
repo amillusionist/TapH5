@@ -161,4 +161,3 @@ class AdminGameManagementTest extends TestCase
         $response->assertSessionHasErrors(['title', 'slug']);
     }
 }
-

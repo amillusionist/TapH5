@@ -1,0 +1,127 @@
+- generic [ref=f3e479]:
+  - complementary [ref=f3e480]:
+    - link "TAPH5 GAMES Free Web Gaming Admin" [ref=f3e482] [cursor=pointer]:
+      - /url: http://127.0.0.1:8000/admin
+      - link "TAPH5 GAMES Free Web Gaming" [ref=f3e483]:
+        - /url: /
+        - generic [ref=f3e489]:
+          - generic [ref=f3e490]:
+            - generic [ref=f3e491]: TAPH5
+            - generic [ref=f3e492]: GAMES
+          - generic [ref=f3e493]: Free Web Gaming
+      - generic [ref=f3e494]: Admin
+    - generic [ref=f3e495]:
+      - generic [ref=f3e496]:
+        - generic [ref=f3e497]: Platform Operations
+        - navigation [ref=f3e498]:
+          - link "Dashboard" [ref=f3e499] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin
+          - link "Games Manager" [ref=f3e506] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/games
+      - generic [ref=f3e510]:
+        - generic [ref=f3e511]: Content & Taxonomies
+        - navigation [ref=f3e512]:
+          - link "Categories" [ref=f3e513] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/categories
+          - link "Tags" [ref=f3e517] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/tags
+    - generic [ref=f3e522]:
+      - link "View Live Portal" [ref=f3e523] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f3e532]:
+        - generic [ref=f3e533]:
+          - paragraph [ref=f3e534]: TapH5 Admin
+          - paragraph [ref=f3e535]: admin@taph5gaming.com
+        - button "Sign Out of Admin" [ref=f3e536] [cursor=pointer]
+  - generic [ref=f3e540]:
+    - banner [ref=f3e541]:
+      - generic [ref=f3e543]:
+        - generic [ref=f3e544]: Control Panel
+        - generic [ref=f3e545]: /
+        - generic [ref=f3e546]: "Game Review: Classic Snake - TapH5"
+      - generic [ref=f3e547]: Single-Domain Online
+    - main [ref=f3e550]:
+      - generic [ref=f3e551]:
+        - generic [ref=f3e552]:
+          - navigation [ref=f3e553]:
+            - link "Admin" [ref=f3e554] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin
+            - link "Games" [ref=f3e557] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin/games
+            - generic [ref=f3e560]: Classic Snake - TapH5
+          - generic [ref=f3e561]:
+            - generic [ref=f3e562]:
+              - heading "Classic Snake - TapH5 Published" [level=1] [ref=f3e563]:
+                - generic [ref=f3e564]: Classic Snake - TapH5
+                - generic [ref=f3e565]: Published
+              - paragraph [ref=f3e568]: "ID: #9 • Slug: classic-snake-taph5"
+            - generic [ref=f3e569]:
+              - link "View Live" [ref=f3e570] [cursor=pointer]:
+                - /url: /games/classic-snake-taph5
+              - button "Archive" [ref=f3e576] [cursor=pointer]
+              - link "Edit Metadata" [ref=f3e577] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/admin/games/9/edit
+        - generic [ref=f3e582]:
+          - generic [ref=f3e583]:
+            - generic [ref=f3e584]:
+              - generic [ref=f3e585]:
+                - heading "Game Overview & Instructions" [level=3] [ref=f3e586]
+                - paragraph [ref=f3e587]: Content surfaced to players on the game detail page.
+              - generic [ref=f3e588]:
+                - generic [ref=f3e589]:
+                  - generic [ref=f3e590]: Description
+                  - generic [ref=f3e591]: Play Classic Snake - TapH5 online for free on TapH5 Games. Fast, responsive HTML5 gameplay in your browser.
+                - generic [ref=f3e592]:
+                  - generic [ref=f3e593]: Gameplay Instructions
+                  - generic [ref=f3e594]: Use keyboard arrows or touch controls to play.
+            - generic [ref=f3e595]:
+              - generic [ref=f3e596]:
+                - heading "Filesystem & Discovery Engine Diagnostics" [level=3] [ref=f3e597]
+                - paragraph [ref=f3e598]: Single-domain paths, entry file validation, and cryptographic identity.
+              - generic [ref=f3e599]:
+                - generic [ref=f3e600]:
+                  - generic [ref=f3e601]: Storage Directory
+                  - text: arcade/classic-snake-taph5
+                - generic [ref=f3e602]:
+                  - generic [ref=f3e603]: Entry File
+                  - text: index.html
+                - generic [ref=f3e604]:
+                  - generic [ref=f3e605]: Game Architecture
+                  - text: single_file
+                - generic [ref=f3e606]:
+                  - generic [ref=f3e607]: Recorded Plays
+                  - text: 20 sessions
+              - generic [ref=f3e608]:
+                - generic [ref=f3e609]:
+                  - generic [ref=f3e610]: Cryptographic Fingerprint
+                  - code [ref=f3e611]: d41c61b151ebb450e0a888224243961db07fc99662a5e4d487c83ef2f170077b
+                - button "Copy" [ref=f3e612] [cursor=pointer]
+              - generic [ref=f3e614]:
+                - generic [ref=f3e615]: Scan Metadata Payload
+                - button "Inspect Raw JSON" [ref=f3e616] [cursor=pointer]
+          - generic [ref=f3e620]:
+            - generic [ref=f3e621]:
+              - generic [ref=f3e622]:
+                - heading "Thumbnail Asset" [level=4] [ref=f3e623]
+                - generic [ref=f3e624]: 4:3 Aspect
+              - img "Classic Snake - TapH5" [ref=f3e626]
+              - paragraph [ref=f3e627]: /images/thumbnails/classic-snake-taph5.svg
+            - generic [ref=f3e628]:
+              - heading "Taxonomies" [level=4] [ref=f3e629]
+              - generic [ref=f3e630]:
+                - generic [ref=f3e631]: Primary Category
+                - generic [ref=f3e632]: Arcade
+              - generic [ref=f3e633]:
+                - generic [ref=f3e634]: Assigned Tags
+                - text: No tags assigned
+            - generic [ref=f3e635]:
+              - heading "Curation Flags" [level=4] [ref=f3e636]
+              - generic [ref=f3e637]:
+                - generic [ref=f3e638]: Featured Game
+                - generic [ref=f3e639]: "Off"
+              - generic [ref=f3e640]:
+                - generic [ref=f3e641]: Trending Now
+                - generic [ref=f3e642]: "Off"
+              - generic [ref=f3e643]:
+                - generic [ref=f3e644]: Popular Catalog
+                - generic [ref=f3e645]: "Off"

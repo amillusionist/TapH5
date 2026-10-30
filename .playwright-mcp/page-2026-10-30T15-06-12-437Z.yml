@@ -1,0 +1,6 @@
+- generic [active] [ref=f3e1]:
+  - heading "Not Found" [level=1] [ref=f3e2]
+  - paragraph [ref=f3e3]:
+    - text: The requested resource
+    - code [ref=f3e4]: /games?search=snake
+    - text: was not found on this server.

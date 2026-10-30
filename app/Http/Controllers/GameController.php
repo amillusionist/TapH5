@@ -39,12 +39,7 @@ class GameController extends Controller
             ->withCount('publishedGames')
             ->get();
 
-        $pageTitle = 'All Free HTML5 Games';
-        if ($categorySlug && $cat = $categories->firstWhere('slug', $categorySlug)) {
-            $pageTitle = "{$cat->name} Games";
-        } elseif ($search) {
-            $pageTitle = "Search: {$search}";
-        }
+        $activeCategory = $categorySlug ? $categories->firstWhere('slug', $categorySlug) : null;
 
         return Inertia::render('Games/Index', [
             'games' => GameResource::collection($games),
@@ -54,10 +49,11 @@ class GameController extends Controller
                 'category' => $categorySlug,
                 'sort' => $sort,
             ],
-            'meta' => $this->seoService->forPage(
-                $pageTitle,
-                'Explore and play all free HTML5 games on TapH5 Games. Filter by category, search favorites, and play instantly in any browser.',
-                route('games.index')
+            'meta' => $this->seoService->forGamesIndex(
+                $search ?: null,
+                $categorySlug ?: null,
+                $sort ?: null,
+                $activeCategory
             ),
         ]);
     }

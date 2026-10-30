@@ -115,4 +115,3 @@ class AdminPublishingTest extends TestCase
         $this->assertFileExists($publicDir.'/index.html');
     }
 }
-

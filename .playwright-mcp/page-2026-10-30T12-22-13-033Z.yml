@@ -1,0 +1,82 @@
+- generic [ref=f2e3]:
+  - complementary [ref=f2e4]:
+    - link "TAPH5 GAMES Free Web Gaming Admin" [ref=f2e6] [cursor=pointer]:
+      - /url: http://127.0.0.1:8000/admin
+      - link "TAPH5 GAMES Free Web Gaming" [ref=f2e7]:
+        - /url: /
+        - generic [ref=f2e13]:
+          - generic [ref=f2e14]:
+            - generic [ref=f2e15]: TAPH5
+            - generic [ref=f2e16]: GAMES
+          - generic [ref=f2e17]: Free Web Gaming
+      - generic [ref=f2e18]: Admin
+    - generic [ref=f2e19]:
+      - generic [ref=f2e20]:
+        - generic [ref=f2e21]: Platform Operations
+        - navigation [ref=f2e22]:
+          - link "Dashboard" [ref=f2e23] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin
+          - link "Games Manager" [ref=f2e30] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/games
+      - generic [ref=f2e34]:
+        - generic [ref=f2e35]: Content & Taxonomies
+        - navigation [ref=f2e36]:
+          - link "Categories" [ref=f2e37] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/categories
+          - link "Tags" [ref=f2e41] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/tags
+    - generic [ref=f2e46]:
+      - link "View Live Portal" [ref=f2e47] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f2e56]:
+        - generic [ref=f2e57]:
+          - paragraph [ref=f2e58]: TapH5 Admin
+          - paragraph [ref=f2e59]: admin@taph5gaming.com
+        - button "Sign Out of Admin" [ref=f2e60] [cursor=pointer]
+  - generic [ref=f2e64]:
+    - banner [ref=f2e65]:
+      - generic [ref=f2e67]:
+        - generic [ref=f2e68]: Control Panel
+        - generic [ref=f2e69]: /
+        - generic [ref=f2e70]: Games Management
+    - main [ref=f2e71]:
+      - generic [ref=f2e72]:
+        - generic [ref=f2e73]:
+          - navigation [ref=f2e74]:
+            - link "Admin" [ref=f2e75] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin
+            - generic [ref=f2e78]: Games
+          - generic [ref=f2e80]:
+            - heading "Games Catalog Manager" [level=1] [ref=f2e81]
+            - paragraph [ref=f2e83]: Review, inspect, edit, publish, and manage all HTML5 games on the platform.
+        - generic [ref=f2e84]:
+          - button "All Games 9" [ref=f2e85] [cursor=pointer]:
+            - generic [ref=f2e86]: All Games
+            - generic [ref=f2e87]: "9"
+          - button "Draft Queue 0" [ref=f2e88] [cursor=pointer]:
+            - generic [ref=f2e89]: Draft Queue
+            - generic [ref=f2e90]: "0"
+          - button "Published 9" [ref=f2e91] [cursor=pointer]:
+            - generic [ref=f2e92]: Published
+            - generic [ref=f2e93]: "9"
+          - button "Archived 0" [ref=f2e94] [cursor=pointer]:
+            - generic [ref=f2e95]: Archived
+            - generic [ref=f2e96]: "0"
+        - generic [ref=f2e97]:
+          - textbox "Search by title, slug, or keywords..." [ref=f2e102]
+          - generic [ref=f2e103]:
+            - combobox [ref=f2e104]:
+              - option "All Categories" [selected]
+              - option "Action"
+              - option "Arcade"
+              - option "Puzzle"
+              - option "Racing"
+              - option "Adventure"
+              - option "Sports"
+            - combobox [ref=f2e105]:
+              - 'option "Sort: Newest" [selected]'
+              - 'option "Sort: Oldest"'
+              - 'option "Sort: Title A-Z"'
+              - 'option "Sort: Title Z-A"'
+              - 'option "Sort: Most Played"'
+            - button "Filter" [ref=f2e106] [cursor=pointer]

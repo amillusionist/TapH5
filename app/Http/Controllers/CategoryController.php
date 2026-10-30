@@ -33,6 +33,8 @@ class CategoryController extends Controller
             ->paginate(18)
             ->withQueryString();
 
+        $isFiltered = ! empty($search) || ($sort !== 'newest');
+
         return Inertia::render('Categories/Show', [
             'category' => new CategoryResource($category),
             'games' => GameResource::collection($games),
@@ -40,7 +42,7 @@ class CategoryController extends Controller
                 'search' => $search,
                 'sort' => $sort,
             ],
-            'meta' => $this->seoService->forCategory($category),
+            'meta' => $this->seoService->forCategory($category, $isFiltered),
         ]);
     }
 }

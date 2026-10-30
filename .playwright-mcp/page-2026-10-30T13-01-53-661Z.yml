@@ -1,0 +1,163 @@
+- generic [ref=f7e3]:
+  - complementary [ref=f7e4]:
+    - generic [ref=f7e5]:
+      - link "TAPH5 GAMES Free Web Gaming Admin" [ref=f7e6] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin
+        - link "TAPH5 GAMES Free Web Gaming" [ref=f7e7]:
+          - /url: /
+          - generic [ref=f7e13]:
+            - generic [ref=f7e14]:
+              - generic [ref=f7e15]: TAPH5
+              - generic [ref=f7e16]: GAMES
+            - generic [ref=f7e17]: Free Web Gaming
+        - generic [ref=f7e18]: Admin
+      - button "Close Sidebar" [ref=f7e19] [cursor=pointer]
+    - generic [ref=f7e22]:
+      - generic [ref=f7e23]:
+        - generic [ref=f7e24]: Platform Operations
+        - navigation [ref=f7e25]:
+          - link "Dashboard" [ref=f7e26] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin
+          - link "Games Manager" [ref=f7e33] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/games
+      - generic [ref=f7e37]:
+        - generic [ref=f7e38]: Content & Taxonomies
+        - navigation [ref=f7e39]:
+          - link "Categories" [ref=f7e40] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/categories
+          - link "Tags" [ref=f7e44] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/tags
+    - generic [ref=f7e49]:
+      - link "View Live Portal" [ref=f7e50] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f7e59]:
+        - generic [ref=f7e60]:
+          - paragraph [ref=f7e61]: TapH5 Admin
+          - paragraph [ref=f7e62]: admin@taph5gaming.com
+        - button "Sign Out of Admin" [ref=f7e63] [cursor=pointer]
+  - generic [ref=f7e67]:
+    - banner [ref=f7e68]:
+      - generic [ref=f7e69]:
+        - button "Open Mobile Menu" [ref=f7e70] [cursor=pointer]
+        - generic [ref=f7e72]:
+          - generic [ref=f7e73]: Control Panel
+          - generic [ref=f7e74]: /
+          - generic [ref=f7e75]: Dashboard Overview
+    - main [ref=f7e76]:
+      - generic [ref=f7e77]:
+        - generic [ref=f7e78]:
+          - navigation [ref=f7e79]:
+            - link "Admin" [ref=f7e80] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin
+            - generic [ref=f7e83]: Dashboard
+          - generic [ref=f7e84]:
+            - generic [ref=f7e85]:
+              - heading "Operations Dashboard" [level=1] [ref=f7e86]
+              - paragraph [ref=f7e88]: Real-time portal performance, catalog diagnostics, and review queue management.
+            - generic [ref=f7e89]:
+              - link "+ Category" [ref=f7e90] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/admin/categories/create
+              - link "+ Tag" [ref=f7e92] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/admin/tags/create
+        - generic [ref=f7e94]:
+          - generic [ref=f7e95]:
+            - generic [ref=f7e96]: Total Games
+            - generic [ref=f7e101]: "9"
+            - generic [ref=f7e104]:
+              - generic [ref=f7e105]: 9 live
+              - generic [ref=f7e106]: •
+              - generic [ref=f7e107]: 0 drafts
+          - generic [ref=f7e108]:
+            - generic [ref=f7e109]: Published Active
+            - generic [ref=f7e115]: "9"
+            - generic [ref=f7e117]: Available on public portal
+          - generic [ref=f7e118]:
+            - generic [ref=f7e119]: Total Game Plays
+            - generic [ref=f7e125]: "31"
+            - generic [ref=f7e127]: Recorded gameplay sessions
+          - generic [ref=f7e128]:
+            - generic [ref=f7e129]: Taxonomies
+            - generic [ref=f7e134]:
+              - generic [ref=f7e135]: "6"
+              - generic [ref=f7e136]: Categories
+            - generic [ref=f7e137]: 9 metadata tags configured
+        - generic [ref=f7e138]:
+          - generic [ref=f7e139]:
+            - generic [ref=f7e140]:
+              - generic [ref=f7e141]:
+                - heading "Awaiting Review" [level=3] [ref=f7e142]
+                - paragraph [ref=f7e144]: Games waiting for approval and metadata verification.
+              - link "View Queue →" [ref=f7e145] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/admin/games?status=draft
+            - generic [ref=f7e147]:
+              - paragraph [ref=f7e151]: All games are up to date!
+              - paragraph [ref=f7e152]: No drafts awaiting review in the queue.
+          - generic [ref=f7e153]:
+            - generic [ref=f7e154]:
+              - generic [ref=f7e155]:
+                - heading "Recently Cataloged" [level=3] [ref=f7e156]
+                - paragraph [ref=f7e157]: Most recent game additions across the portal.
+              - link "View All →" [ref=f7e158] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/admin/games
+            - generic [ref=f7e159]:
+              - generic [ref=f7e160]:
+                - generic [ref=f7e161]:
+                  - img "Classic Snake - TapH5" [ref=f7e162]
+                  - generic [ref=f7e163]:
+                    - heading "Classic Snake - TapH5" [level=4] [ref=f7e164]
+                    - paragraph [ref=f7e165]: Arcade • 20 plays
+                - generic [ref=f7e166]:
+                  - generic [ref=f7e167]: Published
+                  - link "Inspect Game" [ref=f7e170] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/games/9
+              - generic [ref=f7e173]:
+                - generic [ref=f7e174]:
+                  - img "Neon Pulse" [ref=f7e175]
+                  - generic [ref=f7e176]:
+                    - heading "Neon Pulse" [level=4] [ref=f7e177]
+                    - paragraph [ref=f7e178]: Arcade • 4 plays
+                - generic [ref=f7e179]:
+                  - generic [ref=f7e180]: Published
+                  - link "Inspect Game" [ref=f7e183] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/games/1
+              - generic [ref=f7e186]:
+                - generic [ref=f7e187]:
+                  - img "Cyber Runner" [ref=f7e188]
+                  - generic [ref=f7e189]:
+                    - heading "Cyber Runner" [level=4] [ref=f7e190]
+                    - paragraph [ref=f7e191]: Action • 3 plays
+                - generic [ref=f7e192]:
+                  - generic [ref=f7e193]: Published
+                  - link "Inspect Game" [ref=f7e196] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/games/2
+              - generic [ref=f7e199]:
+                - generic [ref=f7e200]:
+                  - img "Galaxy Drift" [ref=f7e201]
+                  - generic [ref=f7e202]:
+                    - heading "Galaxy Drift" [level=4] [ref=f7e203]
+                    - paragraph [ref=f7e204]: Racing • 0 plays
+                - generic [ref=f7e205]:
+                  - generic [ref=f7e206]: Published
+                  - link "Inspect Game" [ref=f7e209] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/games/3
+              - generic [ref=f7e212]:
+                - generic [ref=f7e213]:
+                  - img "Mind Mesh" [ref=f7e214]
+                  - generic [ref=f7e215]:
+                    - heading "Mind Mesh" [level=4] [ref=f7e216]
+                    - paragraph [ref=f7e217]: Puzzle • 1 plays
+                - generic [ref=f7e218]:
+                  - generic [ref=f7e219]: Published
+                  - link "Inspect Game" [ref=f7e222] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/games/4
+        - generic [ref=f7e226]:
+          - generic [ref=f7e231]:
+            - heading "System Architecture Status" [level=4] [ref=f7e232]
+            - paragraph [ref=f7e233]:
+              - text: Single-Domain Static Routing • Hardened Iframe Sandboxing (
+              - code [ref=f7e234]: allow-scripts allow-forms allow-pointer-lock
+              - text: )
+          - generic [ref=f7e235]:
+            - generic [ref=f7e236]: "Storage: public/games"
+            - generic [ref=f7e237]: •
+            - generic [ref=f7e238]: "Archived: 0"
