@@ -51,6 +51,7 @@ class SeoTest extends TestCase
         $response = $this->get('/games/brain-teaser');
 
         $response->assertStatus(200);
+        $response->assertHeaderMissing('X-Robots-Tag');
         $response->assertInertia(fn ($page) => $page
             ->component('Games/Show')
             ->has('meta', fn ($meta) => $meta
@@ -198,7 +199,7 @@ class SeoTest extends TestCase
         $this->assertStringNotContainsString('<changefreq>', $content);
     }
 
-    public function test_robots_txt_returns_text_plain_with_security_disallows_and_sitemap(): void
+    public function test_robots_txt_has_no_standalone_game_html_disallows(): void
     {
         $response = $this->get('/robots.txt');
 
@@ -212,8 +213,61 @@ class SeoTest extends TestCase
         $this->assertStringContainsString('Disallow: /login', $content);
         $this->assertStringContainsString('Disallow: /register', $content);
         $this->assertStringContainsString('Disallow: /profile', $content);
-        $this->assertStringContainsString('Disallow: /games/*/*.html', $content);
-        $this->assertStringContainsString('Disallow: /games/*/*.htm', $content);
+
+        // Raw game HTML disallows must NOT be present
+        $this->assertStringNotContainsString('Disallow: /games/*/*.html', $content);
+        $this->assertStringNotContainsString('Disallow: /games/*/*.htm', $content);
+        $this->assertStringNotContainsString('Disallow: /games/', $content);
+
+        // Sitemap declaration must be present
         $this->assertStringContainsString('Sitemap:', $content);
+    }
+
+    public function test_static_robots_txt_file_matches_dynamic_directives(): void
+    {
+        $filePath = public_path('robots.txt');
+        $this->assertFileExists($filePath);
+
+        $content = file_get_contents($filePath);
+        $this->assertStringContainsString('User-agent: *', $content);
+        $this->assertStringContainsString('Disallow: /admin/', $content);
+        $this->assertStringContainsString('Disallow: /dashboard', $content);
+        $this->assertStringContainsString('Disallow: /login', $content);
+        $this->assertStringContainsString('Disallow: /register', $content);
+        $this->assertStringContainsString('Disallow: /profile', $content);
+
+        // Raw game HTML disallows must NOT be present in static file
+        $this->assertStringNotContainsString('Disallow: /games/*/*.html', $content);
+        $this->assertStringNotContainsString('Disallow: /games/*/*.htm', $content);
+        $this->assertStringNotContainsString('Disallow: /games/', $content);
+
+        // Sitemap declaration must be present
+        $this->assertStringContainsString('Sitemap: https://taph5gaming.com/sitemap.xml', $content);
+    }
+
+    public function test_standalone_game_entry_html_contains_meta_robots_noindex_follow(): void
+    {
+        $gameHtmlPath = public_path('games/arcade/classic-snake-taph5/index.html');
+        $this->assertFileExists($gameHtmlPath);
+
+        $content = file_get_contents($gameHtmlPath);
+        $this->assertMatchesRegularExpression('/<meta\s+name=["\']robots["\']\s+content=["\']noindex,\s*follow["\']/i', $content);
+    }
+
+    public function test_apache_htaccess_contains_scoped_x_robots_tag_for_game_html(): void
+    {
+        $htaccessPath = public_path('.htaccess');
+        $this->assertFileExists($htaccessPath);
+
+        $content = file_get_contents($htaccessPath);
+
+        // Verify SetEnvIf scoped to /games/.*.(html|htm)
+        $this->assertStringContainsString('Request_URI "^/games/.*\.(html|htm)$"', $content);
+
+        // Verify Header always set X-Robots-Tag "noindex, follow"
+        $this->assertStringContainsString('X-Robots-Tag "noindex, follow"', $content);
+
+        // Verify it is NOT applied globally to all files
+        $this->assertStringNotContainsString('Header set X-Robots-Tag "noindex, follow"\n', $content);
     }
 }

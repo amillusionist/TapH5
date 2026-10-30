@@ -51,7 +51,11 @@ defineProps<{
                             <div class="w-14 h-14 rounded-xl overflow-hidden bg-slate-950 border border-slate-800 shrink-0">
                                 <img
                                     :src="game.thumbnail || '/images/thumbnails/neon-pulse.svg'"
-                                    :alt="game.title"
+                                    :alt="`${game.title} thumbnail`"
+                                    width="56"
+                                    height="56"
+                                    loading="eager"
+                                    decoding="async"
                                     class="w-full h-full object-cover"
                                 />
                             </div>
@@ -173,9 +177,10 @@ defineProps<{
 
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                 <GameCard
-                    v-for="related in relatedGames"
+                    v-for="(related, idx) in relatedGames"
                     :key="related.id"
                     :game="related"
+                    :priority="idx < 4"
                 />
             </div>
         </section>

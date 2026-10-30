@@ -1,17 +1,18 @@
+<IfModule mod_headers.c>
+    <IfModule mod_setenvif.c>
+        # Serve X-Robots-Tag: noindex, follow specifically for standalone HTML game files inside /games/
+        # This prevents raw iframe game bundles from indexing while allowing search crawlers to read the directive.
+        SetEnvIfNoCase Request_URI "^/games/.*\.(html|htm)$" IS_GAME_HTML
+        Header always set X-Robots-Tag "noindex, follow" env=IS_GAME_HTML
+    </IfModule>
+</IfModule>
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
     </IfModule>
 
     RewriteEngine On
-
-    # Prevent standalone iframe game bundle HTML files from being indexed directly
-    <IfModule mod_headers.c>
-        <IfModule mod_setenvif.c>
-            SetEnvIf Request_URI "^/games/.*\.(html|htm)$" IS_GAME_HTML
-            Header set X-Robots-Tag "noindex, nofollow" env=IS_GAME_HTML
-        </IfModule>
-    </IfModule>
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
@@ -27,6 +28,7 @@
     RewriteRule ^ %1 [L,R=301]
 
     # Send Requests To Front Controller...
+    # Route /games to Laravel front controller instead of filesystem directory
     RewriteCond %{REQUEST_URI} ^/games/?$ [OR]
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f

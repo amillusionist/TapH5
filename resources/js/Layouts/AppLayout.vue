@@ -50,11 +50,15 @@ const toggleMobileMenu = () => {
                     <div class="relative" @mouseenter="isCategoriesDropdownOpen = true" @mouseleave="isCategoriesDropdownOpen = false">
                         <button
                             type="button"
-                            class="flex items-center gap-1 px-3.5 py-2 text-sm font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors focus:outline-none"
+                            @click="isCategoriesDropdownOpen = !isCategoriesDropdownOpen"
+                            @keydown.escape="isCategoriesDropdownOpen = false"
+                            aria-haspopup="true"
+                            :aria-expanded="isCategoriesDropdownOpen"
+                            class="flex items-center gap-1 px-3.5 py-2 text-sm font-semibold rounded-xl text-slate-300 hover:text-white hover:bg-slate-800/50 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400"
                             :class="$page.url.startsWith('/category') ? 'text-emerald-400 bg-emerald-500/10' : ''"
                         >
                             <span>Categories</span>
-                            <svg class="w-4 h-4 ml-0.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <svg class="w-4 h-4 ml-0.5 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <path d="m6 9 6 6 6-6"/>
                             </svg>
                         </button>
@@ -68,7 +72,7 @@ const toggleMobileMenu = () => {
                                 v-for="cat in page.props.categoriesNav"
                                 :key="cat.id"
                                 :href="route('categories.show', { slug: cat.slug })"
-                                class="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-emerald-400 hover:bg-slate-800/80 transition-colors"
+                                class="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-emerald-400 hover:bg-slate-800/80 transition-colors focus:outline-none focus:ring-1 focus:ring-emerald-400"
                             >
                                 <span>{{ cat.name }}</span>
                                 <span class="text-[11px] text-slate-400">{{ cat.games_count }}</span>
@@ -79,15 +83,18 @@ const toggleMobileMenu = () => {
 
                 <!-- Search Input Form -->
                 <div class="hidden lg:flex items-center max-w-xs w-full">
-                    <form @submit.prevent="handleSearch" class="relative w-full">
+                    <form @submit.prevent="handleSearch" role="search" class="relative w-full">
+                        <label for="desktop-search-input" class="sr-only">Search free games</label>
                         <input
+                            id="desktop-search-input"
                             v-model="searchQuery"
                             type="text"
                             placeholder="Search games..."
+                            aria-label="Search games"
                             class="w-full pl-9 pr-4 py-2 bg-slate-900/90 border border-slate-800 rounded-xl text-xs text-slate-200 placeholder-slate-400 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all"
                         />
-                        <button type="submit" class="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-emerald-400 transition-colors">
-                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <button type="submit" aria-label="Submit search" class="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-emerald-400 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
                             </svg>
                         </button>
@@ -99,12 +106,14 @@ const toggleMobileMenu = () => {
                     <button
                         @click="toggleMobileMenu"
                         type="button"
-                        class="p-2 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white focus:outline-none"
+                        aria-label="Toggle navigation menu"
+                        :aria-expanded="isMobileMenuOpen"
+                        class="p-2.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white focus:outline-none focus:ring-2 focus:ring-emerald-400"
                     >
-                        <svg v-if="!isMobileMenuOpen" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg v-if="!isMobileMenuOpen" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>
                         </svg>
-                        <svg v-else class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <svg v-else class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/>
                         </svg>
                     </button>
@@ -114,15 +123,18 @@ const toggleMobileMenu = () => {
             <!-- Mobile Dropdown Menu -->
             <div v-show="isMobileMenuOpen" class="md:hidden border-b border-slate-800 bg-slate-950/95 px-4 pt-3 pb-6">
                 <!-- Mobile Search -->
-                <form @submit.prevent="handleSearch" class="relative w-full mb-4">
+                <form @submit.prevent="handleSearch" role="search" class="relative w-full mb-4">
+                    <label for="mobile-search-input" class="sr-only">Search games</label>
                     <input
+                        id="mobile-search-input"
                         v-model="searchQuery"
                         type="text"
                         placeholder="Search games..."
+                        aria-label="Search games"
                         class="w-full pl-9 pr-4 py-2.5 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-400 focus:outline-none focus:border-emerald-500"
                     />
-                    <button type="submit" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
-                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <button type="submit" aria-label="Submit search" class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
                         </svg>
                     </button>

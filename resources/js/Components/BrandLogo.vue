@@ -7,7 +7,7 @@ defineProps<{
 </script>
 
 <template>
-    <Link href="/" class="flex items-center gap-2.5 group focus:outline-none">
+    <Link href="/" class="flex items-center gap-2.5 group focus:outline-none focus:ring-2 focus:ring-emerald-400 rounded-xl" aria-label="TapH5 Games Homepage">
         <div class="relative flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 p-0.5 shadow-lg shadow-emerald-500/20 group-hover:shadow-emerald-500/40 transition-shadow">
             <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
                 <svg class="w-5 h-5 text-emerald-400 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">

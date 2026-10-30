@@ -16,9 +16,7 @@ class RobotsController extends Controller
             ."Disallow: /dashboard\n"
             ."Disallow: /login\n"
             ."Disallow: /register\n"
-            ."Disallow: /profile\n"
-            ."Disallow: /games/*/*.html\n"
-            ."Disallow: /games/*/*.htm\n\n"
+            ."Disallow: /profile\n\n"
             ."Sitemap: {$sitemapUrl}\n";
 
         return response($content, 200, [
@@ -26,4 +24,3 @@ class RobotsController extends Controller
         ]);
     }
 }
-

@@ -48,7 +48,7 @@ const dismissAlert = () => {
         >
             <!-- Logo & Brand Header -->
             <div class="h-16 px-5 flex items-center justify-between border-b border-slate-800/80 shrink-0">
-                <Link :href="route('admin.dashboard')" class="flex items-center gap-2 group">
+                <Link :href="route('admin.dashboard')" class="flex items-center gap-2 group" aria-label="Admin Control Panel Dashboard">
                     <BrandLogo />
                     <span class="px-1.5 py-0.5 rounded text-[10px] font-black uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 group-hover:border-emerald-500/40 transition-colors">
                         Admin
@@ -176,7 +176,8 @@ const dismissAlert = () => {
                         method="post"
                         as="button"
                         title="Sign Out of Admin"
-                        class="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors focus:outline-none shrink-0"
+                        aria-label="Sign Out of Admin"
+                        class="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors focus:outline-none focus:ring-1 focus:ring-rose-400 shrink-0"
                     >
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

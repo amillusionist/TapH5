@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -36,6 +37,17 @@ class Category extends Model
         'status',
         'sort_order',
     ];
+
+    protected static function booted(): void
+    {
+        static::saved(function () {
+            HomeController::clearCache();
+        });
+
+        static::deleted(function () {
+            HomeController::clearCache();
+        });
+    }
 
     /**
      * @return HasMany<Game, $this>

@@ -96,14 +96,17 @@ const clearFilters = () => {
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80">
             <!-- Search bar -->
             <div class="relative w-full sm:max-w-md">
+                <label for="category-search-input" class="sr-only">Search in {{ category.name }} games</label>
                 <input
+                    id="category-search-input"
                     v-model="search"
                     @input="handleSearchInput"
                     type="text"
+                    :aria-label="`Search in ${category.name} games`"
                     :placeholder="`Search in ${category.name} games...`"
                     class="w-full pl-10 pr-10 py-2.5 bg-slate-950/80 border border-slate-800 rounded-xl text-xs sm:text-sm text-slate-200 placeholder-slate-400 focus:outline-none focus:border-emerald-500 transition-all"
                 />
-                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" aria-hidden="true">
                     <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
                     </svg>
@@ -111,9 +114,10 @@ const clearFilters = () => {
                 <button
                     v-if="search"
                     @click="search = ''; applyFilters();"
-                    class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                    aria-label="Clear search input"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white p-1 rounded focus:outline-none focus:ring-1 focus:ring-emerald-400"
                 >
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/>
                     </svg>
                 </button>
@@ -121,10 +125,12 @@ const clearFilters = () => {
 
             <!-- Sorting Select -->
             <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
-                <span class="text-xs text-slate-400 font-medium hidden sm:inline">Sort:</span>
+                <label for="category-sort-select" class="text-xs text-slate-400 font-medium hidden sm:inline">Sort:</label>
                 <select
+                    id="category-sort-select"
                     v-model="selectedSort"
                     @change="applyFilters"
+                    aria-label="Sort category games"
                     class="px-3.5 py-2 bg-slate-950 border border-slate-800 rounded-xl text-xs text-slate-200 focus:outline-none focus:border-emerald-500 font-semibold"
                 >
                     <option value="newest">Newest First</option>
@@ -139,9 +145,10 @@ const clearFilters = () => {
         <!-- Games Grid -->
         <div v-if="games.data.length > 0" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
             <GameCard
-                v-for="game in games.data"
+                v-for="(game, idx) in games.data"
                 :key="game.id"
                 :game="game"
+                :priority="idx < 6"
             />
         </div>
 

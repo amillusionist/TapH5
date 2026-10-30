@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -72,6 +73,17 @@ class Game extends Model
             'plays_count' => 'integer',
             'scan_metadata' => 'array',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::saved(function () {
+            HomeController::clearCache();
+        });
+
+        static::deleted(function () {
+            HomeController::clearCache();
+        });
     }
 
     /**

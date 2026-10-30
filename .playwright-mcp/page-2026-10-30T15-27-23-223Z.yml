@@ -1,0 +1,1 @@
+- generic [active] [ref=e1]: "User-agent: * Disallow: /admin/ Disallow: /dashboard Disallow: /login Disallow: /register Disallow: /profile Sitemap: https://taph5gaming.com/sitemap.xml"

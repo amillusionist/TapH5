@@ -73,9 +73,10 @@ defineProps<{
 
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                 <GameCard
-                    v-for="game in featuredGames"
+                    v-for="(game, idx) in featuredGames"
                     :key="game.id"
                     :game="game"
+                    :priority="idx < 4"
                 />
             </div>
         </section>

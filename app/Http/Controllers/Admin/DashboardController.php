@@ -17,14 +17,22 @@ class DashboardController extends Controller
      */
     public function index(Request $request): Response
     {
+        $statsData = Game::selectRaw("
+            COUNT(*) as total_games,
+            SUM(CASE WHEN status = 'published' THEN 1 ELSE 0 END) as published_games,
+            SUM(CASE WHEN status = 'draft' THEN 1 ELSE 0 END) as draft_games,
+            SUM(CASE WHEN status = 'archived' THEN 1 ELSE 0 END) as archived_games,
+            COALESCE(SUM(plays_count), 0) as total_plays
+        ")->first();
+
         $stats = [
-            'total_games' => Game::count(),
-            'published_games' => Game::where('status', 'published')->count(),
-            'draft_games' => Game::where('status', 'draft')->count(),
-            'archived_games' => Game::where('status', 'archived')->count(),
+            'total_games' => (int) ($statsData->total_games ?? 0),
+            'published_games' => (int) ($statsData->published_games ?? 0),
+            'draft_games' => (int) ($statsData->draft_games ?? 0),
+            'archived_games' => (int) ($statsData->archived_games ?? 0),
             'total_categories' => Category::count(),
             'total_tags' => Tag::count(),
-            'total_plays' => (int) Game::sum('plays_count'),
+            'total_plays' => (int) ($statsData->total_plays ?? 0),
         ];
 
         $recentGames = Game::with('category')

@@ -1,0 +1,7 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]: "SCORE: 0"
+    - generic [ref=e5]: "SPD: 1.0x"
+    - generic [ref=e6]: "HI: 0"
+    - 'button "AUDIO: ON" [ref=e7] [cursor=pointer]'
+  - generic [ref=e10]: Swipe anywhere to steer • Tap to restart

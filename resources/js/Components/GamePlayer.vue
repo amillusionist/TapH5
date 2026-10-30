@@ -106,9 +106,10 @@ onUnmounted(() => {
                     v-if="isStarted"
                     @click="reloadGame"
                     title="Reload Game"
-                    class="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors focus:outline-none"
+                    aria-label="Reload Game"
+                    class="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400"
                 >
-                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
                     </svg>
                 </button>
@@ -117,12 +118,13 @@ onUnmounted(() => {
                 <button
                     @click="toggleFullscreen"
                     :title="isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'"
-                    class="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-emerald-500 hover:text-slate-950 text-slate-200 font-semibold transition-all focus:outline-none"
+                    :aria-label="isFullscreen ? 'Exit Fullscreen' : 'Enter Fullscreen'"
+                    class="flex items-center gap-1 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-emerald-500 hover:text-slate-950 text-slate-200 font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-emerald-400"
                 >
-                    <svg v-if="!isFullscreen" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg v-if="!isFullscreen" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
                     </svg>
-                    <svg v-else class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <svg v-else class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                         <path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/>
                     </svg>
                     <span class="hidden sm:inline">{{ isFullscreen ? 'Exit' : 'Fullscreen' }}</span>
@@ -211,7 +213,9 @@ onUnmounted(() => {
                 :key="reloadKey"
                 ref="iframeRef"
                 :src="game.embed_url"
+                :title="`${game.title} Game Player`"
                 :sandbox="game.sandbox_attributes || 'allow-scripts allow-forms allow-pointer-lock'"
+                loading="lazy"
                 allow="fullscreen; autoplay; gamepad"
                 class="w-full h-full border-0 select-none"
                 @load="onIframeLoad"

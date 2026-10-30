@@ -4,7 +4,5 @@ Disallow: /dashboard
 Disallow: /login
 Disallow: /register
 Disallow: /profile
-Disallow: /games/*/*.html
-Disallow: /games/*/*.htm
 
 Sitemap: https://taph5gaming.com/sitemap.xml
