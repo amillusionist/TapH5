@@ -68,11 +68,6 @@ class GameController extends Controller
             ->with(['category', 'tags'])
             ->firstOrFail();
 
-        // Increment play count without bumping updated_at
-        $game->timestamps = false;
-        $game->increment('plays_count');
-        $game->timestamps = true;
-
         $relatedGames = Game::published()
             ->where('id', '!=', $game->id)
             ->where('category_id', $game->category_id)

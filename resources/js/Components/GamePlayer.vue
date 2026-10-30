@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
 import type { Game } from '@/types';
+import { GameSessionTracker } from '@/services/analytics';
 
 const props = withDefaults(
     defineProps<{
@@ -20,16 +21,19 @@ const isLoading = ref(true);
 const hasError = ref(false);
 const isFullscreen = ref(false);
 const reloadKey = ref(0);
+const tracker = ref<GameSessionTracker | null>(null);
 
 const startGame = () => {
     isStarted.value = true;
     isLoading.value = true;
     hasError.value = false;
+    tracker.value?.recordPlayClick();
 };
 
 const onIframeLoad = () => {
     isLoading.value = false;
     hasError.value = false;
+    tracker.value?.recordGameLoaded();
 };
 
 const onIframeError = () => {
@@ -41,6 +45,7 @@ const reloadGame = () => {
     isLoading.value = true;
     hasError.value = false;
     reloadKey.value++;
+    tracker.value?.recordPlayClick();
 };
 
 const toggleFullscreen = async () => {
@@ -76,11 +81,23 @@ const handleFullscreenChange = () => {
 onMounted(() => {
     document.addEventListener('fullscreenchange', handleFullscreenChange);
     document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+
+    // Initialize first-party game lifecycle analytics
+    tracker.value = new GameSessionTracker(props.game.id);
+    tracker.value.recordView();
+
+    if (props.autoPlay) {
+        tracker.value.recordPlayClick();
+    }
 });
 
 onUnmounted(() => {
     document.removeEventListener('fullscreenchange', handleFullscreenChange);
     document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+
+    // Flush any pending gameplay session duration
+    tracker.value?.destroy();
+    tracker.value = null;
 });
 </script>
 

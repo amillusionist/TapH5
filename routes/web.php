@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\AnalyticsController as AdminAnalyticsController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\GameController as AdminGameController;
 use App\Http\Controllers\Admin\TagController as AdminTagController;
+use App\Http\Controllers\Api\AnalyticsEventController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\HomeController;
@@ -20,6 +22,11 @@ Route::get('/', HomeController::class)->name('home');
 Route::get('/games', [GameController::class, 'index'])->name('games.index');
 Route::get('/games/{slug}', [GameController::class, 'show'])->name('games.show');
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('categories.show');
+
+// First-Party Analytics Event Ingestion
+Route::prefix('api')->middleware('throttle:60,1')->group(function () {
+    Route::post('/analytics/events', [AnalyticsEventController::class, 'store'])->name('api.analytics.events');
+});
 
 // Informational & Legal Routes
 Route::get('/about', [PageController::class, 'about'])->name('pages.about');
@@ -51,6 +58,7 @@ Route::middleware('auth')->group(function () {
 // Admin Control Panel Routes
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/analytics', [AdminAnalyticsController::class, 'index'])->name('analytics.index');
 
     // Games Management
     Route::get('/games', [AdminGameController::class, 'index'])->name('games.index');

@@ -78,7 +78,7 @@ class GameTest extends TestCase
         );
     }
 
-    public function test_individual_game_page_loads_and_increments_plays(): void
+    public function test_individual_game_page_loads_without_inflating_plays_count(): void
     {
         $category = Category::factory()->create();
         $game = Game::factory()->create([
@@ -100,7 +100,8 @@ class GameTest extends TestCase
             ->has('meta')
         );
 
-        $this->assertEquals(6, $game->fresh()->plays_count);
+        // Phase 6 decoupled play counting from raw page views
+        $this->assertEquals(5, $game->fresh()->plays_count);
     }
 
     public function test_draft_or_archived_game_returns_404(): void

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 
 /**
@@ -100,6 +101,22 @@ class Game extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class)->withTimestamps();
+    }
+
+    /**
+     * @return HasMany<AnalyticsEvent, $this>
+     */
+    public function analyticsEvents(): HasMany
+    {
+        return $this->hasMany(AnalyticsEvent::class);
+    }
+
+    /**
+     * @return HasMany<AnalyticsDailyAggregate, $this>
+     */
+    public function analyticsDailyAggregates(): HasMany
+    {
+        return $this->hasMany(AnalyticsDailyAggregate::class);
     }
 
     /**
