@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  <path d="M 50 200 L 200 80 L 350 200 Z" fill="none" stroke="#8b5cf6" stroke-width="3" filter="url(#glow)"/>
+  <circle cx="200" cy="140" r="28" fill="#a855f7" filter="url(#glow)"/>
+  <path d="M 80 220 L 320 220" stroke="#06b6d4" stroke-width="4" stroke-dasharray="10 6"/>
+  <text x="200" y="255" text-anchor="middle" fill="#f8fafc" font-family="system-ui, sans-serif" font-weight="800" font-size="20" letter-spacing="2">CYBER RUNNER</text>
+  <text x="200" y="275" text-anchor="middle" fill="#c084fc" font-family="system-ui, sans-serif" font-weight="600" font-size="11" letter-spacing="1">ENDLESS • SCI-FI</text>
+</svg>
+

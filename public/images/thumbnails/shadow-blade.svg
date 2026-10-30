@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#450a0a"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#bg)"/>
+  <path d="M 120 220 Q 200 60 280 180 Q 200 120 120 220 Z" fill="#ef4444" opacity="0.8"/>
+  <circle cx="200" cy="130" r="10" fill="#fef08a"/>
+  <text x="200" y="255" text-anchor="middle" fill="#f8fafc" font-family="system-ui, sans-serif" font-weight="800" font-size="20" letter-spacing="2">SHADOW BLADE</text>
+  <text x="200" y="275" text-anchor="middle" fill="#f87171" font-family="system-ui, sans-serif" font-weight="600" font-size="11" letter-spacing="1">ACTION • NINJA</text>
+</svg>
+
