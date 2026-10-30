@@ -136,7 +136,19 @@
     let food = { x: 0, y: 0 };
     let score = 0;
     let foodEaten = 0;
-    let highScore = parseInt(localStorage.getItem('taph5_snake_hi')) || 0;
+    function safeGetItem(key) {
+      try {
+        return window.localStorage ? window.localStorage.getItem(key) : null;
+      } catch (e) {
+        return null;
+      }
+    }
+    function safeSetItem(key, val) {
+      try {
+        if (window.localStorage) window.localStorage.setItem(key, val);
+      } catch (e) {}
+    }
+    let highScore = parseInt(safeGetItem('taph5_snake_hi')) || 0;
     let isGameOver = false;
     let soundEnabled = true;
     let gameLoopTimeout = null;
@@ -237,7 +249,7 @@
 
         if (score > highScore) {
           highScore = score;
-          localStorage.setItem('taph5_snake_hi', highScore);
+          safeSetItem('taph5_snake_hi', highScore);
           hiDisplay.textContent = `HI: ${highScore}`;
         }
         spawnFood();

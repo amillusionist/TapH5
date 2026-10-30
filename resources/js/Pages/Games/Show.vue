@@ -124,7 +124,7 @@ defineProps<{
                         </div>
                         <div class="flex items-center justify-between pb-2 border-b border-slate-800/60">
                             <span class="text-slate-400">Sandbox Isolation</span>
-                            <span class="font-medium text-emerald-400">Origin Isolated</span>
+                            <span class="font-medium text-emerald-400">Sandboxed Game</span>
                         </div>
                         <div class="flex items-center justify-between pb-2 border-b border-slate-800/60">
                             <span class="text-slate-400">Distribution</span>
