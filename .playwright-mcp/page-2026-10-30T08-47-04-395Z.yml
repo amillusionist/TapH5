@@ -1,0 +1,134 @@
+- generic [ref=f1e3]:
+  - complementary [ref=f1e4]:
+    - link [ref=f1e6] [cursor=pointer]:
+      - /url: http://127.0.0.1:8000/admin
+      - link "TAPH5 GAMES Free Web Gaming" [ref=f1e7]:
+        - /url: /
+        - generic [ref=f1e13]:
+          - generic [ref=f1e14]:
+            - generic [ref=f1e15]: TAPH5
+            - generic [ref=f1e16]: GAMES
+          - generic [ref=f1e17]: Free Web Gaming
+    - generic [ref=f1e18]:
+      - generic [ref=f1e19]: Control Panel
+      - generic [ref=f1e20]: Admin
+    - navigation [ref=f1e21]:
+      - link "Dashboard" [ref=f1e22] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin
+      - link "Games Manager" [ref=f1e29] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/games
+      - link "Categories" [ref=f1e33] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/categories
+      - link "Tags" [ref=f1e37] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/tags
+    - generic [ref=f1e42]:
+      - link "View Public Portal" [ref=f1e43] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f1e52]:
+        - generic [ref=f1e53]:
+          - paragraph [ref=f1e54]: TapH5 Admin
+          - paragraph [ref=f1e55]: admin@taph5gaming.com
+        - button "Sign Out" [ref=f1e56] [cursor=pointer]
+  - generic [ref=f1e60]:
+    - banner [ref=f1e61]:
+      - heading "Dashboard Overview" [level=1] [ref=f1e63]
+    - main [ref=f1e64]:
+      - generic [ref=f1e65]:
+        - generic [ref=f1e66]:
+          - generic [ref=f1e67]:
+            - heading "Portal Operations" [level=2] [ref=f1e68]
+            - paragraph [ref=f1e69]: Real-time database statistics and platform management.
+          - generic [ref=f1e70]:
+            - link "Review Drafts (0)" [ref=f1e71] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin/games?status=draft
+            - link "+ Add Category" [ref=f1e74] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin/categories/create
+            - link "+ Add Tag" [ref=f1e75] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin/tags/create
+        - generic [ref=f1e76]:
+          - generic [ref=f1e77]:
+            - generic [ref=f1e78]: Total Games
+            - generic [ref=f1e83]: "9"
+            - generic [ref=f1e84]:
+              - generic [ref=f1e85]: 9 Published
+              - generic [ref=f1e86]: •
+              - generic [ref=f1e87]: 0 Drafts
+          - generic [ref=f1e88]:
+            - generic [ref=f1e89]: Published Active
+            - generic [ref=f1e95]: "9"
+            - generic [ref=f1e96]: Live on portal catalog
+          - generic [ref=f1e97]:
+            - generic [ref=f1e98]: Total Plays
+            - generic [ref=f1e104]: "30"
+            - generic [ref=f1e105]: Total recorded play sessions
+          - generic [ref=f1e106]:
+            - generic [ref=f1e107]: Taxonomies
+            - generic [ref=f1e112]: 6 Categories
+            - generic [ref=f1e113]: 9 Tags configured
+        - generic [ref=f1e114]:
+          - generic [ref=f1e115]:
+            - generic [ref=f1e116]:
+              - generic [ref=f1e117]:
+                - heading "Awaiting Review" [level=3] [ref=f1e118]
+                - paragraph [ref=f1e120]: Scanned games waiting for approval and publishing.
+              - link "View All →" [ref=f1e121] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/admin/games?status=draft
+            - generic [ref=f1e122]: All scanned games are reviewed and published!
+          - generic [ref=f1e126]:
+            - generic [ref=f1e127]:
+              - generic [ref=f1e128]:
+                - heading "Recently Cataloged" [level=3] [ref=f1e129]
+                - paragraph [ref=f1e130]: Most recently created game entries.
+              - link "View All →" [ref=f1e131] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/admin/games
+            - generic [ref=f1e132]:
+              - generic [ref=f1e133]:
+                - generic [ref=f1e134]:
+                  - img "Classic Snake - TapH5" [ref=f1e135]
+                  - generic [ref=f1e136]:
+                    - heading "Classic Snake - TapH5" [level=4] [ref=f1e137]
+                    - paragraph [ref=f1e138]: Arcade • 19 plays
+                - generic [ref=f1e139]:
+                  - generic [ref=f1e140]: published
+                  - link "Inspect" [ref=f1e141] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/games/9
+              - generic [ref=f1e144]:
+                - generic [ref=f1e145]:
+                  - img "Neon Pulse" [ref=f1e146]
+                  - generic [ref=f1e147]:
+                    - heading "Neon Pulse" [level=4] [ref=f1e148]
+                    - paragraph [ref=f1e149]: Arcade • 4 plays
+                - generic [ref=f1e150]:
+                  - generic [ref=f1e151]: published
+                  - link "Inspect" [ref=f1e152] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/games/1
+              - generic [ref=f1e155]:
+                - generic [ref=f1e156]:
+                  - img "Cyber Runner" [ref=f1e157]
+                  - generic [ref=f1e158]:
+                    - heading "Cyber Runner" [level=4] [ref=f1e159]
+                    - paragraph [ref=f1e160]: Action • 3 plays
+                - generic [ref=f1e161]:
+                  - generic [ref=f1e162]: published
+                  - link "Inspect" [ref=f1e163] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/games/2
+              - generic [ref=f1e166]:
+                - generic [ref=f1e167]:
+                  - img "Galaxy Drift" [ref=f1e168]
+                  - generic [ref=f1e169]:
+                    - heading "Galaxy Drift" [level=4] [ref=f1e170]
+                    - paragraph [ref=f1e171]: Racing • 0 plays
+                - generic [ref=f1e172]:
+                  - generic [ref=f1e173]: published
+                  - link "Inspect" [ref=f1e174] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/games/3
+              - generic [ref=f1e177]:
+                - generic [ref=f1e178]:
+                  - img "Mind Mesh" [ref=f1e179]
+                  - generic [ref=f1e180]:
+                    - heading "Mind Mesh" [level=4] [ref=f1e181]
+                    - paragraph [ref=f1e182]: Puzzle • 1 plays
+                - generic [ref=f1e183]:
+                  - generic [ref=f1e184]: published
+                  - link "Inspect" [ref=f1e185] [cursor=pointer]:
+                    - /url: http://127.0.0.1:8000/admin/games/4

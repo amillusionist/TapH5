@@ -2,6 +2,7 @@ export interface User {
     id: number;
     name: string;
     email: string;
+    role?: string;
     email_verified_at?: string;
 }
 
@@ -12,13 +13,17 @@ export interface Category {
     description: string | null;
     icon: string | null;
     thumbnail: string | null;
+    status?: 'active' | 'inactive';
+    sort_order?: number;
     games_count?: number;
+    published_games_count?: number;
 }
 
 export interface Tag {
     id: number;
     name: string;
     slug: string;
+    games_count?: number;
 }
 
 export interface Game {
@@ -43,7 +48,10 @@ export interface Game {
     seo_description: string | null;
     embed_url: string;
     sandbox_attributes: string;
+    fingerprint?: string | null;
+    scan_metadata?: Record<string, any> | null;
     created_at?: string;
+    updated_at?: string;
 }
 
 export interface PaginationLink {
@@ -90,4 +98,9 @@ export type PageProps<
         user: User;
     };
     meta?: SiteMeta;
+    flash?: {
+        success?: string | null;
+        error?: string | null;
+        warning?: string | null;
+    };
 };

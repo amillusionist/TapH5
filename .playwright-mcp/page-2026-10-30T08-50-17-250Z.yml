@@ -1,0 +1,107 @@
+- generic [ref=f3e3]:
+  - complementary [ref=f3e4]:
+    - link [ref=f3e6] [cursor=pointer]:
+      - /url: http://127.0.0.1:8000/admin
+      - link "TAPH5 GAMES Free Web Gaming" [ref=f3e7]:
+        - /url: /
+        - generic [ref=f3e13]:
+          - generic [ref=f3e14]:
+            - generic [ref=f3e15]: TAPH5
+            - generic [ref=f3e16]: GAMES
+          - generic [ref=f3e17]: Free Web Gaming
+    - generic [ref=f3e18]:
+      - generic [ref=f3e19]: Control Panel
+      - generic [ref=f3e20]: Admin
+    - navigation [ref=f3e21]:
+      - link "Dashboard" [ref=f3e22] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin
+      - link "Games Manager" [ref=f3e29] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/games
+      - link "Categories" [ref=f3e33] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/categories
+      - link "Tags" [ref=f3e37] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/admin/tags
+    - generic [ref=f3e42]:
+      - link "View Public Portal" [ref=f3e43] [cursor=pointer]:
+        - /url: /
+      - generic [ref=f3e52]:
+        - generic [ref=f3e53]:
+          - paragraph [ref=f3e54]: TapH5 Admin
+          - paragraph [ref=f3e55]: admin@taph5gaming.com
+        - button "Sign Out" [ref=f3e56] [cursor=pointer]
+  - generic [ref=f3e60]:
+    - banner [ref=f3e61]:
+      - 'heading "Game Review: Classic Snake - TapH5" [level=1] [ref=f3e63]'
+    - main [ref=f3e64]:
+      - generic [ref=f3e65]:
+        - generic [ref=f3e66]:
+          - generic [ref=f3e67]:
+            - link "Back to Games List" [ref=f3e68] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin/games
+            - generic [ref=f3e71]:
+              - heading "Classic Snake - TapH5 published" [level=2] [ref=f3e72]:
+                - generic [ref=f3e73]: Classic Snake - TapH5
+                - generic [ref=f3e74]: published
+              - paragraph [ref=f3e75]: "ID: #9 • Slug: classic-snake-taph5"
+          - generic [ref=f3e76]:
+            - link "View Live" [ref=f3e77] [cursor=pointer]:
+              - /url: /games/classic-snake-taph5
+            - button "Archive Game" [ref=f3e83] [cursor=pointer]
+            - link "Edit Metadata" [ref=f3e84] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin/games/9/edit
+        - generic [ref=f3e85]:
+          - generic [ref=f3e86]:
+            - generic [ref=f3e87]:
+              - heading "Game Overview" [level=3] [ref=f3e88]
+              - generic [ref=f3e89]:
+                - generic [ref=f3e90]:
+                  - generic [ref=f3e91]: Description
+                  - paragraph [ref=f3e92]: Play Classic Snake - TapH5 online for free on TapH5 Games. Fast, responsive HTML5 gameplay in your browser.
+                - generic [ref=f3e93]:
+                  - generic [ref=f3e94]: Gameplay Instructions
+                  - paragraph [ref=f3e95]: Use keyboard arrows or touch controls to play.
+            - generic [ref=f3e96]:
+              - heading "Filesystem & Scanner Diagnostics" [level=3] [ref=f3e97]
+              - generic [ref=f3e98]:
+                - generic [ref=f3e99]:
+                  - generic [ref=f3e100]: Storage Path
+                  - text: arcade/classic-snake-taph5
+                - generic [ref=f3e101]:
+                  - generic [ref=f3e102]: Entry File
+                  - text: index.html
+                - generic [ref=f3e103]:
+                  - generic [ref=f3e104]: Game Type
+                  - text: single_file
+                - generic [ref=f3e105]:
+                  - generic [ref=f3e106]: Recorded Plays
+                  - text: "19"
+              - generic [ref=f3e107]:
+                - generic [ref=f3e108]: "Scan Metadata Payload:"
+                - generic [ref=f3e109]: "{ \"folder\": \"nokia-snake-game\", \"entry_file\": \"index.html\", \"game_type\": \"single_file\", \"file_count\": 1, \"total_size_bytes\": 12511, \"fingerprint\": \"d41c61b151ebb450e0a888224243961db07fc99662a5e4d487c83ef2f170077b\", \"scanned_at\": \"2026-10-30T06:22:37+00:00\", \"category_suggestion\": { \"category_id\": 2, \"category_name\": \"Arcade\", \"confidence\": 0.85, \"matched_keywords\": [ \"classic\" ] }, \"thumbnail_detected\": false, \"thumbnail_source\": null, \"warnings\": [ \"HTML meta description missing; applied placeholder description.\", \"No valid thumbnail found in game directory; review required.\" ], \"published_at\": \"2026-10-30T06:27:03+00:00\", \"published_path\": \"arcade/classic-snake-taph5\" }"
+              - generic [ref=f3e111]:
+                - generic [ref=f3e112]: Cryptographic Fingerprint
+                - text: d41c61b151ebb450e0a888224243961db07fc99662a5e4d487c83ef2f170077b
+          - generic [ref=f3e113]:
+            - generic [ref=f3e114]:
+              - heading "Thumbnail Preview" [level=4] [ref=f3e115]
+              - img "Classic Snake - TapH5" [ref=f3e117]
+              - paragraph [ref=f3e118]: /images/thumbnails/classic-snake-taph5.svg
+            - generic [ref=f3e119]:
+              - heading "Taxonomies" [level=4] [ref=f3e120]
+              - generic [ref=f3e121]:
+                - generic [ref=f3e122]: Category
+                - text: Arcade
+              - generic [ref=f3e123]:
+                - generic [ref=f3e124]: Assigned Tags
+                - text: No tags assigned
+            - generic [ref=f3e125]:
+              - heading "Curation Status" [level=4] [ref=f3e126]
+              - generic [ref=f3e127]:
+                - generic [ref=f3e128]: Featured
+                - generic [ref=f3e129]: "No"
+              - generic [ref=f3e130]:
+                - generic [ref=f3e131]: Trending
+                - generic [ref=f3e132]: "No"
+              - generic [ref=f3e133]:
+                - generic [ref=f3e134]: Popular
+                - generic [ref=f3e135]: "No"

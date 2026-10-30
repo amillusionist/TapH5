@@ -34,9 +34,17 @@ class HandleInertiaRequests extends Middleware
         return [
             ...parent::share($request),
             'appName' => config('app.name', 'TapH5 Games'),
+            'auth' => [
+                'user' => $request->user(),
+            ],
             'categoriesNav' => fn () => CategoryResource::collection(
                 Category::active()->ordered()->withCount('publishedGames')->get()
             ),
+            'flash' => [
+                'success' => fn () => $request->session()->get('success'),
+                'error' => fn () => $request->session()->get('error'),
+                'warning' => fn () => $request->session()->get('warning'),
+            ],
         ];
     }
 }
