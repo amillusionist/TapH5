@@ -16,10 +16,12 @@ use Illuminate\Support\Carbon;
  * @property string|null $description
  * @property string|null $instructions
  * @property string|null $thumbnail
- * @property int $category_id
+ * @property int|null $category_id
  * @property string $game_type
  * @property string $entry_file
  * @property string|null $storage_path
+ * @property string|null $fingerprint
+ * @property array<string, mixed>|null $scan_metadata
  * @property string $status
  * @property bool $is_featured
  * @property bool $is_trending
@@ -47,6 +49,8 @@ class Game extends Model
         'game_type',
         'entry_file',
         'storage_path',
+        'fingerprint',
+        'scan_metadata',
         'status',
         'is_featured',
         'is_trending',
@@ -66,6 +70,7 @@ class Game extends Model
             'is_trending' => 'boolean',
             'is_popular' => 'boolean',
             'plays_count' => 'integer',
+            'scan_metadata' => 'array',
         ];
     }
 
@@ -92,6 +97,15 @@ class Game extends Model
     public function scopePublished(Builder $query): Builder
     {
         return $query->where('status', 'published');
+    }
+
+    /**
+     * @param  Builder<Game>  $query
+     * @return Builder<Game>
+     */
+    public function scopeDraft(Builder $query): Builder
+    {
+        return $query->where('status', 'draft');
     }
 
     /**
