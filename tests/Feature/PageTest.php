@@ -30,4 +30,13 @@ class PageTest extends TestCase
             );
         }
     }
+
+    public function test_custom_404_error_page_renders_with_links(): void
+    {
+        $response = $this->get('/non-existent-random-route-404');
+        $response->assertStatus(404);
+        $response->assertSee('Game Over — Page Not Found');
+        $response->assertSee('Explore Games Catalog');
+        $response->assertSee('Return to Homepage');
+    }
 }
