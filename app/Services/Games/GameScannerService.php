@@ -37,15 +37,16 @@ class GameScannerService
      */
     public function scan(?string $targetFolder = null, bool $dryRun = false): array
     {
-        $stagingRoot = (string) Config::get('games.staging_root', storage_path('staging'));
+        $stagingRootConfig = (string) Config::get('games.staging_root', storage_path('staging'));
+        $stagingRoot = $this->resolvePath($stagingRootConfig);
 
         if (! is_dir($stagingRoot)) {
             // Attempt to create directory if in local/testing environment
             if (! @mkdir($stagingRoot, 0755, true) && ! is_dir($stagingRoot)) {
                 return [
                     'success' => false,
-                    'message' => "Staging directory does not exist or is not readable: [{$stagingRoot}].",
-                    'staging_root' => $stagingRoot,
+                    'message' => "Staging directory does not exist or is not readable: [{$stagingRootConfig}].",
+                    'staging_root' => $stagingRootConfig,
                     'discovered' => 0,
                     'drafts_created' => 0,
                     'drafts_updated' => 0,
@@ -60,8 +61,8 @@ class GameScannerService
         if ($realStagingRoot === false || ! is_readable($realStagingRoot)) {
             return [
                 'success' => false,
-                'message' => "Staging directory cannot be read: [{$stagingRoot}]. Check filesystem permissions.",
-                'staging_root' => $stagingRoot,
+                'message' => "Staging directory cannot be read: [{$stagingRootConfig}]. Check filesystem permissions.",
+                'staging_root' => $stagingRootConfig,
                 'discovered' => 0,
                 'drafts_created' => 0,
                 'drafts_updated' => 0,
@@ -321,5 +322,17 @@ class GameScannerService
             'rejected' => $rejected,
             'results' => $results,
         ];
+    }
+
+    /**
+     * Resolve absolute filesystem path from potentially relative configuration path.
+     */
+    protected function resolvePath(string $path): string
+    {
+        if (Str::startsWith($path, ['/', '\\']) || preg_match('/^[A-Za-z]:[\\\\\/]/', $path)) {
+            return $path;
+        }
+
+        return base_path($path);
     }
 }

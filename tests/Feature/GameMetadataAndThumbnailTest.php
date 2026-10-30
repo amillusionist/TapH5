@@ -101,8 +101,8 @@ HTML;
         $result = $thumbService->resolveAndStoreThumbnail($this->testDir, 'game-without-thumb', []);
 
         $this->assertFalse($result['found']);
-        $this->assertEquals('/images/thumbnails/neon-pulse.svg', $result['thumbnail_url']);
+        $this->assertTrue($result['is_fallback']);
+        $this->assertEquals('/images/thumbnails/default-game.svg', $result['thumbnail_url']);
         $this->assertNotEmpty($result['warnings']);
     }
 }
-

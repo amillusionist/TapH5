@@ -3,32 +3,34 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Game Storage & Origin Configuration
+    | Game Storage & Origin Configuration (Single-Domain Architecture)
     |--------------------------------------------------------------------------
     |
-    | Phase 2 separates private staging storage, public game storage, and the
-    | public embed origin. In production, games are served from an isolated
-    | subdomain (e.g. games.taph5gaming.com).
+    | All portal pages and HTML5 games run on the same domain (e.g. taph5gaming.com
+    | or http://127.0.0.1:8000 in local development).
+    |
+    | Games are stored in public/games/ and accessed via /games/{storage_path}/{entry_file}.
     |
     */
 
-    // Private staging directory where new game folders are copied for scanning
+    // Private staging directory where newly imported game folders are placed for scanning
     'staging_root' => env('GAME_STAGING_ROOT', storage_path('staging')),
 
-    // Public game storage directory where approved games are published
+    // Public games storage root directory where published games reside
     'public_root' => env('GAME_PUBLIC_ROOT', public_path('games')),
 
-    // Public embed origin for games (e.g. https://games.taph5gaming.com)
-    'embed_origin' => env('GAME_EMBED_ORIGIN', env('APP_URL', 'http://localhost:8000')),
+    // Base URL origin for games (defaults to APP_URL on the single domain)
+    'embed_origin' => env('GAME_EMBED_ORIGIN', env('APP_URL', 'http://127.0.0.1:8000')),
 
-    // Staging and public disk definitions if using Laravel storage
-    'storage_disk' => env('GAME_STORAGE_DISK', 'public'),
-    'storage_path' => env('GAME_STORAGE_PATH', 'games'),
+    // Relative web URL prefix where public games are served
+    'url_prefix' => 'games',
 
-    // Strict iframe sandboxing for origin isolation
+    // Strict iframe sandboxing for untrusted game execution.
+    // In single-domain architecture, omitting 'allow-same-origin' protects
+    // the parent portal DOM, cookies, and localStorage from untrusted game JS.
     'iframe_sandbox' => env(
         'GAME_IFRAME_SANDBOX',
-        'allow-scripts allow-same-origin allow-forms allow-pointer-lock'
+        'allow-scripts allow-forms allow-pointer-lock'
     ),
 
     // Candidate entry files in order of preference
@@ -81,19 +83,18 @@ return [
 
     // Thumbnail candidate filenames in search priority
     'thumbnail_candidates' => [
-        'thumbnail.png',
-        'thumbnail.jpg',
-        'thumbnail.jpeg',
-        'thumbnail.webp',
-        'cover.png',
-        'cover.jpg',
-        'cover.jpeg',
-        'cover.webp',
-        'thumb.png',
-        'thumb.jpg',
-        'icon.png',
-        'icon.jpg',
-        'icon-512.png',
-        'icon-192.png',
+        'thumbnail.png', 'thumbnail.jpg', 'thumbnail.jpeg', 'thumbnail.webp', 'thumbnail.svg',
+        'cover.png', 'cover.jpg', 'cover.jpeg', 'cover.webp', 'cover.svg',
+        'screenshot.png', 'screenshot.jpg', 'screenshot.jpeg', 'screenshot.webp',
+        'preview.png', 'preview.jpg', 'preview.jpeg', 'preview.webp',
+        'poster.png', 'poster.jpg', 'poster.jpeg', 'poster.webp',
+        'banner.png', 'banner.jpg', 'banner.jpeg', 'banner.webp',
+        'icon.png', 'icon.jpg', 'icon.jpeg', 'icon.webp', 'icon.svg',
+        'thumb.png', 'thumb.jpg', 'thumb.jpeg', 'thumb.webp',
+        'logo.png', 'logo.jpg', 'logo.svg', 'logo.webp',
+        'icon-512.png', 'icon-192.png',
     ],
+
+    // Default portal fallback thumbnail if game does not provide one
+    'default_thumbnail' => env('GAME_DEFAULT_THUMBNAIL', '/images/thumbnails/default-game.svg'),
 ];

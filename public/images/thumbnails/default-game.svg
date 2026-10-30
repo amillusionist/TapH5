@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300">
+  <defs>
+    <radialGradient id="def-bg" cx="50%" cy="50%" r="75%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="60%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </radialGradient>
+    <filter id="accent-glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="100%" height="100%" fill="url(#def-bg)"/>
+  
+  <!-- Gamepad outline graphic -->
+  <g transform="translate(100, 50)" filter="url(#accent-glow)">
+    <rect x="20" y="30" width="160" height="90" rx="35" fill="#312e81" stroke="#6366f1" stroke-width="3" opacity="0.9"/>
+    <!-- D-pad -->
+    <rect x="50" y="65" width="24" height="8" rx="2" fill="#c7d2fe"/>
+    <rect x="58" y="57" width="8" height="24" rx="2" fill="#c7d2fe"/>
+    <!-- Action buttons -->
+    <circle cx="140" cy="65" r="5" fill="#ec4899"/>
+    <circle cx="152" cy="77" r="5" fill="#38bdf8"/>
+    <circle cx="128" cy="77" r="5" fill="#a855f7"/>
+    <circle cx="140" cy="89" r="5" fill="#eab308"/>
+  </g>
+
+  <text x="200" y="248" text-anchor="middle" fill="#f8fafc" font-family="system-ui, -apple-system, sans-serif" font-weight="800" font-size="20" letter-spacing="2">TAPH5 GAME</text>
+  <text x="200" y="272" text-anchor="middle" fill="#818cf8" font-family="system-ui, -apple-system, sans-serif" font-weight="600" font-size="11" letter-spacing="1">HTML5 GAMING PORTAL</text>
+</svg>
+

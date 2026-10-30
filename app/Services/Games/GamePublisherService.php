@@ -3,6 +3,7 @@
 namespace App\Services\Games;
 
 use App\Models\Game;
+use App\Services\GameUrlService;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -17,7 +18,10 @@ class GamePublisherService
     public function __construct(
         protected GameValidatorService $validator,
         protected GameFingerprintService $fingerprintService,
-    ) {}
+        protected ?GameUrlService $urlService = null,
+    ) {
+        $this->urlService = $urlService ?? app(GameUrlService::class);
+    }
 
     /**
      * Approve and publish a draft game.
@@ -61,13 +65,14 @@ class GamePublisherService
         }
 
         // 3. Locate staged source folder
-        $stagingRoot = (string) Config::get('games.staging_root', storage_path('staging'));
+        $stagingRootConfig = (string) Config::get('games.staging_root', storage_path('staging'));
+        $stagingRoot = $this->resolvePath($stagingRootConfig);
         $realStagingRoot = realpath($stagingRoot);
 
         if ($realStagingRoot === false || ! is_dir($realStagingRoot)) {
             return [
                 'success' => false,
-                'message' => "Staging root directory does not exist: [{$stagingRoot}].",
+                'message' => "Staging root directory does not exist: [{$stagingRootConfig}].",
                 'game' => $game,
                 'public_storage_path' => null,
                 'public_url' => null,
@@ -104,12 +109,13 @@ class GamePublisherService
         }
 
         // 5. Determine public destination path
-        $publicRoot = (string) Config::get('games.public_root', public_path('games'));
+        $publicRootConfig = (string) Config::get('games.public_root', public_path('games'));
+        $publicRoot = $this->resolvePath($publicRootConfig);
         if (! is_dir($publicRoot)) {
             if (! @mkdir($publicRoot, 0755, true) && ! is_dir($publicRoot)) {
                 return [
                     'success' => false,
-                    'message' => "Public game storage directory does not exist and cannot be created: [{$publicRoot}].",
+                    'message' => "Public game storage directory does not exist and cannot be created: [{$publicRootConfig}].",
                     'game' => $game,
                     'public_storage_path' => null,
                     'public_url' => null,
@@ -121,15 +127,16 @@ class GamePublisherService
         if ($realPublicRoot === false || ! is_writable($realPublicRoot)) {
             return [
                 'success' => false,
-                'message' => "Public game storage root is not writable: [{$publicRoot}].",
+                'message' => "Public game storage root is not writable: [{$publicRootConfig}].",
                 'game' => $game,
                 'public_storage_path' => null,
                 'public_url' => null,
             ];
         }
 
-        // Form sanitized relative path (e.g. 'arcade/neon-pulse' or 'games/neon-pulse')
-        $categoryPrefix = $game->category?->slug ? Str::slug($game->category->slug) : 'games';
+        // Form sanitized relative path (e.g. 'arcade/neon-pulse' or 'general/neon-pulse')
+        // Using 'general' as fallback prevents nested 'games/games/...' directories
+        $categoryPrefix = $game->category?->slug ? Str::slug($game->category->slug) : 'general';
         $gameFolderSlug = Str::slug($game->slug);
         $relativePublicPath = "{$categoryPrefix}/{$gameFolderSlug}";
 
@@ -199,8 +206,7 @@ class GamePublisherService
             ]);
         });
 
-        $embedOrigin = rtrim((string) Config::get('games.embed_origin', config('app.url')), '/');
-        $publicUrl = "{$embedOrigin}/{$relativePublicPath}/{$game->entry_file}";
+        $publicUrl = $this->urlService->getEmbedUrl($game->fresh());
 
         Log::info("Game approved and published: #{$game->id} '{$game->title}' at '{$relativePublicPath}'.");
 
@@ -277,5 +283,17 @@ class GamePublisherService
         }
 
         @rmdir($dir);
+    }
+
+    /**
+     * Resolve absolute filesystem path from potentially relative configuration path.
+     */
+    protected function resolvePath(string $path): string
+    {
+        if (Str::startsWith($path, ['/', '\\']) || preg_match('/^[A-Za-z]:[\\\\\/]/', $path)) {
+            return $path;
+        }
+
+        return base_path($path);
     }
 }

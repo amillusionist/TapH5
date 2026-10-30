@@ -17,10 +17,11 @@ class GameUrlServiceTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        Config::set('games.embed_origin', 'https://games.taph5gaming.com');
+        Config::set('games.embed_origin', 'https://taph5gaming.com');
+        Config::set('games.url_prefix', 'games');
     }
 
-    public function test_published_game_generates_valid_embed_url(): void
+    public function test_published_game_generates_valid_single_domain_embed_url(): void
     {
         $arcade = Category::factory()->create(['slug' => 'arcade']);
         $game = Game::factory()->create([
@@ -35,7 +36,23 @@ class GameUrlServiceTest extends TestCase
         $urlService = app(GameUrlService::class);
         $url = $urlService->getEmbedUrl($game);
 
-        $this->assertEquals('https://games.taph5gaming.com/arcade/space-shooter/index.html', $url);
+        $this->assertEquals('https://taph5gaming.com/games/arcade/space-shooter/index.html', $url);
+    }
+
+    public function test_fixture_game_preserves_fixture_path_without_double_prefixing(): void
+    {
+        $game = Game::factory()->create([
+            'slug' => 'fixture-demo',
+            'storage_path' => 'fixtures/games/neon-pulse',
+            'entry_file' => 'index.html',
+            'status' => 'published',
+        ]);
+
+        /** @var GameUrlService $urlService */
+        $urlService = app(GameUrlService::class);
+        $url = $urlService->getEmbedUrl($game);
+
+        $this->assertEquals('https://taph5gaming.com/fixtures/games/neon-pulse/index.html', $url);
     }
 
     public function test_draft_game_does_not_receive_public_embed_url(): void
@@ -96,7 +113,16 @@ class GameUrlServiceTest extends TestCase
         $urlService = app(GameUrlService::class);
         $url = $urlService->getEmbedUrl($game);
 
-        $this->assertEquals('https://games.taph5gaming.com/arcade/super%20race%20game/index.html', $url);
+        $this->assertEquals('https://taph5gaming.com/games/arcade/super%20race%20game/index.html', $url);
+    }
+
+    public function test_sandbox_attributes_returns_safe_single_domain_attributes(): void
+    {
+        /** @var GameUrlService $urlService */
+        $urlService = app(GameUrlService::class);
+        $sandbox = $urlService->getSandboxAttributes();
+
+        $this->assertStringContainsString('allow-scripts', $sandbox);
+        $this->assertStringNotContainsString('allow-same-origin', $sandbox);
     }
 }
-

@@ -105,4 +105,3 @@ class GameProtectionTest extends TestCase
         $this->assertStringContainsString('Total file count (4) exceeds maximum allowed limit', $result['errors'][0]);
     }
 }
-

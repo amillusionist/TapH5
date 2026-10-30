@@ -29,7 +29,8 @@ class GamePublisherTest extends TestCase
 
         Config::set('games.staging_root', $this->testStagingPath);
         Config::set('games.public_root', $this->testPublicPath);
-        Config::set('games.embed_origin', 'https://games.taph5gaming.com');
+        Config::set('games.embed_origin', 'https://taph5gaming.com');
+        Config::set('games.url_prefix', 'games');
     }
 
     protected function tearDown(): void
@@ -67,7 +68,7 @@ class GamePublisherTest extends TestCase
 
         $this->assertTrue($result['success']);
         $this->assertEquals('arcade/turbo-kart', $result['public_storage_path']);
-        $this->assertEquals('https://games.taph5gaming.com/arcade/turbo-kart/index.html', $result['public_url']);
+        $this->assertEquals('https://taph5gaming.com/games/arcade/turbo-kart/index.html', $result['public_url']);
 
         // Verify database update
         $fresh = $draft->fresh();
@@ -172,5 +173,30 @@ class GamePublisherTest extends TestCase
             ->assertExitCode(0);
 
         $this->assertEquals('published', $draft->fresh()->status);
+    }
+
+    public function test_publisher_uses_general_category_fallback_to_prevent_nested_games_directory(): void
+    {
+        $gameDir = $this->testStagingPath.'/uncategorized-game';
+        File::makeDirectory($gameDir, 0755, true);
+        File::put($gameDir.'/index.html', '<!DOCTYPE html><html><head><title>Uncategorized</title></head></html>');
+
+        $draft = Game::factory()->create([
+            'title' => 'Uncategorized',
+            'slug' => 'uncategorized-game',
+            'category_id' => null,
+            'status' => 'draft',
+            'storage_path' => 'staging/uncategorized-game',
+            'entry_file' => 'index.html',
+        ]);
+
+        /** @var GamePublisherService $publisher */
+        $publisher = app(GamePublisherService::class);
+        $result = $publisher->approveAndPublish($draft->id);
+
+        $this->assertTrue($result['success']);
+        $this->assertEquals('general/uncategorized-game', $result['public_storage_path']);
+        $this->assertEquals('https://taph5gaming.com/games/general/uncategorized-game/index.html', $result['public_url']);
+        $this->assertDirectoryExists($this->testPublicPath.'/general/uncategorized-game');
     }
 }
