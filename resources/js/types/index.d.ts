@@ -91,6 +91,41 @@ export interface SiteMeta {
     schema?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
+export interface PublicAdProvider {
+    key: string;
+    name: string;
+    enabled: boolean;
+    configured: boolean;
+    publisher_id: string | null;
+    script_url: string | null;
+    test_mode: boolean;
+    preload_ad_breaks?: string;
+    integration_model?: string;
+    requires_sdk?: boolean;
+}
+
+export interface PublicAdPlacement {
+    key: string;
+    name: string;
+    provider: string;
+    slot_id: string | null;
+    placement_type: 'display' | 'banner' | 'interstitial' | 'rewarded';
+    show_on_desktop: boolean;
+    show_on_mobile: boolean;
+    frequency_limit: number;
+    provider_config?: Record<string, any>;
+}
+
+export interface PublicAdConfig {
+    ads_enabled: boolean;
+    consent_required: boolean;
+    consent_mode: string;
+    consent_policy_version: string;
+    default_provider: string;
+    providers: Record<string, PublicAdProvider>;
+    placements: Record<string, PublicAdPlacement>;
+}
+
 export type PageProps<
     T extends Record<string, unknown> = Record<string, unknown>,
 > = T & {
@@ -100,6 +135,7 @@ export type PageProps<
         user: User;
     };
     meta?: SiteMeta;
+    adConfig?: PublicAdConfig;
     flash?: {
         success?: string | null;
         error?: string | null;

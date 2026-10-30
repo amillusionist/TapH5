@@ -4,6 +4,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import HeroBanner from '@/Components/HeroBanner.vue';
 import GameCard from '@/Components/GameCard.vue';
 import CategoryCard from '@/Components/CategoryCard.vue';
+import AdSlot from '@/Components/Ads/AdSlot.vue';
 import SeoHead from '@/Components/SeoHead.vue';
 import EmptyState from '@/Components/EmptyState.vue';
 import type { Category, Game, SiteMeta } from '@/types';
@@ -27,6 +28,9 @@ defineProps<{
     <AppLayout>
         <!-- Hero Section -->
         <HeroBanner :games="heroGames" />
+
+        <!-- Monetization: Top Leaderboard Placement -->
+        <AdSlot placement-key="home_top" class-name="mb-10" />
 
         <!-- Categories Bar -->
         <section class="mb-14">
@@ -110,6 +114,9 @@ defineProps<{
                 />
             </div>
         </section>
+
+        <!-- Monetization: Between Sections Placement -->
+        <AdSlot placement-key="home_between_sections" class-name="mb-14" />
 
         <!-- New Games Section -->
         <section v-if="newGames.length > 0" class="mb-14">

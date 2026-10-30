@@ -1,0 +1,241 @@
+- generic [ref=e3]:
+  - complementary [ref=e4]:
+    - link "Admin Control Panel Dashboard" [ref=e6] [cursor=pointer]:
+      - /url: http://127.0.0.1:8000/admin
+      - link "TapH5 Games Homepage" [ref=e7]:
+        - /url: /
+        - generic [ref=e13]:
+          - generic [ref=e14]:
+            - generic [ref=e15]: TAPH5
+            - generic [ref=e16]: GAMES
+          - generic [ref=e17]: Free Web Gaming
+      - generic [ref=e18]: Admin
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - generic [ref=e21]: Platform Operations
+        - navigation [ref=e22]:
+          - link "Dashboard" [ref=e23] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin
+          - link "Games Manager" [ref=e30] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/games
+          - link "Analytics" [ref=e34] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/analytics
+          - link "Monetization" [ref=e38] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/monetization
+      - generic [ref=e42]:
+        - generic [ref=e43]: Content & Taxonomies
+        - navigation [ref=e44]:
+          - link "Categories" [ref=e45] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/categories
+          - link "Tags" [ref=e49] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/admin/tags
+    - generic [ref=e54]:
+      - link "View Live Portal" [ref=e55] [cursor=pointer]:
+        - /url: /
+      - generic [ref=e64]:
+        - generic [ref=e65]:
+          - paragraph [ref=e66]: TapH5 Admin
+          - paragraph [ref=e67]: admin@taph5gaming.com
+        - button "Sign Out of Admin" [ref=e68] [cursor=pointer]
+  - generic [ref=e72]:
+    - banner [ref=e73]:
+      - generic [ref=e75]:
+        - generic [ref=e76]: Control Panel
+        - generic [ref=e77]: /
+        - generic [ref=e78]: Monetization & Advertising
+      - generic [ref=e79]: Single-Domain Online
+    - main [ref=e82]:
+      - generic [ref=e83]:
+        - generic [ref=e84]:
+          - navigation [ref=e85]:
+            - link "Admin" [ref=e86] [cursor=pointer]:
+              - /url: http://127.0.0.1:8000/admin
+            - generic [ref=e89]: Monetization
+          - generic [ref=e91]:
+            - heading "Monetization & Advertising" [level=1] [ref=e92]
+            - paragraph [ref=e94]: Manage advertising providers, configure ad slot IDs, and control device-specific placement inventory.
+        - generic [ref=e95]:
+          - generic [ref=e100]:
+            - generic [ref=e101]:
+              - 'heading "Global Monetization Master State: DISABLED (SAFE LOCAL MODE)" [level=3] [ref=e102]'
+              - generic [ref=e103]: ADS_ENABLED=false
+            - paragraph [ref=e104]: All advertising rendering is completely disabled by default. No live scripts, third-party network requests, or empty ad containers will render until environment approval is configured.
+          - generic [ref=e105]: "Consent Required: Yes (GDPR/ePrivacy)"
+        - generic [ref=e106]:
+          - generic [ref=e107]:
+            - generic [ref=e108]: Total Placements
+            - generic [ref=e109]: "8"
+            - generic [ref=e110]: Configured slot inventory
+          - generic [ref=e111]:
+            - generic [ref=e112]: Active Placements
+            - generic [ref=e113]: "0"
+            - generic [ref=e114]: 8 disabled
+          - generic [ref=e115]:
+            - generic [ref=e116]: Providers Configured
+            - generic [ref=e117]: 0 / 2
+            - generic [ref=e118]: Ready for account linking
+          - generic [ref=e119]:
+            - generic [ref=e120]: Default Provider
+            - generic [ref=e121]: adsense
+            - generic [ref=e122]: Fallback ad network
+        - generic [ref=e123]:
+          - generic [ref=e125]:
+            - heading "Advertising Providers" [level=2] [ref=e126]
+            - paragraph [ref=e127]: Configure network credentials and environment parameters
+          - generic [ref=e128]:
+            - generic [ref=e129]:
+              - generic [ref=e130]:
+                - generic [ref=e131]:
+                  - generic [ref=e132]: Ad
+                  - generic [ref=e133]:
+                    - heading "Google AdSense" [level=3] [ref=e134]
+                    - text: Display, Responsive & Leaderboard Ads
+                - generic [ref=e135]: Awaiting Approval
+              - generic [ref=e136]:
+                - generic [ref=e137]:
+                  - generic [ref=e138]: Publisher ID
+                  - textbox "Publisher ID" [ref=e139]:
+                    - /placeholder: ca-pub-XXXXXXXXXXXXXXXX
+                  - paragraph [ref=e140]: Leave empty until account approval is granted.
+                - generic [ref=e141]:
+                  - generic [ref=e142]:
+                    - checkbox "Provider Enabled" [ref=e143]
+                    - generic [ref=e144]: Provider Enabled
+                  - generic [ref=e145]:
+                    - checkbox "Test Mode (Sandbox)" [checked] [ref=e146]
+                    - generic [ref=e147]: Test Mode (Sandbox)
+                - button "Save AdSense Settings" [ref=e149] [cursor=pointer]
+            - generic [ref=e150]:
+              - generic [ref=e151]:
+                - generic [ref=e152]:
+                  - generic [ref=e153]: H5
+                  - generic [ref=e154]:
+                    - heading "H5 Games Ads" [level=3] [ref=e155]
+                    - text: Ad Placement API & Interstitial Breaks
+                - generic [ref=e156]: Awaiting Approval
+              - generic [ref=e157]:
+                - generic [ref=e158]:
+                  - generic [ref=e159]: Game Client ID
+                  - textbox "Game Client ID" [ref=e160]:
+                    - /placeholder: ca-pub-XXXXXXXXXXXXXXXX
+                  - paragraph [ref=e161]: Google AdSense for Games client account.
+                - generic [ref=e162]:
+                  - generic [ref=e163]:
+                    - checkbox "Provider Enabled" [ref=e164]
+                    - generic [ref=e165]: Provider Enabled
+                  - generic [ref=e166]:
+                    - checkbox "Test Mode (adbreak-test)" [checked] [ref=e167]
+                    - generic [ref=e168]: Test Mode (adbreak-test)
+                - button "Save H5 Games Ads Settings" [ref=e170] [cursor=pointer]
+        - generic [ref=e171]:
+          - generic [ref=e173]:
+            - heading "Ad Placement Inventory" [level=2] [ref=e174]
+            - paragraph [ref=e175]: Control individual slot activation, targeting, and device visibility
+          - table [ref=e177]:
+            - rowgroup [ref=e178]:
+              - row [ref=e179]:
+                - columnheader "Placement & Key" [ref=e180]
+                - columnheader "Provider" [ref=e181]
+                - columnheader "Slot ID" [ref=e182]
+                - columnheader "Type" [ref=e183]
+                - columnheader "Desktop" [ref=e184]
+                - columnheader "Mobile" [ref=e185]
+                - columnheader "Status" [ref=e186]
+                - columnheader "Actions" [ref=e187]
+            - rowgroup [ref=e188]:
+              - row [ref=e189]:
+                - cell "Homepage Top Leaderboard home_top" [ref=e190]:
+                  - generic [ref=e191]: Homepage Top Leaderboard
+                  - generic [ref=e192]: home_top
+                - cell "adsense" [ref=e193]
+                - cell "Not set" [ref=e194]
+                - cell "banner" [ref=e195]
+                - cell "✓" [ref=e196]
+                - cell "✓" [ref=e197]
+                - cell "Disabled" [ref=e198]
+                - cell [ref=e199]:
+                  - button "Configure" [ref=e200] [cursor=pointer]
+              - row [ref=e201]:
+                - cell "Homepage Between Sections home_between_sections" [ref=e202]:
+                  - generic [ref=e203]: Homepage Between Sections
+                  - generic [ref=e204]: home_between_sections
+                - cell "adsense" [ref=e205]
+                - cell "Not set" [ref=e206]
+                - cell "display" [ref=e207]
+                - cell "✓" [ref=e208]
+                - cell "✓" [ref=e209]
+                - cell "Disabled" [ref=e210]
+                - cell [ref=e211]:
+                  - button "Configure" [ref=e212] [cursor=pointer]
+              - row [ref=e213]:
+                - cell "All Games Listing Header games_listing" [ref=e214]:
+                  - generic [ref=e215]: All Games Listing Header
+                  - generic [ref=e216]: games_listing
+                - cell "adsense" [ref=e217]
+                - cell "Not set" [ref=e218]
+                - cell "display" [ref=e219]
+                - cell "✓" [ref=e220]
+                - cell "✓" [ref=e221]
+                - cell "Disabled" [ref=e222]
+                - cell [ref=e223]:
+                  - button "Configure" [ref=e224] [cursor=pointer]
+              - row [ref=e225]:
+                - cell "Games Grid In-Feed Ad games_between_cards" [ref=e226]:
+                  - generic [ref=e227]: Games Grid In-Feed Ad
+                  - generic [ref=e228]: games_between_cards
+                - cell "adsense" [ref=e229]
+                - cell "Not set" [ref=e230]
+                - cell "display" [ref=e231]
+                - cell "✓" [ref=e232]
+                - cell "✗" [ref=e233]
+                - cell "Disabled" [ref=e234]
+                - cell [ref=e235]:
+                  - button "Configure" [ref=e236] [cursor=pointer]
+              - row [ref=e237]:
+                - cell "Game Page Top Banner game_detail_top" [ref=e238]:
+                  - generic [ref=e239]: Game Page Top Banner
+                  - generic [ref=e240]: game_detail_top
+                - cell "adsense" [ref=e241]
+                - cell "Not set" [ref=e242]
+                - cell "banner" [ref=e243]
+                - cell "✓" [ref=e244]
+                - cell "✓" [ref=e245]
+                - cell "Disabled" [ref=e246]
+                - cell [ref=e247]:
+                  - button "Configure" [ref=e248] [cursor=pointer]
+              - row [ref=e249]:
+                - cell "Below Game Player Banner game_player_below" [ref=e250]:
+                  - generic [ref=e251]: Below Game Player Banner
+                  - generic [ref=e252]: game_player_below
+                - cell "adsense" [ref=e253]
+                - cell "Not set" [ref=e254]
+                - cell "display" [ref=e255]
+                - cell "✓" [ref=e256]
+                - cell "✓" [ref=e257]
+                - cell "Disabled" [ref=e258]
+                - cell [ref=e259]:
+                  - button "Configure" [ref=e260] [cursor=pointer]
+              - row [ref=e261]:
+                - cell "Game Detail Description Footer game_detail_content" [ref=e262]:
+                  - generic [ref=e263]: Game Detail Description Footer
+                  - generic [ref=e264]: game_detail_content
+                - cell "adsense" [ref=e265]
+                - cell "Not set" [ref=e266]
+                - cell "display" [ref=e267]
+                - cell "✓" [ref=e268]
+                - cell "✓" [ref=e269]
+                - cell "Disabled" [ref=e270]
+                - cell [ref=e271]:
+                  - button "Configure" [ref=e272] [cursor=pointer]
+              - row [ref=e273]:
+                - cell "Game Level / Interstitial Break game_player_interstitial" [ref=e274]:
+                  - generic [ref=e275]: Game Level / Interstitial Break
+                  - generic [ref=e276]: game_player_interstitial
+                - cell "h5_games_ads" [ref=e277]
+                - cell "Not set" [ref=e278]
+                - cell "interstitial" [ref=e279]
+                - cell "✓" [ref=e280]
+                - cell "✓" [ref=e281]
+                - cell "Disabled" [ref=e282]
+                - cell [ref=e283]:
+                  - button "Configure" [ref=e284] [cursor=pointer]

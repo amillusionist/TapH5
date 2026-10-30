@@ -51,4 +51,3 @@ class AnalyticsPruneCommand extends Command
         return self::SUCCESS;
     }
 }
-

@@ -2,6 +2,8 @@
 import { ref } from 'vue';
 import { Link, router, usePage } from '@inertiajs/vue3';
 import BrandLogo from '@/Components/BrandLogo.vue';
+import ConsentBanner from '@/Components/ConsentBanner.vue';
+import { openConsentPreferences } from '@/services/ads';
 import type { PageProps } from '@/types';
 
 const page = usePage<PageProps>();
@@ -228,6 +230,7 @@ const toggleMobileMenu = () => {
                             <li><Link :href="route('pages.terms')" class="hover:text-emerald-400 transition-colors">Terms of Service</Link></li>
                             <li><Link :href="route('pages.cookie-policy')" class="hover:text-emerald-400 transition-colors">Cookie Policy</Link></li>
                             <li><Link :href="route('pages.data-policy')" class="hover:text-emerald-400 transition-colors">Data Policy</Link></li>
+                            <li><button @click="openConsentPreferences" type="button" class="hover:text-emerald-400 transition-colors text-left">Cookie & Ad Preferences</button></li>
                         </ul>
                     </div>
                 </div>
@@ -242,6 +245,9 @@ const toggleMobileMenu = () => {
                 </div>
             </div>
         </footer>
+
+        <!-- First-Party Consent Banner / Modal -->
+        <ConsentBanner />
     </div>
 </template>
 

@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue';
-import type { Game } from '@/types';
+import { usePage } from '@inertiajs/vue3';
+import type { Game, PageProps } from '@/types';
 import { GameSessionTracker } from '@/services/analytics';
+import { triggerH5GameBreak } from '@/services/ads';
 
 const props = withDefaults(
     defineProps<{
@@ -13,6 +15,7 @@ const props = withDefaults(
     }
 );
 
+const page = usePage<PageProps>();
 const containerRef = ref<HTMLElement | null>(null);
 const iframeRef = ref<HTMLIFrameElement | null>(null);
 
@@ -24,10 +27,17 @@ const reloadKey = ref(0);
 const tracker = ref<GameSessionTracker | null>(null);
 
 const startGame = () => {
-    isStarted.value = true;
-    isLoading.value = true;
-    hasError.value = false;
-    tracker.value?.recordPlayClick();
+    triggerH5GameBreak({
+        type: 'start',
+        name: props.game.slug,
+        config: page.props.adConfig,
+        afterAd: () => {
+            isStarted.value = true;
+            isLoading.value = true;
+            hasError.value = false;
+            tracker.value?.recordPlayClick();
+        },
+    });
 };
 
 const onIframeLoad = () => {

@@ -114,6 +114,21 @@ const dismissAlert = () => {
                             </svg>
                             <span>Analytics</span>
                         </Link>
+
+                        <Link
+                            :href="route('admin.monetization.index')"
+                            :class="route().current('admin.monetization.*')
+                                ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400 font-semibold pl-2.5'
+                                : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 pl-3'"
+                            class="flex items-center gap-3 py-2.5 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
+                        >
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <rect x="2" y="4" width="20" height="16" rx="2" stroke-width="2"/>
+                                <line x1="2" y1="10" x2="22" y2="10" stroke-width="2"/>
+                                <line x1="6" y1="15" x2="10" y2="15" stroke-width="2"/>
+                            </svg>
+                            <span>Monetization</span>
+                        </Link>
                     </nav>
                 </div>
 

@@ -60,4 +60,3 @@ class AnalyticsDailyAggregate extends Model
         return $this->belongsTo(Game::class);
     }
 }
-

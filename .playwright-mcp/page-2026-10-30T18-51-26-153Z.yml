@@ -1,0 +1,147 @@
+- generic [ref=e3]:
+  - banner [ref=e4]:
+    - generic [ref=e5]:
+      - link "TapH5 Games Homepage" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e12]:
+          - generic [ref=e13]:
+            - generic [ref=e14]: TAPH5
+            - generic [ref=e15]: GAMES
+          - generic [ref=e16]: Free Web Gaming
+      - navigation [ref=e17]:
+        - link "Home" [ref=e18] [cursor=pointer]:
+          - /url: /
+        - link "All Games" [ref=e19] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games
+        - button "Categories" [ref=e21] [cursor=pointer]
+      - search [ref=e26]:
+        - generic [ref=e27]: Search free games
+        - textbox "Search games" [ref=e28]:
+          - /placeholder: Search games...
+        - button "Submit search" [ref=e29] [cursor=pointer]
+  - main [ref=e33]:
+    - generic [ref=e34]:
+      - navigation [ref=e35]:
+        - link "Home" [ref=e36] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e37]: /
+        - generic [ref=e38]: Privacy Policy
+      - generic [ref=e39]:
+        - generic [ref=e40]:
+          - text: Legal Document
+          - heading "Privacy Policy" [level=1] [ref=e41]
+          - paragraph [ref=e42]: "Last updated: October 2026 • Official Platform Policy"
+        - generic [ref=e43]:
+          - generic [ref=e44]:
+            - heading "1. Overview & Operating Status" [level=2] [ref=e45]
+            - paragraph [ref=e46]: TapH5 Games ("we", "our", or "platform") respects player privacy and data protection principles. Our platform is architected around player safety, data minimization, and transparent controls.
+            - paragraph [ref=e47]:
+              - emphasis [ref=e48]:
+                - text: "Current Status: Commercial advertising technologies are inactive by default ("
+                - code [ref=e49]: ADS_ENABLED=false
+                - text: ). No third-party marketing tags or ad tracking pixels execute during default portal operation.
+          - generic [ref=e50]:
+            - heading "2. Information Collection & First-Party Analytics" [level=2] [ref=e51]
+            - paragraph [ref=e52]: We do not require mandatory registration or personal accounts for public game discovery and gameplay. Standard web server logs (including truncated IP addresses and user agents) are processed strictly for security, rate limiting, and operational diagnostics.
+            - paragraph [ref=e53]:
+              - text: To measure portal engagement, game loads, and play sessions, we utilize a privacy-conscious, first-party analytics system. This system relies on rotating pseudonymized visitor identifiers (
+              - code [ref=e54]: taph5_vid
+              - text: ) and ephemeral session tokens. We do not track individual users across unrelated websites, do not construct behavioral profiles, and never sell or rent user data.
+          - generic [ref=e55]:
+            - heading "3. Game Sandbox & Origin Isolation" [level=2] [ref=e56]
+            - paragraph [ref=e57]:
+              - text: Every game hosted on our portal runs within an isolated, sandboxed HTML5 frame (
+              - code [ref=e58]: sandbox="allow-scripts allow-forms allow-pointer-lock"
+              - text: ). Under no circumstances is
+              - code [ref=e59]: allow-same-origin
+              - text: granted. This technical barrier guarantees that game scripts cannot access parent cookies, local storage, session state, or credentials.
+          - generic [ref=e60]:
+            - heading "4. Third-Party Advertising & Google Certified CMP" [level=2] [ref=e61]
+            - paragraph [ref=e62]: To sustainably offer free web games, TapH5 Games is architecturally prepared for approved advertising partners including Google AdSense and H5 Games Ads (Google Ad Placement API).
+            - paragraph [ref=e63]: "When commercial advertising is activated:"
+            - list [ref=e64]:
+              - listitem [ref=e65]: Advertisers may use cookies or mobile advertising IDs to serve contextual or personalized advertisements and prevent fraudulent traffic.
+              - listitem [ref=e66]: For users within the European Economic Area (EEA), the United Kingdom, and Switzerland, Google requires an IAB Europe Transparency and Consent Framework (TCF v2.2) certified Consent Management Platform (CMP). Our platform prepares integration with Google's certified Privacy & Messaging CMP to ensure valid, auditable consent strings are communicated before ad scripts load.
+              - listitem [ref=e67]: H5 Games Ads and interstitial ad breaks run within individual game canvas documents subject to approved developer SDK integration.
+          - generic [ref=e68]:
+            - heading "5. Privacy Rights & Consent Management" [level=2] [ref=e69]
+            - paragraph [ref=e70]: Where regional privacy regulations (including GDPR, UK GDPR, and CCPA) apply, non-essential advertising scripts remain blocked until explicit consent is granted. You can review, adjust, or revoke your consent preferences at any time by selecting the "Cookie & Ad Preferences" link located in our footer.
+  - contentinfo [ref=e71]:
+    - generic [ref=e72]:
+      - generic [ref=e73]:
+        - generic [ref=e74]:
+          - link "TapH5 Games Homepage" [ref=e75] [cursor=pointer]:
+            - /url: /
+            - generic [ref=e81]:
+              - generic [ref=e82]:
+                - generic [ref=e83]: TAPH5
+                - generic [ref=e84]: GAMES
+              - generic [ref=e85]: Free Web Gaming
+          - paragraph [ref=e86]: TapH5 Games is a dedicated web gaming portal delivering high-performance, responsive HTML5 games playable across mobile, tablet, and desktop without downloads.
+          - generic [ref=e87]: Shared-Hosting & Sandbox Origin Ready
+        - generic [ref=e90]:
+          - heading "Categories" [level=4] [ref=e91]
+          - list [ref=e92]:
+            - listitem [ref=e93]:
+              - link "Action Games" [ref=e94] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/action
+            - listitem [ref=e95]:
+              - link "Arcade Games" [ref=e96] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/arcade
+            - listitem [ref=e97]:
+              - link "Puzzle Games" [ref=e98] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/puzzle
+            - listitem [ref=e99]:
+              - link "Racing Games" [ref=e100] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/racing
+            - listitem [ref=e101]:
+              - link "Adventure Games" [ref=e102] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/adventure
+            - listitem [ref=e103]:
+              - link "Sports Games" [ref=e104] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/sports
+        - generic [ref=e105]:
+          - heading "Discover" [level=4] [ref=e106]
+          - list [ref=e107]:
+            - listitem [ref=e108]:
+              - link "Home Portal" [ref=e109] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e110]:
+              - link "All Games" [ref=e111] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/games
+            - listitem [ref=e112]:
+              - link "Featured Games" [ref=e113] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/games?sort=featured
+            - listitem [ref=e114]:
+              - link "Popular Titles" [ref=e115] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/games?sort=popular
+        - generic [ref=e116]:
+          - heading "Legal & About" [level=4] [ref=e117]
+          - list [ref=e118]:
+            - listitem [ref=e119]:
+              - link "About Us" [ref=e120] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/about
+            - listitem [ref=e121]:
+              - link "Contact Us" [ref=e122] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/contact
+            - listitem [ref=e123]:
+              - link "Privacy Policy" [ref=e124] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/privacy
+            - listitem [ref=e125]:
+              - link "Terms of Service" [ref=e126] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/terms
+            - listitem [ref=e127]:
+              - link "Cookie Policy" [ref=e128] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/cookie-policy
+            - listitem [ref=e129]:
+              - link "Data Policy" [ref=e130] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/data-policy
+            - listitem [ref=e131]:
+              - button "Cookie & Ad Preferences" [ref=e132] [cursor=pointer]
+      - generic [ref=e133]:
+        - paragraph [ref=e134]: © 2026 TapH5 Games. All rights reserved.
+        - generic [ref=e135]:
+          - link "XML Sitemap" [ref=e136] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/sitemap.xml
+          - generic [ref=e137]: •
+          - generic [ref=e138]: Designed for Global HTML5 Gaming

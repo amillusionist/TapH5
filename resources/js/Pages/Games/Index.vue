@@ -5,6 +5,7 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import GameCard from '@/Components/GameCard.vue';
 import Pagination from '@/Components/Pagination.vue';
 import EmptyState from '@/Components/EmptyState.vue';
+import AdSlot from '@/Components/Ads/AdSlot.vue';
 import SeoHead from '@/Components/SeoHead.vue';
 import type { Category, Game, PaginatedData, SiteMeta } from '@/types';
 
@@ -107,6 +108,9 @@ const clearFilters = () => {
                 </div>
             </div>
         </div>
+
+        <!-- Monetization: Games Listing Banner -->
+        <AdSlot placement-key="games_listing" class-name="mb-8" />
 
         <!-- Filter & Search Controls Bar -->
         <div class="flex flex-col gap-4 mb-8 p-4 rounded-2xl bg-slate-900/60 border border-slate-800/80">

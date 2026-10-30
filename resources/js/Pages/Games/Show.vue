@@ -3,6 +3,7 @@ import { Link } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
 import GamePlayer from '@/Components/GamePlayer.vue';
 import GameCard from '@/Components/GameCard.vue';
+import AdSlot from '@/Components/Ads/AdSlot.vue';
 import SeoHead from '@/Components/SeoHead.vue';
 import type { Game, SiteMeta } from '@/types';
 
@@ -34,10 +35,16 @@ defineProps<{
             <span class="text-slate-200 font-medium truncate max-w-[200px]">{{ game.title }}</span>
         </nav>
 
+        <!-- Monetization: Top Leaderboard Placement -->
+        <AdSlot placement-key="game_detail_top" class-name="mb-6" />
+
         <!-- Main Game Stage Section -->
         <div class="mb-8">
             <!-- Dedicated Reusable Sandboxed Game Player -->
             <GamePlayer :game="game" :auto-play="false" />
+
+            <!-- Monetization: Below Player Placement -->
+            <AdSlot placement-key="game_player_below" class-name="mt-6" />
         </div>
 
         <!-- Game Information and Details -->
@@ -152,6 +159,9 @@ defineProps<{
                 </div>
             </div>
         </div>
+
+        <!-- Monetization: Description Footer Placement -->
+        <AdSlot placement-key="game_detail_content" class-name="mb-14" />
 
         <!-- Related Games Section -->
         <section v-if="relatedGames.length > 0" class="mb-12">

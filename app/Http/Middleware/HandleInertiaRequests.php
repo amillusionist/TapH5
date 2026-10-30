@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
+use App\Services\Ads\AdService;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -45,6 +46,8 @@ class HandleInertiaRequests extends Middleware
                 'error' => fn () => $request->session()->get('error'),
                 'warning' => fn () => $request->session()->get('warning'),
             ],
+            'adConfig' => fn () => app(AdService::class)->getPublicAdConfig(),
+            'adConfig' => fn () => app(AdService::class)->getPublicAdConfig(),
         ];
     }
 }

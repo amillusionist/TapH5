@@ -1,0 +1,384 @@
+- generic [ref=f4e3]:
+  - banner [ref=f4e4]:
+    - generic [ref=f4e5]:
+      - link "TapH5 Games Homepage" [ref=f4e6] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f4e12]:
+          - generic [ref=f4e13]:
+            - generic [ref=f4e14]: TAPH5
+            - generic [ref=f4e15]: GAMES
+          - generic [ref=f4e16]: Free Web Gaming
+      - navigation [ref=f4e17]:
+        - link "Home" [ref=f4e18] [cursor=pointer]:
+          - /url: /
+        - link "All Games" [ref=f4e19] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games
+        - button "Categories" [ref=f4e21] [cursor=pointer]
+      - search [ref=f4e26]:
+        - generic [ref=f4e27]: Search free games
+        - textbox "Search games" [ref=f4e28]:
+          - /placeholder: Search games...
+        - button "Submit search" [ref=f4e29] [cursor=pointer]
+  - main [ref=f4e33]:
+    - generic [ref=f4e34]:
+      - generic [ref=f4e36]:
+        - heading "Explore Categories" [level=2] [ref=f4e37]
+        - paragraph [ref=f4e39]: Browse our collection organized by gameplay genre
+      - generic [ref=f4e40]:
+        - link "Action category thumbnail Action 2 Games" [ref=f4e41] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/category/action
+          - img "Action category thumbnail" [ref=f4e43]
+          - generic [ref=f4e44]:
+            - generic [ref=f4e45]: Action
+            - generic [ref=f4e46]: 2 Games
+        - link "Arcade category thumbnail Arcade 3 Games" [ref=f4e47] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/category/arcade
+          - img "Arcade category thumbnail" [ref=f4e49]
+          - generic [ref=f4e50]:
+            - generic [ref=f4e51]: Arcade
+            - generic [ref=f4e52]: 3 Games
+        - link "Puzzle category thumbnail Puzzle 1 Game" [ref=f4e53] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/category/puzzle
+          - img "Puzzle category thumbnail" [ref=f4e55]
+          - generic [ref=f4e56]:
+            - generic [ref=f4e57]: Puzzle
+            - generic [ref=f4e58]: 1 Game
+        - link "Racing category thumbnail Racing 1 Game" [ref=f4e59] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/category/racing
+          - img "Racing category thumbnail" [ref=f4e61]
+          - generic [ref=f4e62]:
+            - generic [ref=f4e63]: Racing
+            - generic [ref=f4e64]: 1 Game
+        - link "Adventure category thumbnail Adventure 1 Game" [ref=f4e65] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/category/adventure
+          - img "Adventure category thumbnail" [ref=f4e67]
+          - generic [ref=f4e68]:
+            - generic [ref=f4e69]: Adventure
+            - generic [ref=f4e70]: 1 Game
+        - link "Sports category thumbnail Sports 1 Game" [ref=f4e71] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/category/sports
+          - img "Sports category thumbnail" [ref=f4e73]
+          - generic [ref=f4e74]:
+            - generic [ref=f4e75]: Sports
+            - generic [ref=f4e76]: 1 Game
+    - generic [ref=f4e77]:
+      - generic [ref=f4e78]:
+        - generic [ref=f4e79]:
+          - heading "Featured Games" [level=2] [ref=f4e80]
+          - paragraph [ref=f4e82]: Handpicked spotlight titles ready for instant play
+        - link "View All" [ref=f4e83] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games?sort=featured
+      - generic [ref=f4e87]:
+        - link "Mind Mesh thumbnail Featured Mind Mesh A clean and satisfying geometric puzzle game. Connect glowing nodes across an ever-shifting hexagonal web. Free Play Instant H5" [ref=f4e88] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/mind-mesh
+          - generic [ref=f4e89]:
+            - img "Mind Mesh thumbnail" [ref=f4e90]
+            - generic [ref=f4e92]: Featured
+          - generic [ref=f4e99]:
+            - heading "Mind Mesh" [level=3] [ref=f4e100]
+            - paragraph [ref=f4e101]: A clean and satisfying geometric puzzle game. Connect glowing nodes across an ever-shifting hexagonal web.
+            - generic [ref=f4e102]:
+              - generic [ref=f4e103]: Free Play
+              - generic [ref=f4e107]: Instant H5
+        - link "Cyber Runner thumbnail Featured Cyber Runner Sprint across futuristic cyberpunk rooftops avoiding neon laser barriers and collecting data chips. Free Play Multi-File" [ref=f4e108] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/cyber-runner
+          - generic [ref=f4e109]:
+            - img "Cyber Runner thumbnail" [ref=f4e110]
+            - generic [ref=f4e112]: Featured
+          - generic [ref=f4e119]:
+            - heading "Cyber Runner" [level=3] [ref=f4e120]
+            - paragraph [ref=f4e121]: Sprint across futuristic cyberpunk rooftops avoiding neon laser barriers and collecting data chips.
+            - generic [ref=f4e122]:
+              - generic [ref=f4e123]: Free Play
+              - generic [ref=f4e127]: Multi-File
+        - link "Neon Pulse thumbnail Featured Neon Pulse A vibrant neon rhythm particle game where every touch creates rhythmic visual ripples. Play directly in your browser with zero downloads. Free Play Instant H5" [ref=f4e128] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/neon-pulse
+          - generic [ref=f4e129]:
+            - img "Neon Pulse thumbnail" [ref=f4e130]
+            - generic [ref=f4e132]: Featured
+          - generic [ref=f4e139]:
+            - heading "Neon Pulse" [level=3] [ref=f4e140]
+            - paragraph [ref=f4e141]: A vibrant neon rhythm particle game where every touch creates rhythmic visual ripples. Play directly in your browser with zero downloads.
+            - generic [ref=f4e142]:
+              - generic [ref=f4e143]: Free Play
+              - generic [ref=f4e147]: Instant H5
+    - generic [ref=f4e148]:
+      - generic [ref=f4e149]:
+        - generic [ref=f4e150]:
+          - heading "Trending Now" [level=2] [ref=f4e151]
+          - paragraph [ref=f4e153]: Games capturing player attention right now
+        - link "View All" [ref=f4e154] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games
+      - generic [ref=f4e158]:
+        - link "Shadow Blade thumbnail Shadow Blade Test your samurai reaction speed. Strike precision targets as they appear from the shadows. Free Play Instant H5" [ref=f4e159] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/shadow-blade
+          - img "Shadow Blade thumbnail" [ref=f4e161]
+          - generic [ref=f4e169]:
+            - heading "Shadow Blade" [level=3] [ref=f4e170]
+            - paragraph [ref=f4e171]: Test your samurai reaction speed. Strike precision targets as they appear from the shadows.
+            - generic [ref=f4e172]:
+              - generic [ref=f4e173]: Free Play
+              - generic [ref=f4e177]: Instant H5
+        - link "Galaxy Drift thumbnail Galaxy Drift Zero-gravity interplanetary racing with high speed drifting around orbital curves. Free Play Multi-File" [ref=f4e178] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/galaxy-drift
+          - img "Galaxy Drift thumbnail" [ref=f4e180]
+          - generic [ref=f4e188]:
+            - heading "Galaxy Drift" [level=3] [ref=f4e189]
+            - paragraph [ref=f4e190]: Zero-gravity interplanetary racing with high speed drifting around orbital curves.
+            - generic [ref=f4e191]:
+              - generic [ref=f4e192]: Free Play
+              - generic [ref=f4e196]: Multi-File
+        - link "Cyber Runner thumbnail Featured Cyber Runner Sprint across futuristic cyberpunk rooftops avoiding neon laser barriers and collecting data chips. Free Play Multi-File" [ref=f4e197] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/cyber-runner
+          - generic [ref=f4e198]:
+            - img "Cyber Runner thumbnail" [ref=f4e199]
+            - generic [ref=f4e201]: Featured
+          - generic [ref=f4e208]:
+            - heading "Cyber Runner" [level=3] [ref=f4e209]
+            - paragraph [ref=f4e210]: Sprint across futuristic cyberpunk rooftops avoiding neon laser barriers and collecting data chips.
+            - generic [ref=f4e211]:
+              - generic [ref=f4e212]: Free Play
+              - generic [ref=f4e216]: Multi-File
+        - link "Neon Pulse thumbnail Featured Neon Pulse A vibrant neon rhythm particle game where every touch creates rhythmic visual ripples. Play directly in your browser with zero downloads. Free Play Instant H5" [ref=f4e217] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/neon-pulse
+          - generic [ref=f4e218]:
+            - img "Neon Pulse thumbnail" [ref=f4e219]
+            - generic [ref=f4e221]: Featured
+          - generic [ref=f4e228]:
+            - heading "Neon Pulse" [level=3] [ref=f4e229]
+            - paragraph [ref=f4e230]: A vibrant neon rhythm particle game where every touch creates rhythmic visual ripples. Play directly in your browser with zero downloads.
+            - generic [ref=f4e231]:
+              - generic [ref=f4e232]: Free Play
+              - generic [ref=f4e236]: Instant H5
+    - generic [ref=f4e237]:
+      - generic [ref=f4e238]:
+        - generic [ref=f4e239]:
+          - heading "New Releases" [level=2] [ref=f4e240]
+          - paragraph [ref=f4e242]: Fresh arrivals added to the platform
+        - link "View All" [ref=f4e243] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games?sort=newest
+      - generic [ref=f4e247]:
+        - link "Classic Snake - TapH5 thumbnail Classic Snake - TapH5 Play Classic Snake - TapH5 online for free on TapH5 Games. Fast, responsive HTML5 gameplay in your browser. Free Play Instant H5" [ref=f4e248] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/classic-snake-taph5
+          - img "Classic Snake - TapH5 thumbnail" [ref=f4e250]
+          - generic [ref=f4e258]:
+            - heading "Classic Snake - TapH5" [level=3] [ref=f4e259]
+            - paragraph [ref=f4e260]: Play Classic Snake - TapH5 online for free on TapH5 Games. Fast, responsive HTML5 gameplay in your browser.
+            - generic [ref=f4e261]:
+              - generic [ref=f4e262]: Free Play
+              - generic [ref=f4e266]: Instant H5
+        - link "Hyper Hoops thumbnail Hyper Hoops Arcade basketball shootout with realistic physics, combo bonuses, and sudden-death buzzer beaters. Free Play Instant H5" [ref=f4e267] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/hyper-hoops
+          - img "Hyper Hoops thumbnail" [ref=f4e269]
+          - generic [ref=f4e277]:
+            - heading "Hyper Hoops" [level=3] [ref=f4e278]
+            - paragraph [ref=f4e279]: Arcade basketball shootout with realistic physics, combo bonuses, and sudden-death buzzer beaters.
+            - generic [ref=f4e280]:
+              - generic [ref=f4e281]: Free Play
+              - generic [ref=f4e285]: Instant H5
+        - link "Astro Blaster thumbnail Astro Blaster Defend orbital space stations against descending waves of rogue asteroids and alien ships. Free Play Instant H5" [ref=f4e286] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/astro-blaster
+          - img "Astro Blaster thumbnail" [ref=f4e288]
+          - generic [ref=f4e296]:
+            - heading "Astro Blaster" [level=3] [ref=f4e297]
+            - paragraph [ref=f4e298]: Defend orbital space stations against descending waves of rogue asteroids and alien ships.
+            - generic [ref=f4e299]:
+              - generic [ref=f4e300]: Free Play
+              - generic [ref=f4e304]: Instant H5
+        - link "Shadow Blade thumbnail Shadow Blade Test your samurai reaction speed. Strike precision targets as they appear from the shadows. Free Play Instant H5" [ref=f4e305] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/shadow-blade
+          - img "Shadow Blade thumbnail" [ref=f4e307]
+          - generic [ref=f4e315]:
+            - heading "Shadow Blade" [level=3] [ref=f4e316]
+            - paragraph [ref=f4e317]: Test your samurai reaction speed. Strike precision targets as they appear from the shadows.
+            - generic [ref=f4e318]:
+              - generic [ref=f4e319]: Free Play
+              - generic [ref=f4e323]: Instant H5
+        - link "Pixel Quest thumbnail Pixel Quest A retro-inspired fantasy dungeon quest filled with mystery, monsters, and treasures. Free Play Multi-File" [ref=f4e324] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/pixel-quest
+          - img "Pixel Quest thumbnail" [ref=f4e326]
+          - generic [ref=f4e334]:
+            - heading "Pixel Quest" [level=3] [ref=f4e335]
+            - paragraph [ref=f4e336]: A retro-inspired fantasy dungeon quest filled with mystery, monsters, and treasures.
+            - generic [ref=f4e337]:
+              - generic [ref=f4e338]: Free Play
+              - generic [ref=f4e342]: Multi-File
+        - link "Mind Mesh thumbnail Featured Mind Mesh A clean and satisfying geometric puzzle game. Connect glowing nodes across an ever-shifting hexagonal web. Free Play Instant H5" [ref=f4e343] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/mind-mesh
+          - generic [ref=f4e344]:
+            - img "Mind Mesh thumbnail" [ref=f4e345]
+            - generic [ref=f4e347]: Featured
+          - generic [ref=f4e354]:
+            - heading "Mind Mesh" [level=3] [ref=f4e355]
+            - paragraph [ref=f4e356]: A clean and satisfying geometric puzzle game. Connect glowing nodes across an ever-shifting hexagonal web.
+            - generic [ref=f4e357]:
+              - generic [ref=f4e358]: Free Play
+              - generic [ref=f4e362]: Instant H5
+    - generic [ref=f4e363]:
+      - generic [ref=f4e364]:
+        - generic [ref=f4e365]:
+          - heading "Popular Games" [level=2] [ref=f4e366]
+          - paragraph [ref=f4e368]: Community favorites across all game styles
+        - link "View All" [ref=f4e369] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games?sort=popular
+      - generic [ref=f4e373]:
+        - link "Astro Blaster thumbnail Astro Blaster Defend orbital space stations against descending waves of rogue asteroids and alien ships. Free Play Instant H5" [ref=f4e374] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/astro-blaster
+          - img "Astro Blaster thumbnail" [ref=f4e376]
+          - generic [ref=f4e384]:
+            - heading "Astro Blaster" [level=3] [ref=f4e385]
+            - paragraph [ref=f4e386]: Defend orbital space stations against descending waves of rogue asteroids and alien ships.
+            - generic [ref=f4e387]:
+              - generic [ref=f4e388]: Free Play
+              - generic [ref=f4e392]: Instant H5
+        - link "Mind Mesh thumbnail Featured Mind Mesh A clean and satisfying geometric puzzle game. Connect glowing nodes across an ever-shifting hexagonal web. Free Play Instant H5" [ref=f4e393] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/mind-mesh
+          - generic [ref=f4e394]:
+            - img "Mind Mesh thumbnail" [ref=f4e395]
+            - generic [ref=f4e397]: Featured
+          - generic [ref=f4e404]:
+            - heading "Mind Mesh" [level=3] [ref=f4e405]
+            - paragraph [ref=f4e406]: A clean and satisfying geometric puzzle game. Connect glowing nodes across an ever-shifting hexagonal web.
+            - generic [ref=f4e407]:
+              - generic [ref=f4e408]: Free Play
+              - generic [ref=f4e412]: Instant H5
+        - link "Galaxy Drift thumbnail Galaxy Drift Zero-gravity interplanetary racing with high speed drifting around orbital curves. Free Play Multi-File" [ref=f4e413] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/galaxy-drift
+          - img "Galaxy Drift thumbnail" [ref=f4e415]
+          - generic [ref=f4e423]:
+            - heading "Galaxy Drift" [level=3] [ref=f4e424]
+            - paragraph [ref=f4e425]: Zero-gravity interplanetary racing with high speed drifting around orbital curves.
+            - generic [ref=f4e426]:
+              - generic [ref=f4e427]: Free Play
+              - generic [ref=f4e431]: Multi-File
+        - link "Neon Pulse thumbnail Featured Neon Pulse A vibrant neon rhythm particle game where every touch creates rhythmic visual ripples. Play directly in your browser with zero downloads. Free Play Instant H5" [ref=f4e432] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/neon-pulse
+          - generic [ref=f4e433]:
+            - img "Neon Pulse thumbnail" [ref=f4e434]
+            - generic [ref=f4e436]: Featured
+          - generic [ref=f4e443]:
+            - heading "Neon Pulse" [level=3] [ref=f4e444]
+            - paragraph [ref=f4e445]: A vibrant neon rhythm particle game where every touch creates rhythmic visual ripples. Play directly in your browser with zero downloads.
+            - generic [ref=f4e446]:
+              - generic [ref=f4e447]: Free Play
+              - generic [ref=f4e451]: Instant H5
+    - generic [ref=f4e452]:
+      - generic [ref=f4e454]:
+        - heading "Recently Added" [level=2] [ref=f4e455]
+        - paragraph [ref=f4e457]: Latest games cataloged on TapH5
+      - generic [ref=f4e458]:
+        - link "Galaxy Drift thumbnail Galaxy Drift Zero-gravity interplanetary racing with high speed drifting around orbital curves. Free Play Multi-File" [ref=f4e459] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/galaxy-drift
+          - img "Galaxy Drift thumbnail" [ref=f4e461]
+          - generic [ref=f4e469]:
+            - heading "Galaxy Drift" [level=3] [ref=f4e470]
+            - paragraph [ref=f4e471]: Zero-gravity interplanetary racing with high speed drifting around orbital curves.
+            - generic [ref=f4e472]:
+              - generic [ref=f4e473]: Free Play
+              - generic [ref=f4e477]: Multi-File
+        - link "Cyber Runner thumbnail Featured Cyber Runner Sprint across futuristic cyberpunk rooftops avoiding neon laser barriers and collecting data chips. Free Play Multi-File" [ref=f4e478] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/cyber-runner
+          - generic [ref=f4e479]:
+            - img "Cyber Runner thumbnail" [ref=f4e480]
+            - generic [ref=f4e482]: Featured
+          - generic [ref=f4e489]:
+            - heading "Cyber Runner" [level=3] [ref=f4e490]
+            - paragraph [ref=f4e491]: Sprint across futuristic cyberpunk rooftops avoiding neon laser barriers and collecting data chips.
+            - generic [ref=f4e492]:
+              - generic [ref=f4e493]: Free Play
+              - generic [ref=f4e497]: Multi-File
+        - link "Neon Pulse thumbnail Featured Neon Pulse A vibrant neon rhythm particle game where every touch creates rhythmic visual ripples. Play directly in your browser with zero downloads. Free Play Instant H5" [ref=f4e498] [cursor=pointer]:
+          - /url: http://127.0.0.1:8000/games/neon-pulse
+          - generic [ref=f4e499]:
+            - img "Neon Pulse thumbnail" [ref=f4e500]
+            - generic [ref=f4e502]: Featured
+          - generic [ref=f4e509]:
+            - heading "Neon Pulse" [level=3] [ref=f4e510]
+            - paragraph [ref=f4e511]: A vibrant neon rhythm particle game where every touch creates rhythmic visual ripples. Play directly in your browser with zero downloads.
+            - generic [ref=f4e512]:
+              - generic [ref=f4e513]: Free Play
+              - generic [ref=f4e517]: Instant H5
+    - generic [ref=f4e519]:
+      - heading "Browse Our Complete Catalog" [level=2] [ref=f4e524]
+      - paragraph [ref=f4e525]: Filter by category, search by title, sort by popularity or release date, and enjoy instant HTML5 games anywhere.
+      - link "View All Games" [ref=f4e526] [cursor=pointer]:
+        - /url: http://127.0.0.1:8000/games
+  - contentinfo [ref=f4e527]:
+    - generic [ref=f4e528]:
+      - generic [ref=f4e529]:
+        - generic [ref=f4e530]:
+          - link "TapH5 Games Homepage" [ref=f4e531] [cursor=pointer]:
+            - /url: /
+            - generic [ref=f4e537]:
+              - generic [ref=f4e538]:
+                - generic [ref=f4e539]: TAPH5
+                - generic [ref=f4e540]: GAMES
+              - generic [ref=f4e541]: Free Web Gaming
+          - paragraph [ref=f4e542]: TapH5 Games is a dedicated web gaming portal delivering high-performance, responsive HTML5 games playable across mobile, tablet, and desktop without downloads.
+          - generic [ref=f4e543]: Shared-Hosting & Sandbox Origin Ready
+        - generic [ref=f4e546]:
+          - heading "Categories" [level=4] [ref=f4e547]
+          - list [ref=f4e548]:
+            - listitem [ref=f4e549]:
+              - link "Action Games" [ref=f4e550] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/action
+            - listitem [ref=f4e551]:
+              - link "Arcade Games" [ref=f4e552] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/arcade
+            - listitem [ref=f4e553]:
+              - link "Puzzle Games" [ref=f4e554] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/puzzle
+            - listitem [ref=f4e555]:
+              - link "Racing Games" [ref=f4e556] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/racing
+            - listitem [ref=f4e557]:
+              - link "Adventure Games" [ref=f4e558] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/adventure
+            - listitem [ref=f4e559]:
+              - link "Sports Games" [ref=f4e560] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/category/sports
+        - generic [ref=f4e561]:
+          - heading "Discover" [level=4] [ref=f4e562]
+          - list [ref=f4e563]:
+            - listitem [ref=f4e564]:
+              - link "Home Portal" [ref=f4e565] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=f4e566]:
+              - link "All Games" [ref=f4e567] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/games
+            - listitem [ref=f4e568]:
+              - link "Featured Games" [ref=f4e569] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/games?sort=featured
+            - listitem [ref=f4e570]:
+              - link "Popular Titles" [ref=f4e571] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/games?sort=popular
+        - generic [ref=f4e572]:
+          - heading "Legal & About" [level=4] [ref=f4e573]
+          - list [ref=f4e574]:
+            - listitem [ref=f4e575]:
+              - link "About Us" [ref=f4e576] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/about
+            - listitem [ref=f4e577]:
+              - link "Contact Us" [ref=f4e578] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/contact
+            - listitem [ref=f4e579]:
+              - link "Privacy Policy" [ref=f4e580] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/privacy
+            - listitem [ref=f4e581]:
+              - link "Terms of Service" [ref=f4e582] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/terms
+            - listitem [ref=f4e583]:
+              - link "Cookie Policy" [ref=f4e584] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/cookie-policy
+            - listitem [ref=f4e585]:
+              - link "Data Policy" [ref=f4e586] [cursor=pointer]:
+                - /url: http://127.0.0.1:8000/data-policy
+            - listitem [ref=f4e587]:
+              - button "Cookie & Ad Preferences" [ref=f4e588] [cursor=pointer]
+      - generic [ref=f4e589]:
+        - paragraph [ref=f4e590]: © 2026 TapH5 Games. All rights reserved.
+        - generic [ref=f4e591]:
+          - link "XML Sitemap" [ref=f4e592] [cursor=pointer]:
+            - /url: http://127.0.0.1:8000/sitemap.xml
+          - generic [ref=f4e593]: •
+          - generic [ref=f4e594]: Designed for Global HTML5 Gaming

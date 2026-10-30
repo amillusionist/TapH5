@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AnalyticsController as AdminAnalyticsController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\GameController as AdminGameController;
+use App\Http\Controllers\Admin\MonetizationController as AdminMonetizationController;
 use App\Http\Controllers\Admin\TagController as AdminTagController;
 use App\Http\Controllers\Api\AnalyticsEventController;
 use App\Http\Controllers\CategoryController;
@@ -59,6 +60,11 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/analytics', [AdminAnalyticsController::class, 'index'])->name('analytics.index');
+
+    // Monetization Management
+    Route::get('/monetization', [AdminMonetizationController::class, 'index'])->name('monetization.index');
+    Route::put('/monetization/providers/{key}', [AdminMonetizationController::class, 'updateProvider'])->name('monetization.providers.update');
+    Route::put('/monetization/placements/{id}', [AdminMonetizationController::class, 'updatePlacement'])->name('monetization.placements.update');
 
     // Games Management
     Route::get('/games', [AdminGameController::class, 'index'])->name('games.index');

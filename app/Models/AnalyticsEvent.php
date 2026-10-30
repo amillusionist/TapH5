@@ -59,4 +59,3 @@ class AnalyticsEvent extends Model
         return $this->belongsTo(Game::class);
     }
 }
-
