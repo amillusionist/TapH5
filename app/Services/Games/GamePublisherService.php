@@ -64,6 +64,17 @@ class GamePublisherService
             ];
         }
 
+        // Verify review status is not rejected, pending, or changes_requested
+        if (in_array($game->review_status, [Game::REVIEW_REJECTED, Game::REVIEW_CHANGES_REQUESTED, Game::REVIEW_PENDING], true)) {
+            return [
+                'success' => false,
+                'message' => "Game #{$game->id} ('{$game->title}') cannot be published while in '{$game->review_status}' review state.",
+                'game' => $game,
+                'public_storage_path' => null,
+                'public_url' => null,
+            ];
+        }
+
         // Security check: reject explicit path traversal in game slug or category slug
         if (str_contains((string) $game->slug, '..') || str_contains((string) $game->category?->slug, '..')) {
             return [

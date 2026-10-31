@@ -7,7 +7,7 @@ import CategoryCard from '@/Components/CategoryCard.vue';
 import AdSlot from '@/Components/Ads/AdSlot.vue';
 import SeoHead from '@/Components/SeoHead.vue';
 import EmptyState from '@/Components/EmptyState.vue';
-import type { Category, Game, SiteMeta } from '@/types';
+import type { Category, Game, HomepageSection, SiteMeta } from '@/types';
 
 defineProps<{
     heroGames: Game[];
@@ -19,6 +19,7 @@ defineProps<{
     allGamesPreview: Game[];
     categories: Category[];
     meta: SiteMeta;
+    sections?: Record<string, HomepageSection>;
 }>();
 </script>
 
@@ -28,22 +29,22 @@ defineProps<{
     <AppLayout>
         <!-- Full-Width Hero Section -->
         <template #hero>
-            <HeroBanner :games="heroGames" />
+            <HeroBanner v-if="!sections?.hero || sections.hero.is_enabled" :games="heroGames" />
         </template>
 
         <!-- Monetization: Top Leaderboard Placement -->
         <AdSlot placement-key="home_top" class-name="mb-10 sm:mb-12" />
 
         <!-- 1. Categories / Genres Bar -->
-        <section class="mb-12 sm:mb-16">
+        <section v-if="!sections?.genres || sections.genres.is_enabled" class="mb-12 sm:mb-16">
             <div class="flex items-center justify-between mb-5 sm:mb-6">
                 <div>
                     <h2 class="text-lg sm:text-2xl font-black text-white tracking-tight flex items-center gap-2.5">
                         <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 ring-4 ring-cyan-500/20"></span>
-                        Explore Game Genres
+                        {{ sections?.genres?.title || 'Explore Game Genres' }}
                     </h2>
                     <p class="text-xs sm:text-sm text-slate-400 mt-1">
-                        Browse our collection organized by gameplay mechanics and genres
+                        {{ sections?.genres?.subtitle || 'Browse our collection organized by gameplay mechanics and genres' }}
                     </p>
                 </div>
             </div>
@@ -59,15 +60,15 @@ defineProps<{
         </section>
 
         <!-- 2. Featured Games (Curated Spotlight) -->
-        <section v-if="featuredGames.length > 0" class="mb-12 sm:mb-16">
+        <section v-if="(!sections?.featured || sections.featured.is_enabled) && featuredGames.length > 0" class="mb-12 sm:mb-16">
             <div class="flex items-center justify-between mb-5 sm:mb-6">
                 <div>
                     <h2 class="text-lg sm:text-2xl font-black text-white tracking-tight flex items-center gap-2.5">
                         <span class="w-2.5 h-2.5 rounded-full bg-amber-400 ring-4 ring-amber-500/20"></span>
-                        Featured Spotlight
+                        {{ sections?.featured?.title || 'Featured Spotlight' }}
                     </h2>
                     <p class="text-xs sm:text-sm text-slate-400 mt-1">
-                        Handpicked premiere titles curated for immediate in-browser play
+                        {{ sections?.featured?.subtitle || 'Handpicked premiere titles curated for immediate in-browser play' }}
                     </p>
                 </div>
                 <Link
@@ -93,15 +94,15 @@ defineProps<{
         </section>
 
         <!-- 3. Trending Games (Ranked Leaderboard Style) -->
-        <section v-if="trendingGames.length > 0" class="mb-12 sm:mb-16">
+        <section v-if="(!sections?.trending || sections.trending.is_enabled) && trendingGames.length > 0" class="mb-12 sm:mb-16">
             <div class="flex items-center justify-between mb-5 sm:mb-6">
                 <div>
                     <h2 class="text-lg sm:text-2xl font-black text-white tracking-tight flex items-center gap-2.5">
                         <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 ring-4 ring-emerald-500/20"></span>
-                        Trending Now
+                        {{ sections?.trending?.title || 'Trending Now' }}
                     </h2>
                     <p class="text-xs sm:text-sm text-slate-400 mt-1">
-                        Top games capturing player attention and active gameplay today
+                        {{ sections?.trending?.subtitle || 'Top games capturing player attention and active gameplay today' }}
                     </p>
                 </div>
                 <Link
@@ -129,15 +130,15 @@ defineProps<{
         <AdSlot placement-key="home_between_sections" class-name="mb-12 sm:mb-16" />
 
         <!-- 4. New Releases -->
-        <section v-if="newGames.length > 0" class="mb-12 sm:mb-16">
+        <section v-if="(!sections?.new || sections.new.is_enabled) && newGames.length > 0" class="mb-12 sm:mb-16">
             <div class="flex items-center justify-between mb-5 sm:mb-6">
                 <div>
                     <h2 class="text-lg sm:text-2xl font-black text-white tracking-tight flex items-center gap-2.5">
                         <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 ring-4 ring-cyan-500/20"></span>
-                        New Releases
+                        {{ sections?.new?.title || 'New Releases' }}
                     </h2>
                     <p class="text-xs sm:text-sm text-slate-400 mt-1">
-                        Fresh arrivals recently published to the TapH5 catalog
+                        {{ sections?.new?.subtitle || 'Fresh arrivals recently published to the TapH5 catalog' }}
                     </p>
                 </div>
                 <Link
@@ -162,15 +163,15 @@ defineProps<{
         </section>
 
         <!-- 5. Popular Games (Community Favorites) -->
-        <section v-if="popularGames.length > 0" class="mb-12 sm:mb-16">
+        <section v-if="(!sections?.popular || sections.popular.is_enabled) && popularGames.length > 0" class="mb-12 sm:mb-16">
             <div class="flex items-center justify-between mb-5 sm:mb-6">
                 <div>
                     <h2 class="text-lg sm:text-2xl font-black text-white tracking-tight flex items-center gap-2.5">
                         <span class="w-2.5 h-2.5 rounded-full bg-purple-400 ring-4 ring-purple-500/20"></span>
-                        Popular Games
+                        {{ sections?.popular?.title || 'Popular Games' }}
                     </h2>
                     <p class="text-xs sm:text-sm text-slate-400 mt-1">
-                        Community favorites across all genres and platforms
+                        {{ sections?.popular?.subtitle || 'Community favorites across all genres and platforms' }}
                     </p>
                 </div>
                 <Link
@@ -195,15 +196,15 @@ defineProps<{
         </section>
 
         <!-- 6. Recently Added Section -->
-        <section v-if="recentlyAdded.length > 0" class="mb-12 sm:mb-16">
+        <section v-if="(!sections?.recently_added || sections.recently_added.is_enabled) && recentlyAdded.length > 0" class="mb-12 sm:mb-16">
             <div class="flex items-center justify-between mb-5 sm:mb-6">
                 <div>
                     <h2 class="text-lg sm:text-2xl font-black text-white tracking-tight flex items-center gap-2.5">
                         <span class="w-2.5 h-2.5 rounded-full bg-rose-400 ring-4 ring-rose-500/20"></span>
-                        Recently Cataloged
+                        {{ sections?.recently_added?.title || 'Recently Cataloged' }}
                     </h2>
                     <p class="text-xs sm:text-sm text-slate-400 mt-1">
-                        Latest verified HTML5 titles added to our gaming library
+                        {{ sections?.recently_added?.subtitle || 'Latest verified HTML5 titles added to our gaming library' }}
                     </p>
                 </div>
                 <Link
@@ -227,7 +228,7 @@ defineProps<{
         </section>
 
         <!-- 7. All Games Catalog Call-To-Action Banner -->
-        <section class="rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900/95 to-slate-950 border border-slate-800 p-7 sm:p-12 text-center mb-6 shadow-2xl relative overflow-hidden">
+        <section v-if="!sections?.catalog_cta || sections.catalog_cta.is_enabled" class="rounded-3xl bg-gradient-to-br from-slate-900 via-slate-900/95 to-slate-950 border border-slate-800 p-7 sm:p-12 text-center mb-6 shadow-2xl relative overflow-hidden">
             <!-- Subtle background ambient glow -->
             <div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
 
@@ -240,11 +241,11 @@ defineProps<{
                 </div>
 
                 <h2 class="text-2xl sm:text-3xl font-black text-white mb-2.5 tracking-tight">
-                    Browse Our Complete Game Catalog
+                    {{ sections?.catalog_cta?.title || 'Browse Our Complete Game Catalog' }}
                 </h2>
 
                 <p class="text-slate-400 text-xs sm:text-sm mb-6 leading-relaxed max-w-md">
-                    Filter by gameplay genre, search by title, sort by popularity or release date, and enjoy instant HTML5 games across all devices.
+                    {{ sections?.catalog_cta?.subtitle || 'Filter by gameplay genre, search by title, sort by popularity or release date, and enjoy instant HTML5 games across all devices.' }}
                 </p>
 
                 <!-- Value Highlights -->

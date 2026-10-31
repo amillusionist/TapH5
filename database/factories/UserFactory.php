@@ -30,6 +30,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'role' => 'user',
+            'is_active' => true,
             'remember_token' => Str::random(10),
         ];
     }
@@ -41,6 +42,36 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'role' => 'admin',
+        ]);
+    }
+
+    /**
+     * Indicate that the user is a super administrator.
+     */
+    public function superAdmin(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'super_admin',
+        ]);
+    }
+
+    /**
+     * Indicate that the user is a content manager.
+     */
+    public function contentManager(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'content_manager',
+        ]);
+    }
+
+    /**
+     * Indicate that the user is an analyst.
+     */
+    public function analyst(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'role' => 'analyst',
         ]);
     }
 

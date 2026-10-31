@@ -48,6 +48,36 @@ const statusConfig = computed(() => {
                 badgeClasses: 'bg-slate-800 text-slate-400 border-slate-700/60',
                 dotClasses: 'bg-slate-600',
             };
+        case 'pending':
+            return {
+                label: 'Pending Review',
+                badgeClasses: 'bg-amber-500/10 text-amber-400 border-amber-500/30',
+                dotClasses: 'bg-amber-400',
+            };
+        case 'changes_requested':
+            return {
+                label: 'Changes Requested',
+                badgeClasses: 'bg-orange-500/10 text-orange-400 border-orange-500/30',
+                dotClasses: 'bg-orange-400',
+            };
+        case 'approved':
+            return {
+                label: 'Approved',
+                badgeClasses: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
+                dotClasses: 'bg-emerald-400',
+            };
+        case 'rejected':
+            return {
+                label: 'Rejected',
+                badgeClasses: 'bg-rose-500/10 text-rose-400 border-rose-500/30',
+                dotClasses: 'bg-rose-400',
+            };
+        case 'not_submitted':
+            return {
+                label: 'Not Submitted',
+                badgeClasses: 'bg-slate-800 text-slate-400 border-slate-700/60',
+                dotClasses: 'bg-slate-500',
+            };
         default:
             return {
                 label: props.status,

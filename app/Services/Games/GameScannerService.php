@@ -325,6 +325,219 @@ class GameScannerService
     }
 
     /**
+     * List all candidate game folders currently residing in the staging root.
+     *
+     * @return list<array{
+     *     folder: string,
+     *     file_count: int,
+     *     total_size_bytes: int,
+     *     total_size_formatted: string,
+     *     has_entry_file: bool,
+     *     entry_file: string|null,
+     *     is_imported: bool,
+     *     existing_game: array{id: int, title: string, status: string, review_status: string}|null
+     * }>
+     */
+    public function listStagingFolders(): array
+    {
+        $stagingRootConfig = (string) Config::get('games.staging_root', storage_path('staging'));
+        $stagingRoot = $this->resolvePath($stagingRootConfig);
+
+        if (! is_dir($stagingRoot)) {
+            @mkdir($stagingRoot, 0755, true);
+        }
+
+        $realStagingRoot = realpath($stagingRoot);
+        if ($realStagingRoot === false || ! is_readable($realStagingRoot)) {
+            return [];
+        }
+
+        $items = scandir($realStagingRoot) ?: [];
+        $folders = [];
+        $allowedEntryFiles = (array) Config::get('games.allowed_entry_files', ['index.html', 'game.html', 'play.html']);
+
+        foreach ($items as $item) {
+            if ($item === '.' || $item === '..' || str_starts_with($item, '.')) {
+                continue;
+            }
+
+            $fullPath = $realStagingRoot.DIRECTORY_SEPARATOR.$item;
+            if (! is_dir($fullPath)) {
+                continue;
+            }
+
+            // Path traversal safeguard
+            if (basename($item) !== $item || str_contains($item, '..')) {
+                continue;
+            }
+
+            $fileCount = 0;
+            $totalSize = 0;
+            $detectedEntry = null;
+
+            $files = @scandir($fullPath) ?: [];
+            foreach ($files as $f) {
+                if ($f === '.' || $f === '..') {
+                    continue;
+                }
+                $fileCount++;
+                $fPath = $fullPath.DIRECTORY_SEPARATOR.$f;
+                if (is_file($fPath)) {
+                    $totalSize += filesize($fPath);
+                    if ($detectedEntry === null && in_array(strtolower($f), $allowedEntryFiles, true)) {
+                        $detectedEntry = $f;
+                    }
+                }
+            }
+
+            $existingGame = Game::where('storage_path', "staging/{$item}")
+                ->orWhere('slug', Str::slug($item))
+                ->first();
+
+            $folders[] = [
+                'folder' => $item,
+                'file_count' => $fileCount,
+                'total_size_bytes' => $totalSize,
+                'total_size_formatted' => $this->formatBytes($totalSize),
+                'has_entry_file' => $detectedEntry !== null,
+                'entry_file' => $detectedEntry,
+                'is_imported' => $existingGame !== null,
+                'existing_game' => $existingGame ? [
+                    'id' => $existingGame->id,
+                    'title' => $existingGame->title,
+                    'status' => $existingGame->status,
+                    'review_status' => $existingGame->review_status,
+                ] : null,
+            ];
+        }
+
+        usort($folders, fn ($a, $b) => strcmp($a['folder'], $b['folder']));
+
+        return $folders;
+    }
+
+    /**
+     * Inspect a specific staging game folder without writing to database.
+     *
+     * @return array<string, mixed>
+     */
+    public function inspectStagingFolder(string $folder): array
+    {
+        $cleanFolder = basename(trim($folder));
+        if ($cleanFolder !== $folder || str_contains($folder, '..') || blank($cleanFolder)) {
+            return [
+                'is_valid' => false,
+                'errors' => ['Path traversal attempt or invalid folder name detected.'],
+                'warnings' => [],
+            ];
+        }
+
+        $stagingRootConfig = (string) Config::get('games.staging_root', storage_path('staging'));
+        $stagingRoot = $this->resolvePath($stagingRootConfig);
+        $realStagingRoot = realpath($stagingRoot);
+
+        if ($realStagingRoot === false || ! is_dir($realStagingRoot.DIRECTORY_SEPARATOR.$cleanFolder)) {
+            return [
+                'is_valid' => false,
+                'errors' => ["Staging folder '{$cleanFolder}' does not exist."],
+                'warnings' => [],
+            ];
+        }
+
+        $folderFullPath = $realStagingRoot.DIRECTORY_SEPARATOR.$cleanFolder;
+
+        // 1. Validate
+        $validation = $this->validator->validate($realStagingRoot, $cleanFolder);
+        if (! $validation['is_valid']) {
+            return [
+                'is_valid' => false,
+                'folder' => $cleanFolder,
+                'errors' => $validation['errors'],
+                'warnings' => $validation['warnings'],
+            ];
+        }
+
+        // 2. Metadata Extraction
+        $entryFilePath = $folderFullPath.DIRECTORY_SEPARATOR.$validation['entry_file'];
+        $metadata = $this->metadataExtractor->extract($entryFilePath, $cleanFolder);
+
+        // 3. Fingerprint & Duplication Check
+        $fingerprint = $this->fingerprintService->computeDirectoryFingerprint($folderFullPath);
+        $dupCheck = $this->fingerprintService->checkDuplicate(
+            $fingerprint,
+            $metadata['slug'],
+            $metadata['title'],
+            "staging/{$cleanFolder}"
+        );
+
+        // 4. Category Suggestion
+        $categorySuggestion = $this->categorySuggester->suggest(
+            $metadata['title'],
+            $cleanFolder,
+            $metadata['description']
+        );
+
+        // 5. Thumbnail Resolution Preview
+        $thumbnailResult = $this->thumbnailService->resolveAndStoreThumbnail(
+            $folderFullPath,
+            $metadata['slug'],
+            $metadata
+        );
+
+        $allWarnings = array_merge(
+            $validation['warnings'],
+            $metadata['warnings'],
+            $thumbnailResult['warnings']
+        );
+        if ($dupCheck['type'] === 'slug_conflict' || $dupCheck['type'] === 'title_similarity_warning') {
+            $allWarnings[] = $dupCheck['message'];
+        }
+
+        return [
+            'is_valid' => true,
+            'folder' => $cleanFolder,
+            'title' => $metadata['title'] ?? null,
+            'slug' => $metadata['slug'] ?? null,
+            'description' => $metadata['description'] ?? null,
+            'instructions' => $metadata['instructions'] ?? null,
+            'entry_file' => $validation['entry_file'] ?? 'index.html',
+            'game_type' => $validation['game_type'] ?? 'single_file',
+            'file_count' => $validation['file_count'] ?? 0,
+            'total_size_bytes' => $validation['total_size'] ?? 0,
+            'total_size_formatted' => $this->formatBytes($validation['total_size'] ?? 0),
+            'fingerprint' => $fingerprint,
+            'is_duplicate' => $dupCheck['is_duplicate'] ?? false,
+            'duplicate_reason' => $dupCheck['message'] ?? null,
+            'existing_game_id' => $dupCheck['existing_game']?->id,
+            'suggested_category_id' => $categorySuggestion['category']?->id,
+            'suggested_category_name' => $categorySuggestion['category']?->name,
+            'category_confidence' => $categorySuggestion['confidence'] ?? null,
+            'thumbnail_url' => $thumbnailResult['thumbnail_url'] ?? null,
+            'thumbnail_found' => $thumbnailResult['found'] ?? false,
+            'warnings' => $allWarnings,
+            'errors' => [],
+        ];
+    }
+
+    /**
+     * Format byte count into human-readable representation.
+     */
+    public function formatBytes(int $bytes): string
+    {
+        if ($bytes >= 1073741824) {
+            return number_format($bytes / 1073741824, 2).' GB';
+        }
+        if ($bytes >= 1048576) {
+            return number_format($bytes / 1048576, 2).' MB';
+        }
+        if ($bytes >= 1024) {
+            return number_format($bytes / 1024, 2).' KB';
+        }
+
+        return $bytes.' B';
+    }
+
+    /**
      * Resolve absolute filesystem path from potentially relative configuration path.
      */
     protected function resolvePath(string $path): string

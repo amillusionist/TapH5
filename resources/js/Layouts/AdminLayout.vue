@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { Head, Link, usePage } from '@inertiajs/vue3';
 import BrandLogo from '@/Components/BrandLogo.vue';
 import type { PageProps } from '@/types';
@@ -11,6 +11,27 @@ defineProps<{
 const page = usePage<PageProps>();
 const isMobileSidebarOpen = ref(false);
 const dismissedFlash = ref(false);
+
+const user = computed(() => page.props.auth?.user);
+const role = computed(() => user.value?.role || 'admin');
+
+const isSuperAdmin = computed(() => role.value === 'super_admin');
+const canManageUsers = computed(() => isSuperAdmin.value);
+const canManageSettings = computed(() => isSuperAdmin.value);
+const canManageContent = computed(() => ['super_admin', 'admin', 'content_manager'].includes(role.value));
+const canReviewGames = computed(() => ['super_admin', 'admin', 'content_manager'].includes(role.value));
+const canViewAnalytics = computed(() => ['super_admin', 'admin', 'analyst'].includes(role.value));
+const pendingReviewCount = computed(() => Number(page.props.pendingReviewCount ?? 0));
+
+const roleLabel = computed(() => {
+    switch (role.value) {
+        case 'super_admin': return 'Super Admin';
+        case 'admin': return 'Administrator';
+        case 'content_manager': return 'Content Manager';
+        case 'analyst': return 'Analyst';
+        default: return 'Staff';
+    }
+});
 
 const closeMobileSidebar = () => {
     isMobileSidebarOpen.value = false;
@@ -66,11 +87,11 @@ const dismissAlert = () => {
             </div>
 
             <!-- Navigation Sections -->
-            <div class="flex-1 px-3 py-4 space-y-6 overflow-y-auto">
-                <!-- Group: Operations -->
+            <div class="flex-1 px-3 py-4 space-y-5 overflow-y-auto">
+                <!-- Group: Overview -->
                 <div>
-                    <div class="px-3 mb-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                        Platform Operations
+                    <div class="px-3 mb-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                        Overview
                     </div>
                     <nav class="space-y-1">
                         <Link
@@ -78,7 +99,7 @@ const dismissAlert = () => {
                             :class="route().current('admin.dashboard')
                                 ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400 font-semibold pl-2.5'
                                 : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 pl-3'"
-                            class="flex items-center gap-3 py-2.5 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
+                            class="flex items-center gap-3 py-2 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
                         >
                             <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <rect x="3" y="3" width="7" height="7" rx="1.5" stroke-width="2"/>
@@ -88,62 +109,81 @@ const dismissAlert = () => {
                             </svg>
                             <span>Dashboard</span>
                         </Link>
+                    </nav>
+                </div>
+
+                <!-- Group: Content Management -->
+                <div v-if="canManageContent">
+                    <div class="px-3 mb-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                        Content Management
+                    </div>
+                    <nav class="space-y-1">
+                        <Link
+                            :href="route('admin.homepage.index')"
+                            :class="route().current('admin.homepage.*')
+                                ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400 font-semibold pl-2.5'
+                                : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 pl-3'"
+                            class="flex items-center gap-3 py-2 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
+                        >
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+                            </svg>
+                            <span>Homepage Editor</span>
+                        </Link>
 
                         <Link
                             :href="route('admin.games.index')"
-                            :class="route().current('admin.games.*')
+                            :class="route().current('admin.games.index') || route().current('admin.games.show') || route().current('admin.games.edit')
                                 ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400 font-semibold pl-2.5'
                                 : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 pl-3'"
-                            class="flex items-center gap-3 py-2.5 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
+                            class="flex items-center gap-3 py-2 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
                         >
                             <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <polygon points="6 3 20 12 6 21 6 3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <span>Games Manager</span>
+                            <span>All Games</span>
                         </Link>
 
                         <Link
-                            :href="route('admin.analytics.index')"
-                            :class="route().current('admin.analytics.*')
+                            :href="route('admin.games.add')"
+                            :class="route().current('admin.games.add')
                                 ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400 font-semibold pl-2.5'
                                 : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 pl-3'"
-                            class="flex items-center gap-3 py-2.5 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
+                            class="flex items-center gap-3 py-2 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
                         >
                             <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                             </svg>
-                            <span>Analytics</span>
+                            <span>Add Game</span>
                         </Link>
 
                         <Link
-                            :href="route('admin.monetization.index')"
-                            :class="route().current('admin.monetization.*')
+                            :href="route('admin.game_reviews.index')"
+                            :class="route().current('admin.game_reviews.*')
                                 ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400 font-semibold pl-2.5'
                                 : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 pl-3'"
-                            class="flex items-center gap-3 py-2.5 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
+                            class="flex items-center justify-between py-2 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
                         >
-                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <rect x="2" y="4" width="20" height="16" rx="2" stroke-width="2"/>
-                                <line x1="2" y1="10" x2="22" y2="10" stroke-width="2"/>
-                                <line x1="6" y1="15" x2="10" y2="15" stroke-width="2"/>
-                            </svg>
-                            <span>Monetization</span>
+                            <div class="flex items-center gap-3 min-w-0">
+                                <svg class="w-4 h-4 shrink-0 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                                </svg>
+                                <span class="truncate">Game Review</span>
+                            </div>
+                            <span
+                                v-if="pendingReviewCount > 0"
+                                class="px-1.5 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/20 text-amber-400 border border-amber-500/30 shrink-0"
+                            >
+                                {{ pendingReviewCount }}
+                            </span>
                         </Link>
-                    </nav>
-                </div>
 
-                <!-- Group: Taxonomy & Curation -->
-                <div>
-                    <div class="px-3 mb-2 text-[10px] font-bold uppercase tracking-wider text-slate-400">
-                        Content & Taxonomies
-                    </div>
-                    <nav class="space-y-1">
                         <Link
                             :href="route('admin.categories.index')"
                             :class="route().current('admin.categories.*')
                                 ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400 font-semibold pl-2.5'
                                 : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 pl-3'"
-                            class="flex items-center gap-3 py-2.5 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
+                            class="flex items-center gap-3 py-2 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
                         >
                             <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -156,7 +196,7 @@ const dismissAlert = () => {
                             :class="route().current('admin.tags.*')
                                 ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400 font-semibold pl-2.5'
                                 : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 pl-3'"
-                            class="flex items-center gap-3 py-2.5 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
+                            class="flex items-center gap-3 py-2 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
                         >
                             <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <line x1="4" y1="9" x2="20" y2="9" stroke-width="2" stroke-linecap="round"/>
@@ -165,6 +205,112 @@ const dismissAlert = () => {
                                 <line x1="16" y1="3" x2="14" y2="21" stroke-width="2" stroke-linecap="round"/>
                             </svg>
                             <span>Tags</span>
+                        </Link>
+                    </nav>
+                </div>
+
+                <!-- Group: Platform Insights -->
+                <div v-if="canViewAnalytics">
+                    <div class="px-3 mb-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                        Platform Insights
+                    </div>
+                    <nav class="space-y-1">
+                        <Link
+                            :href="route('admin.analytics.index')"
+                            :class="route().current('admin.analytics.*')
+                                ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400 font-semibold pl-2.5'
+                                : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 pl-3'"
+                            class="flex items-center gap-3 py-2 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
+                        >
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                            <span>Analytics</span>
+                        </Link>
+
+                        <Link
+                            :href="route('admin.monetization.index')"
+                            :class="route().current('admin.monetization.*')
+                                ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400 font-semibold pl-2.5'
+                                : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 pl-3'"
+                            class="flex items-center gap-3 py-2 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
+                        >
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <rect x="2" y="4" width="20" height="16" rx="2" stroke-width="2"/>
+                                <line x1="2" y1="10" x2="22" y2="10" stroke-width="2"/>
+                                <line x1="6" y1="15" x2="10" y2="15" stroke-width="2"/>
+                            </svg>
+                            <span>Monetization</span>
+                        </Link>
+                    </nav>
+                </div>
+
+                <!-- Group: Access Management -->
+                <div v-if="canManageUsers">
+                    <div class="px-3 mb-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                        Access Control
+                    </div>
+                    <nav class="space-y-1">
+                        <Link
+                            :href="route('admin.users.index')"
+                            :class="route().current('admin.users.*')
+                                ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400 font-semibold pl-2.5'
+                                : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 pl-3'"
+                            class="flex items-center gap-3 py-2 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
+                        >
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                            <span>Users & Roles</span>
+                        </Link>
+                    </nav>
+                </div>
+
+                <!-- Group: System & Tools -->
+                <div>
+                    <div class="px-3 mb-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                        System Operations
+                    </div>
+                    <nav class="space-y-1">
+                        <Link
+                            v-if="canManageSettings"
+                            :href="route('admin.settings.index')"
+                            :class="route().current('admin.settings.*')
+                                ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400 font-semibold pl-2.5'
+                                : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 pl-3'"
+                            class="flex items-center gap-3 py-2 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
+                        >
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                <circle cx="12" cy="12" r="3" stroke-width="2"/>
+                            </svg>
+                            <span>Platform Settings</span>
+                        </Link>
+
+                        <Link
+                            :href="route('admin.system.index')"
+                            :class="route().current('admin.system.index')
+                                ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400 font-semibold pl-2.5'
+                                : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 pl-3'"
+                            class="flex items-center gap-3 py-2 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
+                        >
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                            <span>System Health</span>
+                        </Link>
+
+                        <Link
+                            :href="route('admin.system.logs')"
+                            :class="route().current('admin.system.logs')
+                                ? 'bg-emerald-500/10 text-emerald-400 border-l-2 border-emerald-400 font-semibold pl-2.5'
+                                : 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/50 pl-3'"
+                            class="flex items-center gap-3 py-2 pr-3 rounded-r-xl text-xs sm:text-sm transition-all"
+                        >
+                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                            </svg>
+                            <span>Activity Logs</span>
                         </Link>
                     </nav>
                 </div>
@@ -192,9 +338,14 @@ const dismissAlert = () => {
 
                 <div class="p-2.5 rounded-xl bg-slate-900/60 border border-slate-800 flex items-center justify-between gap-2">
                     <div class="min-w-0 flex-1">
-                        <p class="text-xs font-bold text-white truncate">
-                            {{ page.props.auth?.user?.name || 'Administrator' }}
-                        </p>
+                        <div class="flex items-center gap-1.5 mb-0.5">
+                            <p class="text-xs font-bold text-white truncate">
+                                {{ page.props.auth?.user?.name || 'Administrator' }}
+                            </p>
+                            <span class="px-1.5 py-0.2 rounded text-[9px] font-bold uppercase tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                                {{ roleLabel }}
+                            </span>
+                        </div>
                         <p class="text-[11px] text-slate-400 truncate">
                             {{ page.props.auth?.user?.email || 'admin@taph5gaming.com' }}
                         </p>

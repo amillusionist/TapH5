@@ -38,6 +38,16 @@ class Game extends Model
 {
     use HasFactory;
 
+    public const REVIEW_NOT_SUBMITTED = 'not_submitted';
+
+    public const REVIEW_PENDING = 'pending';
+
+    public const REVIEW_CHANGES_REQUESTED = 'changes_requested';
+
+    public const REVIEW_APPROVED = 'approved';
+
+    public const REVIEW_REJECTED = 'rejected';
+
     /**
      * @var list<string>
      */
@@ -54,6 +64,12 @@ class Game extends Model
         'fingerprint',
         'scan_metadata',
         'status',
+        'review_status',
+        'submitted_at',
+        'submitted_by',
+        'reviewed_at',
+        'reviewed_by',
+        'review_notes',
         'is_featured',
         'is_trending',
         'is_popular',
@@ -73,6 +89,8 @@ class Game extends Model
             'is_popular' => 'boolean',
             'plays_count' => 'integer',
             'scan_metadata' => 'array',
+            'submitted_at' => 'datetime',
+            'reviewed_at' => 'datetime',
         ];
     }
 
@@ -117,6 +135,48 @@ class Game extends Model
     public function analyticsDailyAggregates(): HasMany
     {
         return $this->hasMany(AnalyticsDailyAggregate::class);
+    }
+
+    /**
+     * @return HasMany<GameReview, $this>
+     */
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(GameReview::class)->latest('id');
+    }
+
+    /**
+     * @return BelongsTo<User, $this>
+     */
+    public function submittedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'submitted_by');
+    }
+
+    /**
+     * @return BelongsTo<User, $this>
+     */
+    public function reviewedBy(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'reviewed_by');
+    }
+
+    /**
+     * @param  Builder<Game>  $query
+     * @return Builder<Game>
+     */
+    public function scopePendingReview(Builder $query): Builder
+    {
+        return $query->where('review_status', self::REVIEW_PENDING);
+    }
+
+    /**
+     * @param  Builder<Game>  $query
+     * @return Builder<Game>
+     */
+    public function scopeReviewStatus(Builder $query, string $status): Builder
+    {
+        return $query->where('review_status', $status);
     }
 
     /**

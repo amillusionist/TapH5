@@ -68,6 +68,9 @@ class HandleInertiaRequests extends Middleware
                 'error' => fn () => $request->session()->get('error'),
                 'warning' => fn () => $request->session()->get('warning'),
             ],
+            'pendingReviewCount' => fn () => ($request->user() && $request->user()->isStaff())
+                ? Game::where('status', 'draft')->where('review_status', Game::REVIEW_PENDING)->count()
+                : 0,
             'adConfig' => fn () => app(AdService::class)->getPublicAdConfig(),
         ];
     }

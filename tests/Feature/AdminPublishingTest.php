@@ -57,7 +57,7 @@ class AdminPublishingTest extends TestCase
         File::makeDirectory($gameDir, 0755, true);
         File::put($gameDir.'/index.html', '<!DOCTYPE html><html><head><title>Blaster</title></head></html>');
 
-        $draft = Game::factory()->draft()->create([
+        $draft = Game::factory()->approvedReview()->create([
             'title' => 'Space Blaster',
             'slug' => 'space-blaster',
             'category_id' => $arcade->id,

@@ -77,4 +77,42 @@ class GameFactory extends Factory
             'status' => 'archived',
         ]);
     }
+
+    public function pendingReview(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => 'draft',
+            'review_status' => Game::REVIEW_PENDING,
+            'submitted_at' => now(),
+        ]);
+    }
+
+    public function changesRequested(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => 'draft',
+            'review_status' => Game::REVIEW_CHANGES_REQUESTED,
+            'submitted_at' => now()->subDay(),
+            'review_notes' => 'Please update thumbnail and controls.',
+        ]);
+    }
+
+    public function approvedReview(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => 'draft',
+            'review_status' => Game::REVIEW_APPROVED,
+            'reviewed_at' => now(),
+        ]);
+    }
+
+    public function rejectedReview(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'status' => 'draft',
+            'review_status' => Game::REVIEW_REJECTED,
+            'reviewed_at' => now(),
+            'review_notes' => 'Non-functional build.',
+        ]);
+    }
 }

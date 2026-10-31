@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\CategoryResource;
-use App\Http\Resources\GameResource;
-use App\Models\Category;
 use App\Models\Game;
 use App\Services\AnalyticsService;
+use App\Services\HomepageContentService;
+use App\Services\PlatformSettingService;
 use App\Services\SeoService;
 use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
@@ -19,7 +18,9 @@ class HomeController extends Controller
     public const CACHE_TTL = 300; // 5 minutes
 
     public function __construct(
-        protected SeoService $seoService
+        protected SeoService $seoService,
+        protected HomepageContentService $homepageService,
+        protected PlatformSettingService $settingService
     ) {}
 
     public static function clearCache(): void
@@ -29,81 +30,28 @@ class HomeController extends Controller
 
     public function __invoke(): Response
     {
-        $data = Cache::remember(self::CACHE_KEY, self::CACHE_TTL, function () {
-            $categories = Category::active()
-                ->ordered()
-                ->withCount('publishedGames')
-                ->get();
-
-            // Query featured games (up to 6); slice first 3 for hero banner
-            $featuredGames = Game::published()
-                ->featured()
-                ->with(['category:id,name,slug'])
-                ->latest()
-                ->take(6)
-                ->get();
-
-            $heroGames = $featuredGames->take(3);
-
-            // Fallback if no games are flagged featured
-            if ($heroGames->isEmpty()) {
-                $fallback = Game::published()
-                    ->with(['category:id,name,slug'])
-                    ->latest()
-                    ->take(3)
-                    ->get();
-                $heroGames = $fallback;
-                if ($featuredGames->isEmpty()) {
-                    $featuredGames = $fallback;
-                }
-            }
-
-            // Trending games
-            $trendingGames = Game::published()
-                ->trending()
-                ->with(['category:id,name,slug'])
-                ->latest()
-                ->take(6)
-                ->get();
-
-            // Popular games
-            $popularGames = Game::published()
-                ->popular()
-                ->with(['category:id,name,slug'])
-                ->latest()
-                ->take(6)
-                ->get();
-
-            // Single query for latest games (take 12):
-            // Slice 0..6 for newGames, 6..12 for recentlyAdded, and full 12 for allGamesPreview
-            $latestGames = Game::published()
-                ->with(['category:id,name,slug'])
-                ->latest()
-                ->take(12)
-                ->get();
-
-            $newGames = $latestGames->slice(0, 6)->values();
-            $recentlyAdded = $latestGames->count() > 6
-                ? $latestGames->slice(6, 6)->values()
-                : $newGames;
+        $payload = Cache::remember(self::CACHE_KEY, self::CACHE_TTL, function () {
+            $data = $this->homepageService->getPublicHomepagePayload();
 
             return [
-                'heroGames' => GameResource::collection($heroGames)->resolve(),
-                'featuredGames' => GameResource::collection($featuredGames)->resolve(),
-                'trendingGames' => GameResource::collection($trendingGames)->resolve(),
-                'popularGames' => GameResource::collection($popularGames)->resolve(),
-                'newGames' => GameResource::collection($newGames)->resolve(),
-                'recentlyAdded' => GameResource::collection($recentlyAdded)->resolve(),
-                'allGamesPreview' => GameResource::collection($latestGames)->resolve(),
-                'categories' => CategoryResource::collection($categories)->resolve(),
+                'heroGames' => $data['heroGames'],
+                'featuredGames' => $data['sectionGames']['featured'] ?? [],
+                'trendingGames' => $data['sectionGames']['trending'] ?? [],
+                'popularGames' => $data['sectionGames']['popular'] ?? [],
+                'newGames' => $data['sectionGames']['new'] ?? [],
+                'recentlyAdded' => $data['sectionGames']['recently_added'] ?? [],
+                'allGamesPreview' => $data['sectionGames']['new'] ?? [],
+                'categories' => $data['categories'],
+                'sections' => $data['sections'],
+                'sectionGames' => $data['sectionGames'],
             ];
         });
 
         // Overlay fresh active player counts (15s cache) onto cached game listings
         $activeCounts = app(AnalyticsService::class)->getCachedActivePlayersCounts();
-        $this->overlayLiveCounts($data, $activeCounts);
+        $this->overlayLiveCounts($payload, $activeCounts);
 
-        return Inertia::render('Home', array_merge($data, [
+        return Inertia::render('Home', array_merge($payload, [
             'meta' => $this->seoService->defaultMeta(),
         ]));
     }
