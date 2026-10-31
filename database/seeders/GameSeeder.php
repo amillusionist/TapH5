@@ -25,6 +25,25 @@ class GameSeeder extends Seeder
 
         $games = [
             [
+                'title' => 'Classic Snake',
+                'slug' => 'classic-snake-taph5',
+                'description' => 'Relive the golden era of arcade gaming with Classic Snake. Guide your snake, eat apples, and grow longer without crashing into walls or your own tail.',
+                'instructions' => 'Use Arrow keys or WASD on keyboard to steer. On touch screens, tap the retro LCD directional buttons.',
+                'thumbnail' => '/images/thumbnails/classic-snake-taph5.svg',
+                'category_id' => $arcade?->id ?? 1,
+                'game_type' => 'single_file',
+                'entry_file' => 'index.html',
+                'storage_path' => 'arcade/classic-snake-taph5',
+                'status' => 'published',
+                'is_featured' => true,
+                'is_trending' => true,
+                'is_popular' => true,
+                'plays_count' => 0,
+                'seo_title' => 'Classic Snake - Play Free Online Retro Arcade Game | TapH5',
+                'seo_description' => 'Play Classic Snake for free online on TapH5 Games. Authentic retro LCD arcade gameplay with keyboard and touch controls.',
+                'tags' => ['html5', 'arcade', 'retro', 'touch-screen', 'single-player'],
+            ],
+            [
                 'title' => 'Neon Pulse',
                 'slug' => 'neon-pulse',
                 'description' => 'A vibrant neon rhythm particle game where every touch creates rhythmic visual ripples. Play directly in your browser with zero downloads.',

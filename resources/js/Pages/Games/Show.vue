@@ -12,6 +12,13 @@ defineProps<{
     relatedGames: Game[];
     meta: SiteMeta;
 }>();
+
+const onThumbnailError = (e: Event) => {
+    const img = e.target as HTMLImageElement;
+    if (img && !img.src.endsWith('/images/thumbnails/default-game.svg')) {
+        img.src = '/images/thumbnails/default-game.svg';
+    }
+};
 </script>
 
 <template>
@@ -19,11 +26,11 @@ defineProps<{
 
     <AppLayout>
         <!-- Breadcrumb Navigation -->
-        <nav class="flex items-center gap-2 text-xs text-slate-400 mb-4">
+        <nav class="flex items-center gap-2 text-xs text-slate-400 mb-4 overflow-x-auto whitespace-nowrap">
             <Link href="/" class="hover:text-emerald-400 transition-colors">Home</Link>
-            <span>/</span>
+            <span class="text-slate-600">/</span>
             <Link :href="route('games.index')" class="hover:text-emerald-400 transition-colors">Games</Link>
-            <span v-if="game.category">/</span>
+            <span v-if="game.category" class="text-slate-600">/</span>
             <Link
                 v-if="game.category"
                 :href="route('categories.show', { slug: game.category.slug })"
@@ -31,8 +38,8 @@ defineProps<{
             >
                 {{ game.category.name }}
             </Link>
-            <span>/</span>
-            <span class="text-slate-200 font-medium truncate max-w-[200px]">{{ game.title }}</span>
+            <span class="text-slate-600">/</span>
+            <span class="text-slate-200 font-medium truncate max-w-[200px] sm:max-w-xs">{{ game.title }}</span>
         </nav>
 
         <!-- Monetization: Top Leaderboard Placement -->
@@ -48,31 +55,32 @@ defineProps<{
         </div>
 
         <!-- Game Information and Details -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-14">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 mb-14">
             <!-- Left 2 Cols: Title, Details, Instructions -->
             <div class="lg:col-span-2 space-y-6">
                 <!-- Header Card -->
-                <div class="p-6 rounded-2xl bg-slate-900/80 border border-slate-800">
-                    <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
-                        <div class="flex items-center gap-3">
-                            <div class="w-14 h-14 rounded-xl overflow-hidden bg-slate-950 border border-slate-800 shrink-0">
+                <div class="p-6 sm:p-7 rounded-2xl bg-slate-900/80 border border-slate-800">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-5">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-slate-950 border border-slate-800 shrink-0">
                                 <img
-                                    :src="game.thumbnail || '/images/thumbnails/neon-pulse.svg'"
+                                    :src="game.thumbnail || '/images/thumbnails/default-game.svg'"
                                     :alt="`${game.title} thumbnail`"
-                                    width="56"
-                                    height="56"
+                                    width="64"
+                                    height="64"
                                     loading="eager"
                                     decoding="async"
+                                    @error="onThumbnailError"
                                     class="w-full h-full object-cover"
                                 />
                             </div>
                             <div>
                                 <h1 class="text-2xl sm:text-3xl font-black text-white tracking-tight">{{ game.title }}</h1>
-                                <div class="flex items-center gap-2 mt-1">
+                                <div class="flex flex-wrap items-center gap-2 mt-1.5">
                                     <Link
                                         v-if="game.category"
                                         :href="route('categories.show', { slug: game.category.slug })"
-                                        class="px-2 py-0.5 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-md hover:bg-emerald-500/20 transition-colors"
+                                        class="px-2.5 py-0.5 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 rounded-md hover:bg-emerald-500/20 transition-colors"
                                     >
                                         {{ game.category.name }}
                                     </Link>
@@ -86,7 +94,7 @@ defineProps<{
                         <!-- Back Button -->
                         <Link
                             :href="route('games.index')"
-                            class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-semibold flex items-center gap-1.5 transition-colors"
+                            class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-semibold flex items-center gap-1.5 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-400"
                         >
                             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="m15 18-6-6 6-6"/>
@@ -96,7 +104,7 @@ defineProps<{
                     </div>
 
                     <!-- Description -->
-                    <div class="pt-4 border-t border-slate-800/80">
+                    <div class="pt-5 border-t border-slate-800/80">
                         <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">About The Game</h2>
                         <p class="text-sm text-slate-300 leading-relaxed whitespace-pre-line">
                             {{ game.description || 'No detailed description available for this game yet.' }}
@@ -104,14 +112,14 @@ defineProps<{
                     </div>
 
                     <!-- Instructions / Controls -->
-                    <div v-if="game.instructions" class="mt-6 pt-4 border-t border-slate-800/80">
-                        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+                    <div v-if="game.instructions" class="mt-6 pt-5 border-t border-slate-800/80">
+                        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2.5 flex items-center gap-1.5">
                             <svg class="w-4 h-4 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>
                             </svg>
                             <span>How To Play & Controls</span>
                         </h2>
-                        <div class="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800 text-xs text-slate-300 leading-relaxed">
+                        <div class="p-4 rounded-xl bg-slate-950/70 border border-slate-800/90 text-xs sm:text-sm text-slate-300 leading-relaxed">
                             {{ game.instructions }}
                         </div>
                     </div>
@@ -185,7 +193,7 @@ defineProps<{
                 </Link>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
                 <GameCard
                     v-for="(related, idx) in relatedGames"
                     :key="related.id"

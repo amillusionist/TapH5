@@ -147,7 +147,7 @@ const clearFilters = () => {
             <div class="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
                 <button
                     @click="setCategory('')"
-                    class="px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all focus:outline-none"
+                    class="px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
                     :class="!selectedCategory ? 'bg-emerald-500 text-slate-950 font-bold shadow-sm shadow-emerald-500/20' : 'bg-slate-800/60 text-slate-300 hover:bg-slate-800 border border-slate-700/60'"
                 >
                     All Genres
@@ -156,7 +156,7 @@ const clearFilters = () => {
                     v-for="cat in categories"
                     :key="cat.id"
                     @click="setCategory(cat.slug)"
-                    class="px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all focus:outline-none"
+                    class="px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
                     :class="selectedCategory === cat.slug ? 'bg-emerald-500 text-slate-950 font-bold shadow-sm shadow-emerald-500/20' : 'bg-slate-800/60 text-slate-300 hover:bg-slate-800 border border-slate-700/60'"
                 >
                     {{ cat.name }}

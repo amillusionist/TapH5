@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, nextTick } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 import type { Game, PageProps } from '@/types';
 import { GameSessionTracker } from '@/services/analytics';
@@ -23,8 +23,30 @@ const isStarted = ref(props.autoPlay);
 const isLoading = ref(true);
 const hasError = ref(false);
 const isFullscreen = ref(false);
+const isIframeFocused = ref(false);
 const reloadKey = ref(0);
 const tracker = ref<GameSessionTracker | null>(null);
+
+/**
+ * Focus the sandboxed game iframe so that keyboard and gamepad inputs
+ * are immediately received without requiring a second click.
+ */
+const focusIframe = () => {
+    if (!iframeRef.value) return;
+
+    try {
+        iframeRef.value.focus({ preventScroll: true });
+        if (iframeRef.value.contentWindow) {
+            iframeRef.value.contentWindow.focus();
+        }
+        isIframeFocused.value = true;
+    } catch {
+        // Cross-origin sandboxing may restrict contentWindow access in certain browsers;
+        // focusing the iframe DOM node itself is the standard cross-origin safe fallback.
+        iframeRef.value.focus();
+        isIframeFocused.value = true;
+    }
+};
 
 const startGame = () => {
     triggerH5GameBreak({
@@ -36,6 +58,10 @@ const startGame = () => {
             isLoading.value = true;
             hasError.value = false;
             tracker.value?.recordPlayClick();
+
+            nextTick(() => {
+                focusIframe();
+            });
         },
     });
 };
@@ -44,11 +70,15 @@ const onIframeLoad = () => {
     isLoading.value = false;
     hasError.value = false;
     tracker.value?.recordGameLoaded();
+
+    // Automatically focus the iframe as soon as its documents/canvas finish loading
+    focusIframe();
 };
 
 const onIframeError = () => {
     isLoading.value = false;
     hasError.value = true;
+    isIframeFocused.value = false;
 };
 
 const reloadGame = () => {
@@ -56,6 +86,19 @@ const reloadGame = () => {
     hasError.value = false;
     reloadKey.value++;
     tracker.value?.recordPlayClick();
+
+    nextTick(() => {
+        focusIframe();
+    });
+};
+
+const handleStageClick = (event: MouseEvent) => {
+    if (!isStarted.value || isLoading.value || hasError.value) return;
+
+    const target = event.target as HTMLElement;
+    if (!target.closest('button') && !target.closest('a')) {
+        focusIframe();
+    }
 };
 
 const toggleFullscreen = async () => {
@@ -81,16 +124,42 @@ const toggleFullscreen = async () => {
         }
     } catch (err) {
         console.error('Fullscreen request error:', err);
+    } finally {
+        nextTick(() => {
+            focusIframe();
+        });
     }
 };
 
 const handleFullscreenChange = () => {
     isFullscreen.value = !!document.fullscreenElement;
+    if (isFullscreen.value) {
+        nextTick(() => {
+            focusIframe();
+        });
+    }
+};
+
+const handleWindowBlur = () => {
+    // When focus moves to the sandboxed iframe, window emits a blur event
+    if (document.activeElement === iframeRef.value) {
+        isIframeFocused.value = true;
+    }
+};
+
+const handleWindowFocus = () => {
+    if (document.activeElement === iframeRef.value) {
+        isIframeFocused.value = true;
+    } else {
+        isIframeFocused.value = false;
+    }
 };
 
 onMounted(() => {
     document.addEventListener('fullscreenchange', handleFullscreenChange);
     document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    window.addEventListener('blur', handleWindowBlur);
+    window.addEventListener('focus', handleWindowFocus);
 
     // Initialize first-party game lifecycle analytics
     tracker.value = new GameSessionTracker(props.game.id);
@@ -98,12 +167,17 @@ onMounted(() => {
 
     if (props.autoPlay) {
         tracker.value.recordPlayClick();
+        nextTick(() => {
+            focusIframe();
+        });
     }
 });
 
 onUnmounted(() => {
     document.removeEventListener('fullscreenchange', handleFullscreenChange);
     document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+    window.removeEventListener('blur', handleWindowBlur);
+    window.removeEventListener('focus', handleWindowFocus);
 
     // Flush any pending gameplay session duration
     tracker.value?.destroy();
@@ -116,18 +190,35 @@ onUnmounted(() => {
         ref="containerRef"
         class="relative w-full rounded-2xl overflow-hidden bg-slate-950 border border-slate-800 shadow-2xl flex flex-col transition-all duration-300"
         :class="{ 'fixed inset-0 z-50 rounded-none border-none h-screen w-screen': isFullscreen }"
+        @click="handleStageClick"
     >
         <!-- Top Toolbar -->
-        <div class="flex items-center justify-between px-4 py-2.5 bg-slate-900/90 border-b border-slate-800 text-xs text-slate-300 z-20">
+        <div class="flex items-center justify-between px-4 py-2.5 bg-slate-900/95 border-b border-slate-800 text-xs text-slate-300 z-20">
             <div class="flex items-center gap-2">
                 <span class="w-2.5 h-2.5 rounded-full" :class="isStarted && !hasError ? 'bg-emerald-400 animate-pulse' : 'bg-slate-500'"></span>
-                <span class="font-bold text-slate-200 tracking-wide truncate max-w-[200px] sm:max-w-md">{{ game.title }}</span>
+                <span class="font-bold text-slate-200 tracking-wide truncate max-w-[160px] sm:max-w-md">{{ game.title }}</span>
                 <span class="hidden sm:inline-block px-1.5 py-0.5 text-[10px] uppercase font-bold bg-slate-800 text-emerald-400 rounded">
                     HTML5
                 </span>
             </div>
 
-            <div class="flex items-center gap-1.5">
+            <div class="flex items-center gap-1.5 sm:gap-2">
+                <!-- Focus Controls Pill/Button -->
+                <button
+                    v-if="isStarted"
+                    @click="focusIframe"
+                    title="Focus Keyboard Controls"
+                    aria-label="Focus Keyboard Controls"
+                    class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[11px] font-semibold transition-all border focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                    :class="isIframeFocused ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' : 'bg-slate-800 text-slate-300 border-slate-700 hover:text-white hover:bg-slate-700'"
+                >
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <rect x="2" y="6" width="20" height="12" rx="2"/>
+                        <path d="M6 12h4m-2-2v4m7-2h.01m3 0h.01"/>
+                    </svg>
+                    <span>{{ isIframeFocused ? 'Controls Active' : 'Focus Controls' }}</span>
+                </button>
+
                 <!-- Reload Button -->
                 <button
                     v-if="isStarted"
@@ -165,14 +256,18 @@ onUnmounted(() => {
             <div
                 v-if="!isStarted"
                 class="absolute inset-0 z-10 flex flex-col items-center justify-center bg-slate-950/90 text-center p-6 bg-cover bg-center"
-                :style="game.thumbnail ? `background-image: linear-gradient(rgba(8, 13, 26, 0.85), rgba(8, 13, 26, 0.95)), url('${game.thumbnail}')` : ''"
+                :style="game.thumbnail ? `background-image: linear-gradient(rgba(8, 13, 26, 0.85), rgba(8, 13, 26, 0.95)), url('${game.thumbnail}')` : 'background-image: linear-gradient(rgba(8, 13, 26, 0.85), rgba(8, 13, 26, 0.95)), url(\'/images/thumbnails/default-game.svg\')'"
             >
                 <div class="max-w-md mx-auto flex flex-col items-center">
-                    <div class="w-20 h-20 rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-emerald-400 mb-5 shadow-glow-emerald animate-pulse">
+                    <button
+                        @click="startGame"
+                        aria-label="Start Game"
+                        class="w-20 h-20 rounded-full bg-emerald-500/20 border-2 border-emerald-400 flex items-center justify-center text-emerald-400 mb-5 shadow-glow-emerald hover:scale-105 active:scale-95 transition-transform focus:outline-none focus:ring-4 focus:ring-emerald-400/50"
+                    >
                         <svg class="w-9 h-9 ml-1" viewBox="0 0 24 24" fill="currentColor">
                             <polygon points="6 3 20 12 6 21 6 3" />
                         </svg>
-                    </div>
+                    </button>
 
                     <h2 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">{{ game.title }}</h2>
                     <p class="text-slate-400 text-sm mb-6 line-clamp-2">
@@ -181,7 +276,7 @@ onUnmounted(() => {
 
                     <button
                         @click="startGame"
-                        class="px-8 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black tracking-wide uppercase text-sm rounded-xl shadow-lg shadow-emerald-500/30 transform hover:-translate-y-0.5 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-400"
+                        class="px-8 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-black tracking-wide uppercase text-sm rounded-xl shadow-lg shadow-emerald-500/30 transform hover:-translate-y-0.5 active:translate-y-0 transition-all focus:outline-none focus:ring-2 focus:ring-emerald-400"
                     >
                         Play Now
                     </button>
@@ -242,9 +337,10 @@ onUnmounted(() => {
                 :src="game.embed_url"
                 :title="`${game.title} Game Player`"
                 :sandbox="game.sandbox_attributes || 'allow-scripts allow-forms allow-pointer-lock'"
-                loading="lazy"
+                tabindex="0"
+                loading="eager"
                 allow="fullscreen; autoplay; gamepad"
-                class="w-full h-full border-0 select-none"
+                class="w-full h-full border-0 select-none outline-none focus:outline-none"
                 @load="onIframeLoad"
                 @error="onIframeError"
             ></iframe>
@@ -252,14 +348,20 @@ onUnmounted(() => {
 
         <!-- Bottom Controls / Aspect Bar -->
         <div class="px-4 py-2 bg-slate-950 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
-            <span class="flex items-center gap-1.5">
-                <svg class="w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
-                </svg>
-                <span>Desktop & Touch Ready</span>
-            </span>
+            <div class="flex items-center gap-3">
+                <span class="flex items-center gap-1.5 text-slate-300">
+                    <svg class="w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+                    </svg>
+                    <span>Desktop & Touch Ready</span>
+                </span>
+                <span v-if="isStarted" class="hidden sm:inline-flex items-center gap-1.5 text-[11px] text-slate-400">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                    <span>Click game stage anytime to activate controls</span>
+                </span>
+            </div>
             <span class="text-slate-400 text-[11px]">
-                Powered by TapH5 Engine
+                Sandboxed HTML5 Engine
             </span>
         </div>
     </div>

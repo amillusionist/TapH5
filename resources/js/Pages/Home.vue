@@ -26,8 +26,10 @@ defineProps<{
     <SeoHead :meta="meta" />
 
     <AppLayout>
-        <!-- Hero Section -->
-        <HeroBanner :games="heroGames" />
+        <!-- Full-Width Hero Section -->
+        <template #hero>
+            <HeroBanner :games="heroGames" />
+        </template>
 
         <!-- Monetization: Top Leaderboard Placement -->
         <AdSlot placement-key="home_top" class-name="mb-10" />
@@ -75,7 +77,7 @@ defineProps<{
                 </Link>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
                 <GameCard
                     v-for="(game, idx) in featuredGames"
                     :key="game.id"
@@ -106,7 +108,7 @@ defineProps<{
                 </Link>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
                 <GameCard
                     v-for="game in trendingGames"
                     :key="game.id"
@@ -139,7 +141,7 @@ defineProps<{
                 </Link>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
                 <GameCard
                     v-for="game in newGames"
                     :key="game.id"
@@ -169,7 +171,7 @@ defineProps<{
                 </Link>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
                 <GameCard
                     v-for="game in popularGames"
                     :key="game.id"
@@ -190,7 +192,7 @@ defineProps<{
                 </div>
             </div>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
                 <GameCard
                     v-for="game in recentlyAdded"
                     :key="game.id"
