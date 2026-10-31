@@ -44,6 +44,9 @@ export interface Game {
     is_trending: boolean;
     is_popular: boolean;
     plays_count: number;
+    rating?: number | null;
+    rating_count?: number;
+    playing_now?: number;
     seo_title: string | null;
     seo_description: string | null;
     embed_url: string;
@@ -131,6 +134,7 @@ export type PageProps<
 > = T & {
     appName: string;
     categoriesNav: Category[];
+    megaMenuGames?: Game[];
     auth: {
         user: User;
     };

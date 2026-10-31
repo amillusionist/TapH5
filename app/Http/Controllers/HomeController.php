@@ -6,6 +6,7 @@ use App\Http\Resources\CategoryResource;
 use App\Http\Resources\GameResource;
 use App\Models\Category;
 use App\Models\Game;
+use App\Services\AnalyticsService;
 use App\Services\SeoService;
 use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
@@ -98,8 +99,34 @@ class HomeController extends Controller
             ];
         });
 
+        // Overlay fresh active player counts (15s cache) onto cached game listings
+        $activeCounts = app(AnalyticsService::class)->getCachedActivePlayersCounts();
+        $this->overlayLiveCounts($data, $activeCounts);
+
         return Inertia::render('Home', array_merge($data, [
             'meta' => $this->seoService->defaultMeta(),
         ]));
+    }
+
+    /**
+     * Overlay fresh live playing player counts onto cached game collections.
+     *
+     * @param  array<string, mixed>  $data
+     * @param  array<int, int>  $activeCounts
+     */
+    protected function overlayLiveCounts(array &$data, array $activeCounts): void
+    {
+        $keys = ['heroGames', 'featuredGames', 'trendingGames', 'popularGames', 'newGames', 'recentlyAdded', 'allGamesPreview'];
+
+        foreach ($keys as $key) {
+            if (isset($data[$key]) && is_array($data[$key])) {
+                foreach ($data[$key] as &$game) {
+                    if (is_array($game) && isset($game['id'])) {
+                        $game['playing_now'] = (int) ($activeCounts[$game['id']] ?? 0);
+                    }
+                }
+                unset($game);
+            }
+        }
     }
 }

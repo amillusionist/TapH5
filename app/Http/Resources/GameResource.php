@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use App\Models\Game;
+use App\Services\AnalyticsService;
 use App\Services\GameUrlService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -29,8 +30,8 @@ class GameResource extends JsonResource
             'instructions' => $this->instructions,
             'thumbnail' => $this->thumbnail,
             'category_id' => $this->category_id,
-            'category' => new CategoryResource($this->whenLoaded('category')),
-            'tags' => TagResource::collection($this->whenLoaded('tags')),
+            'category' => $this->whenLoaded('category', fn () => $this->category ? (new CategoryResource($this->category))->resolve() : null),
+            'tags' => $this->whenLoaded('tags', fn () => TagResource::collection($this->tags)->resolve()),
             'game_type' => $this->game_type,
             'entry_file' => $this->entry_file,
             'storage_path' => $this->storage_path,
@@ -39,6 +40,9 @@ class GameResource extends JsonResource
             'is_trending' => $this->is_trending,
             'is_popular' => $this->is_popular,
             'plays_count' => $this->plays_count,
+            'rating' => $this->rating ?? null,
+            'rating_count' => (int) ($this->rating_count ?? 0),
+            'playing_now' => (int) ($this->playing_now ?? (app(AnalyticsService::class)->getCachedActivePlayersCounts()[$this->id] ?? 0)),
             'seo_title' => $this->seo_title,
             'seo_description' => $this->seo_description,
             'embed_url' => $gameUrlService->getEmbedUrl($this->resource),

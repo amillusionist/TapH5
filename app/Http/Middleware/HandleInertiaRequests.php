@@ -3,9 +3,12 @@
 namespace App\Http\Middleware;
 
 use App\Http\Resources\CategoryResource;
+use App\Http\Resources\GameResource;
 use App\Models\Category;
+use App\Models\Game;
 use App\Services\Ads\AdService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -41,12 +44,30 @@ class HandleInertiaRequests extends Middleware
             'categoriesNav' => fn () => CategoryResource::collection(
                 Category::active()->ordered()->withCount('publishedGames')->get()
             ),
+            'megaMenuGames' => fn () => Cache::remember('taph5_mega_menu_games', 300, function () {
+                $games = Game::published()
+                    ->popular()
+                    ->with('category:id,name,slug')
+                    ->latest()
+                    ->take(10)
+                    ->get();
+
+                if ($games->count() < 6) {
+                    $fallback = Game::published()
+                        ->with('category:id,name,slug')
+                        ->latest()
+                        ->take(10)
+                        ->get();
+                    $games = $fallback;
+                }
+
+                return GameResource::collection($games)->resolve();
+            }),
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),
                 'error' => fn () => $request->session()->get('error'),
                 'warning' => fn () => $request->session()->get('warning'),
             ],
-            'adConfig' => fn () => app(AdService::class)->getPublicAdConfig(),
             'adConfig' => fn () => app(AdService::class)->getPublicAdConfig(),
         ];
     }

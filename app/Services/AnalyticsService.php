@@ -93,6 +93,60 @@ class AnalyticsService
     }
 
     /**
+     * Get approximate live active player counts grouped by game ID.
+     * An active session is defined as having sent a heartbeat (game_session_ping or game_loaded)
+     * within the last 90 seconds without a subsequent game_session_ended event.
+     *
+     * @param  array<int>  $gameIds  Optional filter for specific game IDs
+     * @return array<int, int> Map of game_id => active_players_count
+     */
+    public function getActivePlayersCounts(array $gameIds = []): array
+    {
+        $cutoff = Carbon::now()->subSeconds(90);
+
+        $endedSessionsSubquery = AnalyticsEvent::query()
+            ->where('event_type', 'game_session_ended')
+            ->where('created_at', '>=', $cutoff)
+            ->whereNotNull('session_id');
+
+        if (! empty($gameIds)) {
+            $endedSessionsSubquery->whereIn('game_id', $gameIds);
+        }
+
+        $query = AnalyticsEvent::query()
+            ->whereIn('event_type', ['game_session_ping', 'game_loaded'])
+            ->where('created_at', '>=', $cutoff)
+            ->whereNotNull('session_id')
+            ->whereNotIn('session_id', $endedSessionsSubquery->select('session_id'));
+
+        if (! empty($gameIds)) {
+            $query->whereIn('game_id', $gameIds);
+        }
+
+        /** @var array<int, int> $results */
+        $results = $query
+            ->groupBy('game_id')
+            ->selectRaw('game_id, COUNT(DISTINCT session_id) as active_count')
+            ->pluck('active_count', 'game_id')
+            ->map(fn ($count) => (int) $count)
+            ->all();
+
+        return $results;
+    }
+
+    /**
+     * Cached accessor for active player counts across all games (15-second TTL).
+     *
+     * @return array<int, int>
+     */
+    public function getCachedActivePlayersCounts(): array
+    {
+        return Cache::remember('taph5_active_players_counts', 15, function () {
+            return $this->getActivePlayersCounts();
+        });
+    }
+
+    /**
      * Resolve date boundary Carbon instances for a given range string.
      *
      * @return array{0: Carbon, 1: Carbon, 2: string}

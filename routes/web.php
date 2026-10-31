@@ -24,6 +24,21 @@ Route::get('/games', [GameController::class, 'index'])->name('games.index');
 Route::get('/games/{slug}', [GameController::class, 'show'])->name('games.show');
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('categories.show');
 
+// Instant AJAX Autocomplete Search
+Route::get('/api/games/autocomplete', [GameController::class, 'autocomplete'])
+    ->middleware('throttle:180,1')
+    ->name('api.games.autocomplete');
+
+// Batch Live Players Count Endpoint
+Route::get('/api/games/live-players', [GameController::class, 'livePlayers'])
+    ->middleware('throttle:120,1')
+    ->name('api.games.live_players');
+
+// Mega Menu Games Endpoint
+Route::get('/api/games/mega-menu', [GameController::class, 'megaMenu'])
+    ->middleware('throttle:120,1')
+    ->name('api.games.mega_menu');
+
 // First-Party Analytics Event Ingestion
 Route::prefix('api')->middleware('throttle:60,1')->group(function () {
     Route::post('/analytics/events', [AnalyticsEventController::class, 'store'])->name('api.analytics.events');

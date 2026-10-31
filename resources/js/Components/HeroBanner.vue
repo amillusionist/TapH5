@@ -111,7 +111,7 @@ const onThumbnailError = (e: Event) => {
                         </Link>
 
                         <Link
-                            v-if="game.category"
+                            v-if="game.category?.slug"
                             :href="route('categories.show', { slug: game.category.slug })"
                             class="px-5 sm:px-6 py-3.5 sm:py-4 bg-slate-900/80 hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-700/80 font-bold text-sm sm:text-base rounded-2xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 flex items-center gap-2 backdrop-blur-sm"
                         >
